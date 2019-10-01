@@ -1,0 +1,76 @@
+<style>
+    .row {
+        margin-left: unset;
+        margin-right: unset
+    }
+
+    .form-control {
+        margin-left: 15px
+    }
+</style>
+<div style="   margin-top: 6%;" class="form">
+    <div class="container" style="background: rgba(255,255,255,.7); float: right; margin-right: 4%">
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10" style="padding: 50px">
+                <h1 style="color: #19c880;font-size: 55px;text-align: center; margin: initial; margin-bottom: 10px;">
+                    Thêm tài khoản</h1>
+                <hr>
+                <div style="border-radius: 10px" class="input-group margin-bottom-20">
+                    <label>Họ và tên:&ensp;&ensp; </label>
+                    <span class="input-group-addon"><i style="border-radius: 10px"
+                            class="glyphicon glyphicon-user mycolor"></i></span>
+                    <input ng-model="tenNguoiDung" size="60" maxlength="255" class="form-control" placeholder="Nhập tên"
+                        type="text"> </div>
+                <div class="row" style="margin-top: 20px">
+                    <label>Phụ huynh </label>
+                    <div class="col-md-4">
+
+                        <select style="width:180px;border-radius: 10px" id="lop" class="form-control"
+                            id="exampleFormControlSelect1" ng-model="lop">
+                            <label>Khối:</label>
+                            <option>1</option>
+                            <option>1</option>
+                            <option>1</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+
+                        <select style="width:180px;border-radius: 10px" id="lop" class="form-control"
+                            id="exampleFormControlSelect1" ng-model="lop">
+                            <label>Lớp:</label>
+                            <option>1</option>
+                            <option>1</option>
+                            <option>1</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2" style="float: right">
+
+                        <select style="width:180px;border-radius: 10px" id="lop" class="form-control"
+                            id="exampleFormControlSelect1" ng-model="lop">
+
+                            <label>Học Sinh:</label>
+                            <option>1</option>
+                            <option>1</option>
+                            <option>1</option>
+                        </select>
+                    </div>
+
+                </div>
+                <div style="border-radius: 10px" class="input-group margin-bottom-20">
+                    <label>Số điện thoại &ensp;</label>
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-phone mycolor"></i></span>
+                    <input ng-model="SDT" size="60" maxlength="255" class="form-control" placeholder="Số điện thoại"
+                        type="text"> </div>
+                <div class="row" style="margin-top: 20px">
+                    <div class="col-md-12">
+                        <button style="margin-left: 40%;font-size: 25px;border-radius: 10px ; background-color:#19c880"
+                            class="btn-u pull-left" type="submit" ng-click="tao()">Thêm tài khoản</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+    </div>
+
+</div>
