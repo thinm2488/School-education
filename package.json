@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": " node app.js",
+    "start": " ng build && node app.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -39,6 +39,7 @@
     "mongoose": "^5.7.3",
     "morgan": "^1.9.1",
     "mv": "^2.1.1",
+    "ngx-cookie-service": "^2.2.0",
     "ngx-filter-pipe": "^2.1.2",
     "package.json": "^2.0.1",
     "path": "^0.12.7",
