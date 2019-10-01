@@ -8,9 +8,9 @@ var StudentSchema = new Schema(
         gioiTinh: { type: String },
         ngaySinh: { type: String },
         queQuan: { type: String },
-        lop: { type: String },
+        soHieu: { type: String },
         diaChi: { type: String },
-        loai: { type: String },
+        khoi: { type: String },
         hinh: { type: String, default: "hero-bg.jpg" },
         bangDiem: [{
             toan: [{
