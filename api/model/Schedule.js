@@ -11,8 +11,9 @@ var ScheduleSchema = new Schema(
 
             thoiGianBatDau:{type:String},
 
-            thoiGianKetThuc:{type:String}
-
+            thoiGianKetThuc:{type:String},
+            
+            ngayHoc:{type:String}
             }
         ],
         ngayBatDau:{type:String},
