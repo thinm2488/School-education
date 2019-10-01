@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup,  FormBuilder,  Validators } from '@angular/forms';
 import { HttpClient} from '@angular/common/http'
 import {ApiService} from '../../service/api.service'
+import User from '../../model/User'
+import { CookieService } from 'ngx-cookie-service';
 
 
 
@@ -11,9 +13,9 @@ import {ApiService} from '../../service/api.service'
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
+  user:any;
   angForm: FormGroup;
-  constructor(private fb: FormBuilder, private http : HttpClient) {
+  constructor(private fb: FormBuilder, private http : HttpClient, private cookieService: CookieService ) {
     this.createForm();
    }
    createForm() {
@@ -26,7 +28,28 @@ export class LoginComponent implements OnInit {
   lg:ApiService
   login(soDienThoai,password){
     this.lg = new ApiService(this.http);
-    this.lg.login(soDienThoai,password);
+    this.lg.login(soDienThoai,password).subscribe(data => {
+      
+      //  var tenNguoiDung=data.tenNguoiDung;
+      //  var hinh=data.hinh;
+      this.user=Object.assign(data)      
+      
+      if (data) {
+        // this.cookieService.set( 'tenNguoiDung',tenNguoiDung.toString()  );
+        // this.cookieService.set( 'hinh',hinh.toString()  );
+        
+        window.alert("Đăng Nhập Thành Công!!");
+        window.location.href = '/home'
+        return data
+       
+      }
+     
+      else{
+        window.alert("Sai tài khoản hoặc password")
+      }
+      
+    });
+    
 
   }
   ngOnInit() {
