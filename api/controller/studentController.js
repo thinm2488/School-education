@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Student = mongoose.model('Student');
+const Applicationform = mongoose.model('ApplicationForm');
 // const nodemailer = require('nodemailer')
 var jwt = require('jsonwebtoken');
 const createStudent = async function (data) {
@@ -100,11 +101,31 @@ const xoaStudent = async function (id) {
         mess:'Xóa thành công!'
     }
 }
+const createdayoff= async function(user,data){
+    let student= await Student.findOne({_id:data.idHocSinh});
+    applicationform= new Applicationform();
+    if(student){
+        applicationform.tenHocSinh=student.tenHocSinh;
+        applicationform.tenPhuHuynh=user.tenNguoiDung;
+        applicationform.ngayNghi = data.ngayNghi
+        await applicationform.save();
+        return{
+           applicationform
+        }
+    }else{
+        throw new Error("Không có học sinh trong danh sách")
+    }
+   
+
+
+    
+}
 module.exports={
     createStudent:createStudent,
     laystudent:laystudent,
     layChiTietStudent:layChiTietStudent,
     editProfile:editProfile,
     xoaStudent:xoaStudent,
-    nhapDiem:nhapDiem
+    nhapDiem:nhapDiem,
+    createdayoff:createdayoff
 }

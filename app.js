@@ -3,10 +3,12 @@ const path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 require('./api/model/User');
-require('./api/model/Student')
-require('./api/model/Schedule')
+require('./api/model/Student');
+require('./api/model/Schedule');
+require('./api/model/ApplicationForm')
 var userRouter = require('./api/route/user')
 var scheduleRouter = require('./api/route/schedule')
+var studentRouter = require('./api/route/student')
 
 
 
@@ -22,6 +24,7 @@ app.use(cookieParser());
 app.use(express.static(__dirname + '/dist/school-education'));
 app.use('/api/route/user', userRouter)
 app.use('/api/route/schedule', scheduleRouter)
+app.use('/api/route/student', studentRouter)
 app.get('/*', function(req,res) {
     
 res.sendFile(path.join(__dirname+'/dist/school-education/index.html'));

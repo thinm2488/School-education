@@ -2,6 +2,7 @@ var express = require('express');
 var session = require('express-session')
 var router = express.Router();
 var studentController = require('../controller/studentController');
+var UserController= require('../controller/userController')
 // var authController = require('../controller/authController');
 var jwt = require('jsonwebtoken');
 var fileUpload = require('express-fileupload');
@@ -75,7 +76,13 @@ router.post('/insertmark', async function (req, res) {
         console.log(error)
         res.status(500).send({ errorMessage: error.message })
     }
-})
+});
+//API  xin nghi
+
+
+
+
+
 router.put('/update', fileUpload(), async function (req, res) {
 
     try {
@@ -120,5 +127,27 @@ router.delete('/:id', async function (req, res) {
 
 
 
+});
+
+router.post('/dayoff', async function (req, res) {
+    try {
+        const token = req.headers['x-access-token'];
+        var phoneObj = jwt.decode(token);
+        var user = await UserController.getUserByPhone(phoneObj.data);
+        var dayoff= await studentController.createdayoff(user,req.body) ;
+        if(dayoff){
+            res.send({
+                status:200,
+                dayoff,
+                message:"Đã cập nhật đơn xin phép thành công"
+    
+                
+            })
+        }
+        
+    } catch (error) {
+        console.log(error)
+        res.status(500).send({ errorMessage: error.message })
+    }
 });
 module.exports = router;
