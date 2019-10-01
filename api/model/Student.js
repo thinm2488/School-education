@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var StudentSchema = new Schema(
     {
+        
         tenHocSinh: { type: String },
         maSoHocSinh: { type: String },
         gioiTinh: { type: String },
