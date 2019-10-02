@@ -11,7 +11,7 @@ import { ApiService } from 'src/app/service/api.service';
 })
 export class DanhsachtaikhoanComponent implements OnInit {
   http: HttpClient
-  userlist: User[]
+  userlist: any
   resdata: any[]
 
   constructor(private apiService: ApiService) {
@@ -21,16 +21,11 @@ export class DanhsachtaikhoanComponent implements OnInit {
   ngOnInit(): void {
     var users
     this.apiService.getalluser()
-      .subscribe((data: User[]) => {
-        let user = Object.entries(data)
+      .subscribe(data => {
+        this.userlist = Object.assign(data)
         //for (let index = 0; index < user.length; index++) {
-        const element = user[0];
-        for (let i = 1; i < element.length; i++) {
-          users = element[1];
-          this.userlist = users;
-          console.log(users);
-        }
-        this.innitDatatable(this.userlist);
+        
+        this.innitDatatable(this.userlist.userlist);
 
       }
 
@@ -57,12 +52,13 @@ export class DanhsachtaikhoanComponent implements OnInit {
           }
         },
         
-        { data: 'soDienThoai' },
+       
         { data: 'tenNguoiDung' },
+        { data: 'soDienThoai' },
         //{ data: 'tenHocSinh' },
         {
           "render": function (data, type, JsonResultRow, meta) {
-            return '<a href="'+'/home/taikhoan/'+JsonResultRow.id+'"><button class="btn btn-warning"> <span class="glyphicon glyphicon-pencil"></span>&ensp; Sửa</button></a>&ensp&ensp<a href="'+'/home/taikhoan/'+JsonResultRow.id+'"><button class="btn btn-danger"> <span class="glyphicon glyphicon-pencil"></span>&ensp; Xóa</button></a>';
+            return '<a href="'+'/home/chitiettaikhoan'+JsonResultRow.id+'"><button class="btn btn-warning"> <span class="glyphicon glyphicon-pencil"></span>&ensp; Sửa</button></a>&ensp;&ensp;<a href="'+'/home/taikhoan/'+JsonResultRow.id+'"><button class="btn btn-danger"> <span class="glyphicon glyphicon-pencil"></span>&ensp; Xóa</button></a>';
           }
         },
 

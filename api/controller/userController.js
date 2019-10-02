@@ -28,12 +28,17 @@ const layChiTietUser = async function (id) {
 const taoUser = async function (data) {
     let user = await User.findOne({ soDienThoai: data.soDienThoai });
     if (user) {
-        throw new Error('Số điện thoại đã được sử dụng ! ')
+        return{
+            message:"Số Điện Thoại đã được sử dụng!",
+            status:500
+        }
     }
     user = new User(data);
     await user.save();
     return {
-        user
+        user,
+        message:"Thêm tài khoản thành công",
+        status:200
     }
 
 }

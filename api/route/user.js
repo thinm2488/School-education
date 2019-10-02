@@ -97,14 +97,14 @@ router.post('/signup', async function (req, res) {
         //? lai con de x-acess-token vao khong
 
         var token = jwt.sign({ data: req.body.soDienThoai }, 'secret', { expiresIn: '1y' });
-        req.session.token = token;
+        //req.session.token = token;
         var user = await userController.taoUser(req.body);
-        user = JSON.parse(JSON.stringify(user))
-        delete user.password;
+        //user = JSON.parse(JSON.stringify(user))
+        //delete user.password;
         res.send({
             token,
             user,
-            status: 200,
+           
         })
     } catch (error) {
         console.log(error)

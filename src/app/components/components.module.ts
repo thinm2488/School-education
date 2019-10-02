@@ -12,6 +12,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 // import { DanhsachComponent } from './thongbao/danhsach/danhsach.component';
 import { DanhsachtaikhoanComponent } from './user/danhsachtaikhoan/danhsachtaikhoan.component';
 import { TaotaikhoanComponent } from './user/taotaikhoan/taotaikhoan.component';
+import { ChitiettaikhoanComponent } from './user/chitiettaikhoan/chitiettaikhoan.component';
 
 @NgModule({
   imports: [
@@ -28,7 +29,8 @@ import { TaotaikhoanComponent } from './user/taotaikhoan/taotaikhoan.component';
     // SuathongbaoComponent,
     // DanhsachComponent,
     DanhsachtaikhoanComponent,
-    TaotaikhoanComponent
+    TaotaikhoanComponent,
+    ChitiettaikhoanComponent
   ],
   exports: [
     // FooterComponent,

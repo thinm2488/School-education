@@ -22,4 +22,8 @@ export class ApiService {
   getalluser() {
     return this.http.get("/api/route/user/getall");
   }
+  createUser(data){
+    return this.http.post("/api/route/user/signup",data)
+  }
+
 }
