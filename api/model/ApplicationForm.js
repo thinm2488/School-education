@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 var ApplicationFormSchema = new Schema(
     {
        
-       
+        idHocSinh:{type:String},
         tenHocSinh:{type:String},
         ngayNghi:{type:Number},
         tenPhuHuynh:{type:String},

@@ -10,7 +10,28 @@ const path = require('path');
 // var passport = require('../controller/passport').passport
 // var multipart = require('connect-multiparty')
 // var multipartMiddleware = multipart()
-
+router.get('/getdayoff', async function (req, res) {
+    try {
+        // const token = req.headers['x-access-token'];
+        // var phoneObj = jwt.decode(token);
+        // var user = await UserController.getUserByPhone(phoneObj.data);
+        var dayoffObj = await studentController.getdayoff(req.body) ;
+        var dayoff=dayoffObj.dayoff
+        if(dayoff){
+            res.send({
+                status:200,
+                dayoff
+                
+    
+                
+            })
+        }
+        
+    } catch (error) {
+        console.log(error)
+        res.status(500).send({ errorMessage: error.message })
+    }
+});
 router.get('/:id', async function (req, res) {
     try {
         var students = await studentController.layChiTietStudent(req.params.id);
@@ -26,6 +47,7 @@ router.get('/:id', async function (req, res) {
     }
 
 })
+
 router.post('/getall', async function (req, res) {
     try {
         var list = await studentController.laystudent(req.body);
@@ -77,7 +99,7 @@ router.post('/insertmark', async function (req, res) {
         res.status(500).send({ errorMessage: error.message })
     }
 });
-//API  xin nghi
+
 
 
 
@@ -128,7 +150,7 @@ router.delete('/:id', async function (req, res) {
 
 
 });
-
+//API  xin nghi
 router.post('/dayoff', async function (req, res) {
     try {
         const token = req.headers['x-access-token'];

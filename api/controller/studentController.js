@@ -106,6 +106,7 @@ const createdayoff= async function(user,data){
     applicationform= new Applicationform();
     if(student){
         applicationform.tenHocSinh=student.tenHocSinh;
+        applicationform.idHocSinh=student.id;
         applicationform.tenPhuHuynh=user.tenNguoiDung;
         applicationform.ngayNghi = data.ngayNghi
         await applicationform.save();
@@ -115,10 +116,19 @@ const createdayoff= async function(user,data){
     }else{
         throw new Error("Không có học sinh trong danh sách")
     }
+}
+const getdayoff= async function(data){
+    //let student= await Student.findOne({_id:data.idHocSinh});
+    let dayoff= await Applicationform.findOne({idHocSinh:data.idHocSinh})
    
-
-
-    
+    if(dayoff){
+        return{
+           dayoff
+        }
+    }else{
+        throw new Error("Không có dữ liệu")
+    }
+  
 }
 module.exports={
     createStudent:createStudent,
@@ -127,5 +137,6 @@ module.exports={
     editProfile:editProfile,
     xoaStudent:xoaStudent,
     nhapDiem:nhapDiem,
-    createdayoff:createdayoff
+    createdayoff:createdayoff,
+    getdayoff:getdayoff
 }
