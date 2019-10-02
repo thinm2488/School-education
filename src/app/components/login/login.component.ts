@@ -30,13 +30,13 @@ export class LoginComponent implements OnInit {
     this.lg = new ApiService(this.http);
     this.lg.login(soDienThoai,password).subscribe(data => {
       
-      //  var tenNguoiDung=data.tenNguoiDung;
-      //  var hinh=data.hinh;
+       
       this.user=Object.assign(data)      
-      
+      var tenNguoiDung=this.user.user.tenNguoiDung;
+       var hinh=this.user.user.hinh;
       if (data) {
-        // this.cookieService.set( 'tenNguoiDung',tenNguoiDung.toString()  );
-        // this.cookieService.set( 'hinh',hinh.toString()  );
+        this.cookieService.set( 'tenNguoiDung',tenNguoiDung.toString()  );
+        this.cookieService.set( 'hinh',hinh.toString()  );
         
         window.alert("Đăng Nhập Thành Công!!");
         window.location.href = '/home'
