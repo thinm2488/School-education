@@ -22,6 +22,11 @@ const routes: Routes = [
         path: 'taotaikhoan',
         component: TaotaikhoanComponent
       },
+      {
+        path: 'chitiettaikhoan',
+        component: TaotaikhoanComponent
+      },
+      
     ]
   },
 
