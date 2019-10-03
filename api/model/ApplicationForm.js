@@ -7,7 +7,8 @@ var ApplicationFormSchema = new Schema(
         tenHocSinh:{type:String},
         ngayNghi:{type:Number},
         tenPhuHuynh:{type:String},
-        trangThai:{type:Boolean, default:false}
+        trangThai:{type:Boolean, default:false},
+        ngayGui:{type:Number}
 
     }
 );
