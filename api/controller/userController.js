@@ -5,14 +5,14 @@ var jwt = require('jsonwebtoken');
 // const smtpTransport=require('nodemailer-smtp-transport')
 // var generator=require('generate-password')
 const layuser = async function () {
-    var listuser = await User.find({role:'ph'});
+    var listuser = await User.find({ role: 'ph' });
     return {
         listuser
     }
 
 }
 const layChiTietUser = async function (id) {
-    var user = await User.findOne({_id:id});
+    var user = await User.findOne({ _id: id });
     return {
         user
     }
@@ -28,17 +28,17 @@ const layChiTietUser = async function (id) {
 const taoUser = async function (data) {
     let user = await User.findOne({ soDienThoai: data.soDienThoai });
     if (user) {
-        return{
-            message:"Số Điện Thoại đã được sử dụng!",
-            status:500
+        return {
+            message: "Số Điện Thoại đã được sử dụng!",
+            status: 500
         }
     }
     user = new User(data);
     await user.save();
     return {
         user,
-        message:"Thêm tài khoản thành công",
-        status:200
+        message: "Thêm tài khoản thành công",
+        status: 200
     }
 
 }
@@ -52,30 +52,37 @@ const getUserByPhone = async function (soDienThoai) {
 
 
 const checkLogin = async function (data) {
-    let user = await User.findOne({ soDienThoai: data.soDienThoai||data });
+    let user = await User.findOne({ soDienThoai: data.soDienThoai || data });
     if (user) {
         if (user.password === data.password) {
-           
-            saveAndroidToken(data.androidToken)
+
+            saveAndroidToken(data)
             //saveAndroidToken(data.androidToken);
             return user
 
+
         } else {
 
-            throw new Error('Nhập sai Số điện thoại hoặc password!')
+            return {
+                message:'Sai mật khẩu hoặc password',
+                status: 500
+            }
         }
     } else {
-        throw new Error('Số điện thoại không tồn tại!')
+        return {
+            message : 'Số điện thoại không tồn tại!',
+            status: 500
+        }
     }
 
 }
-const saveAndroidToken = async function(token){
-    let user = await User.findOne({ soDienThoai: data.soDienThoai||data });
-    if(user){
-        if(token){
-            user.androidToken =data.token
+const saveAndroidToken = async function (data) {
+    let user = await User.findOne({ soDienThoai: data.soDienThoai || data });
+    if (user) {
+        if (token) {
+            user.androidToken = data.token
             user.save();
-        }else{
+        } else {
             throw new Error('Không tìm thấy android Token')
         }
     }
@@ -93,7 +100,7 @@ const editProfile = async function (data) {
     if (data.hinh) {
         user.hinh = data.hinh;
     }
-    
+
 
     await user.save();
     return { user }
@@ -178,13 +185,13 @@ const changePass = async function (data) {
 const changePassword = async function (data) {
     let user = await User.findOne({ Email: data });
 
-    var newpass= generator.generate({
-        length:8,
-        Number:true
+    var newpass = generator.generate({
+        length: 8,
+        Number: true
     })
-    user.password=newpass;
+    user.password = newpass;
 
-    
+
     await user.save();
     return { user, newpass }
 
@@ -193,24 +200,24 @@ const xoaUser = async function (id) {
     let user = await User.findOne({ _id: id });
     user.remove();
     return {
-        mess:'Xóa thành công!'
+        mess: 'Xóa thành công!'
     }
 }
 
 
 
 module.exports = {
-    layuser:layuser,
-    layChiTietUser:layChiTietUser,
+    layuser: layuser,
+    layChiTietUser: layChiTietUser,
     //islogin:islogin,
     taoUser: taoUser,
-   getUserByPhone: getUserByPhone,
+    getUserByPhone: getUserByPhone,
     checkLogin: checkLogin,
     editProfile: editProfile,
-    xoaUser:xoaUser,
+    xoaUser: xoaUser,
     changePass: changePass,
     // resetPassword: resetPassword,
-   // changePassword:changePassword
+    // changePassword:changePassword
 }
 
 

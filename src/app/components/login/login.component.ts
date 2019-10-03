@@ -34,18 +34,19 @@ export class LoginComponent implements OnInit {
       this.user=Object.assign(data)      
       var tenNguoiDung=this.user.user.tenNguoiDung;
        var hinh=this.user.user.hinh;
-      if (data) {
-        this.cookieService.set( 'tenNguoiDung',tenNguoiDung.toString()  );
-        this.cookieService.set( 'hinh',hinh.toString()  );
-        
-        window.alert("Đăng Nhập Thành Công!!");
-        window.location.href = '/home'
-        return data
+      if (this.user.user.status==500) {
+        window.alert(this.user.user.message)
        
       }
      
       else{
-        window.alert("Sai tài khoản hoặc password")
+        this.cookieService.set( 'tenNguoiDung',tenNguoiDung.toString()  );
+        this.cookieService.set( 'hinh',hinh.toString()  );
+        
+        window.alert("Đăng Nhập Thành Công!!");
+        window.location.href = '/home/danhsach'
+        return data
+      
       }
       
     });
