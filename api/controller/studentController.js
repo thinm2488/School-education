@@ -119,7 +119,7 @@ const createdayoff= async function(user,data){
 }
 const getdayoff= async function(data){
     //let student= await Student.findOne({_id:data.idHocSinh});
-    let dayoff= await Applicationform.findOne({idHocSinh:data.idHocSinh})
+    let dayoff= await Applicationform.find({idHocSinh:data.idHocSinh})
    
     if(dayoff){
         return{
