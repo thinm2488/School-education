@@ -6,6 +6,7 @@ require('./api/model/User');
 require('./api/model/Student');
 require('./api/model/Schedule');
 require('./api/model/ApplicationForm')
+require('./api/model/Class')
 var userRouter = require('./api/route/user')
 var scheduleRouter = require('./api/route/schedule')
 var studentRouter = require('./api/route/student')

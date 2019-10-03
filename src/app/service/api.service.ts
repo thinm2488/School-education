@@ -25,5 +25,13 @@ export class ApiService {
   createUser(data){
     return this.http.post("/api/route/user/signup",data)
   }
+  deleteUser(id){
+    return this.http.delete("/api/route/user/delete"+id)
+  }
+
+  //student
+  getliststudent(data){
+    return this.http.post("/api/route/student/getall",data);
+  }
 
 }

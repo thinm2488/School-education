@@ -48,6 +48,7 @@ router.get('/:id', async function (req, res) {
 
 })
 
+
 router.post('/getall', async function (req, res) {
     try {
         var list = await studentController.laystudent(req.body);

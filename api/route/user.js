@@ -302,7 +302,7 @@ router.delete('/:id', async function (req, res) {
         req.session.token = token;
         var user = await userController.xoaUser(req.params.id);
         res.send({
-            status: 200,
+            user,
             id: req.params.id
         })
     } catch (error) {

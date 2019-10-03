@@ -7,7 +7,8 @@
     .form-control {
         margin-left: 15px
     }
-    .col-md-4{
+
+    .col-md-4 {
         padding-left: 0;
         padding-right: 0
     }
@@ -20,64 +21,67 @@
                 <h1 style="color: #19c880;font-size: 55px;text-align: center; margin: initial; margin-bottom: 10px;">
                     Thêm tài khoản</h1>
                 <hr>
-                
+
                 <div style="border-radius: 10px" class="input-group margin-bottom-20">
                     <label>Họ và tên:&ensp;&ensp; </label>
                     <span class="input-group-addon"><i style="border-radius: 10px;margin-left: 20px"
                             class="glyphicon glyphicon-user mycolor"></i></span>
-                    <input [(ngModel)]="tenNguoiDung" size="60" maxlength="255" class="form-control" placeholder="Nhập tên"
-                        type="text"> </div>
+                    <input [(ngModel)]="tenNguoiDung" size="60" maxlength="255" class="form-control"
+                        placeholder="Nhập tên" type="text"> </div>
                 <div class="row" style="margin-top: 20px">
-                  
+
                     <div class="col-md-4">
                         <label style="position: absolute">Khối:</label>
-                        <select style="margin-left: 95px;width:180px;border-radius: 10px" id="lop" class="form-control"
-                            id="exampleFormControlSelect1" [(ngModel)]="khoi">
-                            
-                            <option>1</option>
-                            <option>1</option>
-                            <option>1</option>
+                        <select aria-placeholder="chọn khối"style="margin-left: 95px;width:180px;border-radius: 10px" id="lop" class="form-control"
+                            id="exampleFormControlSelect1" [(ngModel)]="khoi" (change)="getlop()">
+                            <option [ngValue]="khoi" *ngFor="let khoi of danhsachkhoi">{{khoi}}</option>                            
                         </select>
                     </div>
                     <div class="col-md-4" style="    margin-left: 30px">
                         <label style="position: absolute">Lớp:</label>
-                        <select style="margin-left: 60px;width:180px;border-radius: 10px" id="lop" class="form-control"
-                            id="exampleFormControlSelect1"[(ngModel)]="lop">
-                            
-                            <option>1</option>
-                            <option>1</option>
-                            <option>1</option>
+                       <!-- <input size="60"  [(ngModel)]="lop" maxlength="255" class="form-control" style="margin-left: 50px;width:200px" placeholder="Nhập số hiệu lớp"> -->
+                       <select (change)="gethocsinh()"aria-placeholder="chọn lớp" style="margin-left: 55px;width:180px;border-radius: 10px" id="lop" class="form-control"
+                       id="exampleFormControlSelect1" [(ngModel)]="lop" >
+                       <option [ngValue]="item" *ngFor="let item of danhsachlop">{{item.soHieu}}</option>              
+                   </select>
+                    </div>
+                 
+                    <div class="col-md-2">
+                            <label style="margin-left: -30px;position: absolute">Học Sinh:</label>
+                        <select aria-placeholder="chọn học sinh" style="margin-left: 50px;width:180px;border-radius: 10px" id="lop" class="form-control" 
+                            id="exampleFormControlSelect1" [(ngModel)]="tenHocSinh">
+                            <option [ngValue]="student" *ngFor="let student of danhsachhocsinh">{{student.tenHocSinh}}</option> 
                         </select>
                     </div>
-                    <div class="col-md-2" style="float: right">
-                        <label style="margin-left: -30px;position: absolute">Học Sinh:</label>
-                        <select style="margin-left: 50px;width:180px;border-radius: 10px" id="lop" class="form-control"
-                            id="exampleFormControlSelect1"[(ngModel)]="tenHocSinh">
-                            <option>1</option>
-                            <option>1</option>
-                            <option>1</option>
-                        </select>
-                    </div>
-
+                   
                 </div>
+
+               
+
                 <div style="border-radius: 10px" class="input-group margin-bottom-20">
                     <label>Số điện thoại &ensp;</label>
                     <span class="input-group-addon"><i class="glyphicon glyphicon-phone mycolor"></i></span>
-                    <input [(ngModel)]="soDienThoai" size="60" maxlength="255" class="form-control" placeholder="Số điện thoại"
-                        type="text"> </div>
+                    <input [(ngModel)]="soDienThoai" size="60" maxlength="255" class="form-control"
+                        placeholder="Số điện thoại" type="text"> </div>
                 <div class="row" style="margin-top: 20px">
                     <div class="col-md-6">
                         <button style="float: right;font-size: 25px;border-radius: 10px ; background-color:#19c880"
-                            class="btn-u pull-left" type="submit">Thêm tài khoản</button>
+                            class="btn-u pull-left" type="submit"(click)="tao()">Thêm tài khoản</button>
                     </div>
                     <div class="col-md-6">
-                            <button style="font-size: 25px;border-radius: 10px ; background-color:#19c880"
-                                class="btn-u pull-left" type="submit" ng-click="tao()">Chọn từ máy tính</button>
-                        </div>
-                        <input placeholder="">
+                        <button style="font-size: 25px;border-radius: 10px ; background-color:#19c880"
+                            class="btn-u pull-left" type="submit" >Chọn từ máy tính</button>
+                    </div>
+
+                </div>
+                <div hidden="true" class="row"style="margin-top: 10px">
+                    <div class="col-md-6"></div>
+                    <div class="col-md-6">
+                        <input  placeholder="ten file"/>
+                    </div>
                 </div>
 
-                
+
             </div>
             <div class="col-md-1"></div>
         </div>

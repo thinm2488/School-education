@@ -9,8 +9,10 @@ import { ApiService } from '../../../service/api.service'
 })
 export class TaotaikhoanComponent implements OnInit {
 
-  as:ApiService
-  constructor( private http: HttpClient) {
+  as:ApiService;
+  
+
+  constructor( private http: HttpClient,private fb: FormBuilder) {
     // this.createform();
 
   }
@@ -29,21 +31,40 @@ export class TaotaikhoanComponent implements OnInit {
   User:any
   tenNguoiDung: string;
   soDienThoai:number;
-  khoi: number;
-  lop: string;
-  tenHocSinh:String;
+  danhsachkhoi= ['1','2','3','4','5','6','7','8','9','10','11','12'];
+  danhsachhocsinh:any;
+  danhsachlop:any;
+  khoi:string;
+  
  
   // idHocSinh: String;
+  getlop(){
+    let data={
+      khoi:this.khoi
+    }
+    this.as=new ApiService(this.http);
+    this.as.getliststudent(data).subscribe(res=>{
+     let danhsachlop=Object.assign(res)
+     this.danhsachlop=danhsachlop.list.liststudent;
+    })
+  }
+  lop: string;
   
-
-
+ 
+  gethocsinh(){
+   
+    this.as=new ApiService(this.http);
+    this.as.getliststudent(this.lop).subscribe(res=>{
+     let student=Object.assign(res)
+     this.danhsachhocsinh=student.list.liststudent;
+    })
+  }
+  tenHocSinh:String;
   tao() {
-    var data={
+    let data={
       tenNguoiDung:this.tenNguoiDung,
       soDienThoai:this.soDienThoai,
-      khoi:this.khoi,
-      lop:this.lop,
-      tenHocSinh:this.tenHocSinh,
+      HocSinh:this.tenHocSinh,
       // idHocSinh:this.idHocSinh
     }
     this.as=new ApiService(this.http);
@@ -59,6 +80,7 @@ export class TaotaikhoanComponent implements OnInit {
   
 
   ngOnInit() {
+   
   }
 
 }

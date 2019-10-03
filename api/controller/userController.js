@@ -33,7 +33,9 @@ const taoUser = async function (data) {
             status: 500
         }
     }
+    
     user = new User(data);
+    user.quanHe=data.HocSinh
     await user.save();
     return {
         user,
@@ -200,7 +202,8 @@ const xoaUser = async function (id) {
     let user = await User.findOne({ _id: id });
     user.remove();
     return {
-        mess: 'Xóa thành công!'
+        status:200,
+        message: 'Xóa thành công!'
     }
 }
 

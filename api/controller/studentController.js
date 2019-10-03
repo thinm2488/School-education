@@ -4,24 +4,44 @@ const Applicationform = mongoose.model('ApplicationForm');
 // const nodemailer = require('nodemailer')
 var jwt = require('jsonwebtoken');
 const createStudent = async function (data) {
-    // let student = await Student.findOne({ maSoHocSinh: data.maSoHocSinh });
-    // if (student) {
-    //     throw new Error('Mã số đã được sử dụng ! ')
-    // }
-    student = new Student(data);
-    await student.save();
-    return {
-        student
+    let student = await Student.findOne({ maSoHocSinh: data.maSoHocSinh });
+    if (student) {
+        throw new Error('Mã số đã được sử dụng ! ')
     }
+    let classs = await Class.find({soHieu:data.soHieu})
+    if(!classs){
+        classs.khoi=data.khoi,
+        classs.soHieu=data.soHieu
+        
+    }else{
+        student = new Student(data);
+        await student.save();
+        return {
+            student
+        }
+    }
+    
 
 }
 const laystudent = async function (data) {
-    var liststudent = await Student.find({lop:data.lop,loai:data.loai});
-    return {
-        liststudent
+    if(data.soHieu){
+        var liststudent = await Student.find({soHieu:data.soHieu});
+        return {
+            liststudent
+        }
+    
     }
-
+    if(data.khoi){
+        var liststudent = await Student.find({khoi:data.khoi});
+        return {
+            liststudent
+        }
+    
+    }
+    
+   
 }
+
 
 
 const layChiTietStudent = async function (id) {

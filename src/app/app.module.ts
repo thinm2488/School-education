@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { DataTablesModule } from 'angular-datatables';
 import { FilterPipeModule } from 'ngx-filter-pipe';
 import { CookieService } from 'ngx-cookie-service';
+
 //component module
 import{ComponentsModule} from './components/components.module'
 //services

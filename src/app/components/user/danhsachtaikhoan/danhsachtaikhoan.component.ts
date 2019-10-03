@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import User from '../../../model/User'
 import { ApiService } from 'src/app/service/api.service';
+import { Button } from 'protractor';
+
 
 @Component({
   selector: 'app-danhsachtaikhoan',
@@ -40,6 +42,10 @@ export class DanhsachtaikhoanComponent implements OnInit {
 
 
   };
+
+ 
+
+
   innitDatatable(datares) {
     var table = $('#datatable').DataTable({
       responsive: true,
@@ -58,7 +64,8 @@ export class DanhsachtaikhoanComponent implements OnInit {
         //{ data: 'tenHocSinh' },
         {
           "render": function (data, type, JsonResultRow, meta) {
-            return '<a href="'+'/home/chitiettaikhoan'+JsonResultRow.id+'"><button class="btn btn-warning"> <span class="glyphicon glyphicon-pencil"></span>&ensp; Sửa</button></a>&ensp;&ensp;<a href="'+'/home/taikhoan/'+JsonResultRow.id+'"><button class="btn btn-danger"> <span class="glyphicon glyphicon-pencil"></span>&ensp; Xóa</button></a>';
+            return '<a href="'+'/home/chitiettaikhoan/'+JsonResultRow._id+'"><button class="btn btn-warning"> <span class="glyphicon glyphicon-pencil"></span>&ensp; Sửa</button></a>&ensp;&ensp;<button id="btnxoa" class="btn btn-danger"(click)="Xoa()"   > <span class="glyphicon glyphicon-pencil"></span>&ensp; Xóa</button>';
+           
           }
         },
 

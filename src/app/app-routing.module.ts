@@ -26,6 +26,10 @@ const routes: Routes = [
         path: 'chitiettaikhoan',
         component: TaotaikhoanComponent
       },
+      {
+        path: 'chitiettaikhoan/:id',
+        component: TaotaikhoanComponent
+      },
       
     ]
   },
