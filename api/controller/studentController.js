@@ -117,9 +117,9 @@ const createdayoff= async function(user,data){
         throw new Error("Không có học sinh trong danh sách")
     }
 }
-const getdayoff= async function(data){
+const getdayoff= async function(id){
     //let student= await Student.findOne({_id:data.idHocSinh});
-    let dayoff= await Applicationform.find({idHocSinh:data.idHocSinh})
+    let dayoff= await Applicationform.find({idHocSinh:id})
    
     if(dayoff){
         return{

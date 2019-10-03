@@ -10,12 +10,12 @@ const path = require('path');
 // var passport = require('../controller/passport').passport
 // var multipart = require('connect-multiparty')
 // var multipartMiddleware = multipart()
-router.get('/getdayoff', async function (req, res) {
+router.get('/getdayoff/:id', async function (req, res) {
     try {
         // const token = req.headers['x-access-token'];
         // var phoneObj = jwt.decode(token);
         // var user = await UserController.getUserByPhone(phoneObj.data);
-        var dayoffObj = await studentController.getdayoff(req.body) ;
+        var dayoffObj = await studentController.getdayoff(req.params.id) ;
         var dayoff=dayoffObj.dayoff
         if(dayoff){
             res.send({
