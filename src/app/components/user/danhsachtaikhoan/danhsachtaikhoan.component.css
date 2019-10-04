@@ -7,5 +7,51 @@
     float: right;
     background-color: white!important;
     padding: 30px;
-    margin: 2%
+    margin: 5%
+}
+@media (min-width: 1500px){
+    
+        #datatable{
+            max-width: 941px;
+        }
+}
+
+@media (min-width: 1200px){
+    .container {
+        max-width: 1108px;}
+        #datatable{
+            max-width: 1050px;
+        }
+}
+@media (min-width: 1700px){
+    .container {
+        max-width: 1240px;}
+        #datatable{
+            max-width: 1184px;
+        }
+
+}
+@media (min-width: 1900px){
+    .container {
+        max-width: 1440px;}
+        #datable{
+            max-width: 1386px;
+        }
+
+}
+@media (min-width: 2100px){
+    .container {
+        max-width: 1522px;}
+        #datatable{
+            max-width: 1465px;
+        }
+    
+}
+
+@media (min-width: 2000px){
+
+    #datatable{
+        max-width: 1389px;
+    }
+
 }

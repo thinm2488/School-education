@@ -5,6 +5,8 @@ import User from '../../../model/User'
 import { ApiService } from 'src/app/service/api.service';
 import { Button } from 'protractor';
 
+import { ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'app-danhsachtaikhoan',
@@ -16,11 +18,12 @@ export class DanhsachtaikhoanComponent implements OnInit {
   userlist: any
   resdata: any[]
 
-  constructor(private apiService: ApiService) {
+  constructor(private apiService: ApiService, private root:ActivatedRoute) {
 
   }
 
   ngOnInit(): void {
+    
     var users
     this.apiService.getalluser()
       .subscribe(data => {
@@ -62,12 +65,7 @@ export class DanhsachtaikhoanComponent implements OnInit {
         { data: 'tenNguoiDung' },
         { data: 'soDienThoai' },
         //{ data: 'tenHocSinh' },
-        {
-          "render": function (data, type, JsonResultRow, meta) {
-            return '<a href="'+'/home/chitiettaikhoan/'+JsonResultRow._id+'"><button class="btn btn-warning"> <span class="glyphicon glyphicon-pencil"></span>&ensp; Sửa</button></a>&ensp;&ensp;<button id="btnxoa" class="btn btn-danger"(click)="Xoa()"   > <span class="glyphicon glyphicon-pencil"></span>&ensp; Xóa</button>';
-           
-          }
-        },
+      
 
       ]
 

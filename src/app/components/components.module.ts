@@ -18,7 +18,8 @@ import { ChitiettaikhoanComponent } from './user/chitiettaikhoan/chitiettaikhoan
   imports: [
     CommonModule,
     RouterModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   declarations: [
     // FooterComponent,

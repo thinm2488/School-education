@@ -15,7 +15,7 @@ import { CookieService } from 'ngx-cookie-service';
 export class LoginComponent implements OnInit {
   user:any;
   angForm: FormGroup;
-  constructor(private fb: FormBuilder, private http : HttpClient, private cookieService: CookieService ) {
+  constructor(private fb: FormBuilder, private http : HttpClient, private cookieService: CookieService ,private lg:ApiService) {
     this.createForm();
    }
    createForm() {
@@ -25,9 +25,9 @@ export class LoginComponent implements OnInit {
   
     });
   }
-  lg:ApiService
+  
   login(soDienThoai,password){
-    this.lg = new ApiService(this.http);
+   
     this.lg.login(soDienThoai,password).subscribe(data => {
       
        
