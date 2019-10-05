@@ -1,5 +1,4 @@
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
 <style>
     .row {
         margin-left: unset;
@@ -77,7 +76,8 @@
                                 class="btn-u pull-left" type="submit" (click)="tao(tenNguoiDung.value,soDienThoai.value)"[disabled]="accountForm.pristine || accountForm.invalid">Thêm tài khoản</button>
                         </div>
                         <div class="col-md-6 form-group"> 
-                            <button style="font-size: 25px;border-radius: 10px ; background-color:#19c880" class="btn-u pull-left" type="submit">Chọn từ máy tính</button>
+                            <button style="font-size: 25px;border-radius: 10px ; background-color:#19c880" class="btn-u pull-left" type="submit"(click)=" importexcel()">Import Excel</button>
+                            <input type="file" class="form-control" (change)="uploadedFile($event)" placeholder="Upload file" accept=".xlsx">
                         </div>
 
                     </div>

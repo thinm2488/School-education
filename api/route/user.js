@@ -113,12 +113,32 @@ router.post('/signup', async function (req, res) {
 
 
 });
+router.post('/excel', async function (req, res) {
+    try {
+        //firebasetoken=passport.createPassportConfig(req.body,req.body.soDienThoai,req.body.password,done=true);
+        
+        const token = req.session.token
+        var phoneObj = jwt.decode(token);
+        var idtao = await userController.getUserByPhone(phoneObj.data)
+        var user = await userController.importexcel(req.body,idtao);
+
+        res.send({
+            status: 200,
+            token: token,
+            user,
+
+        })
+    } catch (error) {
+        console.log(error)
+        res.status(500).send({ errorMessage: error.message })
+    }
+});
 
 router.post('/signin', async function (req, res) {
     try {
         //firebasetoken=passport.createPassportConfig(req.body,req.body.soDienThoai,req.body.password,done=true);
         var token = jwt.sign({ data: req.body.soDienThoai }, 'secret', { expiresIn: '1y' });
-        // req.session.token = token;
+        req.session.token = token;
         var user = await userController.checkLogin(req.body);
 
         res.send({

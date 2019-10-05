@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var session = require('express-session');
 require('./api/model/User');
 require('./api/model/Student');
 require('./api/model/Schedule');
@@ -23,6 +24,13 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 // Serve only the static files form the dist directory
 app.use(express.static(__dirname + '/dist/school-education'));
+app.use(session({
+  secure: true,
+  httpOnly: true,
+  secret: 'asdqwe',
+  resave: false,
+  saveUninitialized: true
+}))
 app.use('/api/route/user', userRouter)
 app.use('/api/route/schedule', scheduleRouter)
 app.use('/api/route/student', studentRouter)

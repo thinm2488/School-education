@@ -24,7 +24,7 @@ var UserSchema = new Schema(
 
     }],
     soDienThoai: { type: String },
-    password: { type: String },
+    password: { type: String,default:'123456' },
 
     role: { type: String, default: 'ph' },
     hinh: { type: String, default: "hero-bg.jpg" }

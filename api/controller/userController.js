@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
+const Student = mongoose.model('Student');
 // const nodemailer = require('nodemailer')
 var jwt = require('jsonwebtoken');
 // const smtpTransport=require('nodemailer-smtp-transport')
@@ -33,15 +34,85 @@ const taoUser = async function (data) {
             status: 500
         }
     }
-    
+
     user = new User(data);
-    user.quanHe=data.HocSinh
+    user.quanHe = data.HocSinh
     await user.save();
     return {
         user,
         message: "Thêm tài khoản thành công",
         status: 200
     }
+
+}
+const importexcel = async function (data, nguoiTao) {
+
+    // try {
+    //     for (let i=0; i <= data.length; i++) {
+    //         let user = await User.findOne({ soDienThoai: data[i].SoDienThoai });
+
+
+    //             let student = await Student.findOne({ id:  data[i].IDHocSinh })
+    //             user = new User(data);
+    //             user.quanHe = student;
+    //             user.idTao = nguoiTao.id;
+    //             user.tenNguoiDung = data[i].HovaTen;
+    //             user.soDienThoai = data[i].SoDienThoai;
+    //             user.email = data[i].Email;
+    //             await user.save();
+    //             return {
+
+    //                 message: "Thêm tài khoản thành công",
+    //                 status: 200
+    //             }
+    //     }
+
+
+    // } catch (error) {
+
+    // }
+    data.map(async function (element) {
+        let user = await User.findOne({ soDienThoai: element.SoDienThoai });
+
+        if(user){
+            return {
+    
+                message: "fail",
+                status: 500
+            }
+        }else{
+            let student = await Student.findOne({ id: element.IDHocSinh })
+            user = new User(data);
+            user.quanHe = student;
+            user.idTao = nguoiTao.id;
+            user.tenNguoiDung = element.HovaTen;
+            user.soDienThoai = element.SoDienThoai;
+            user.email = element.Email;
+            await user.save();
+            return {
+    
+                message: "Thêm tài khoản thành công",
+                status: 200
+            }
+        }
+       
+
+    })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }
 
@@ -66,13 +137,13 @@ const checkLogin = async function (data) {
         } else {
 
             return {
-                message:'Sai mật khẩu hoặc password',
+                message: 'Sai mật khẩu hoặc password',
                 status: 500
             }
         }
     } else {
         return {
-            message : 'Số điện thoại không tồn tại!',
+            message: 'Số điện thoại không tồn tại!',
             status: 500
         }
     }
@@ -202,7 +273,7 @@ const xoaUser = async function (id) {
     let user = await User.findOne({ _id: id });
     user.remove();
     return {
-        status:200,
+        status: 200,
         message: 'Xóa thành công!'
     }
 }
@@ -219,6 +290,7 @@ module.exports = {
     editProfile: editProfile,
     xoaUser: xoaUser,
     changePass: changePass,
+    importexcel: importexcel
     // resetPassword: resetPassword,
     // changePassword:changePassword
 }

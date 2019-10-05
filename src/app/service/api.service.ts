@@ -28,13 +28,19 @@ export class ApiService {
   createUser(data){
     return this.http.post("/api/route/user/signup",data)
   }
+  Importexcel(data){
+    return this.http.post("/api/route/user/excel",data)
+  
+  }
   deleteUser(id){
     return this.http.delete("/api/route/user/"+id)
   }
+
 
   //student
   getliststudent(data){
     return this.http.post("/api/route/student/getall",data);
   }
+
 
 }

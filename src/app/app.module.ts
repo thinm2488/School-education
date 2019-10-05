@@ -19,6 +19,7 @@ import { ApiService } from './service/api.service';
 import { LoginComponent } from './components/login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { ExcelService } from './service/excel.service';
 
 
 @NgModule({
@@ -40,10 +41,12 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     BrowserAnimationsModule,
     ModalModule.forRoot(),
     
+    
   ],
   providers: [
     ApiService,
-    CookieService
+    CookieService,
+    ExcelService
   ],
   bootstrap: [AppComponent]
 })
