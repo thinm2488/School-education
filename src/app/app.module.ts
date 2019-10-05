@@ -17,6 +17,8 @@ import{ComponentsModule} from './components/components.module'
 import { ApiService } from './service/api.service';
 //components
 import { LoginComponent } from './components/login/login.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 
 @NgModule({
@@ -35,6 +37,8 @@ import { LoginComponent } from './components/login/login.component';
     ComponentsModule,
     DataTablesModule,
     FilterPipeModule,
+    BrowserAnimationsModule,
+    ModalModule.forRoot(),
     
   ],
   providers: [

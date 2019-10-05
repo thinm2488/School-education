@@ -22,11 +22,14 @@ export class ApiService {
   getalluser() {
     return this.http.get("/api/route/user/getall");
   }
+  getUser(id){
+    return this.http.get("/api/route/user/"+id)
+  }
   createUser(data){
     return this.http.post("/api/route/user/signup",data)
   }
   deleteUser(id){
-    return this.http.delete("/api/route/user/delete"+id)
+    return this.http.delete("/api/route/user/"+id)
   }
 
   //student

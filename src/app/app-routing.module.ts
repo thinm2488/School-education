@@ -4,6 +4,7 @@ import{ SidebarComponent} from './components/sidebar/sidebar.component';
 import {LoginComponent} from './components/login/login.component';
 import{DanhsachtaikhoanComponent} from './components/user/danhsachtaikhoan/danhsachtaikhoan.component';
 import{TaotaikhoanComponent} from './components/user/taotaikhoan/taotaikhoan.component'
+import{ChitiettaikhoanComponent} from './components/user/chitiettaikhoan/chitiettaikhoan.component'
 
 
 const routes: Routes = [
@@ -23,12 +24,8 @@ const routes: Routes = [
         component: TaotaikhoanComponent
       },
       {
-        path: 'chitiettaikhoan',
-        component: TaotaikhoanComponent
-      },
-      {
         path: 'chitiettaikhoan/:id',
-        component: TaotaikhoanComponent
+        component: ChitiettaikhoanComponent
       },
       
     ]

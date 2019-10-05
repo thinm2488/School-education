@@ -175,7 +175,7 @@ router.put('/', fileUpload(), async function (req, res) {
         else {
             var file = req.files.hinh;
             req.body.hinh = file.name;
-            var url = path.join(path.join(__dirname, '../../'), 'public/images/');
+            var url = path.join(path.join(__dirname, '../../'), 'src/app/assets/images/');
             file.mv(url + req.files.hinh.name, async function () {
                 user = await userController.editProfile(req.body);
 
@@ -206,7 +206,7 @@ router.post('/change-avatar', multipartMiddleware, async function (req, res) {
             req.body.hinh = file.name;
            // phoneObj.hinh=req.files.hinh.name;
 
-            var url = path.join(path.join(__dirname, '../../'), 'public/images/');
+            var url = path.join(path.join(__dirname, '../../'), 'src/app/assets/images/');
 
             var oldPath = req.files.hinh.path;
             var newPath = url
@@ -298,8 +298,7 @@ router.post('/change-password', async function (req, res) {
 
 router.delete('/:id', async function (req, res) {
     try {
-        const token = req.session.token || req.headers['x-access-token'];
-        req.session.token = token;
+        
         var user = await userController.xoaUser(req.params.id);
         res.send({
             user,

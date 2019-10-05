@@ -1,0 +1,59 @@
+.container{
+    background-color: white;
+    margin-top: 100px;
+    height: 550px;
+    padding: 20px;
+    float: right;
+    margin-right: 50px
+
+    
+    
+}
+.title{
+    text-align: center;
+    font-size: 50px;
+    color: #19c880;
+
+}
+.row{
+    margin-top: 20px
+}
+img{
+    height: 300px;
+    width: 300px;
+    border-radius: 50%;
+    border: 1px solid;
+    padding: 5px;
+    box-shadow: 5px 10px 8px #888888;
+    
+}
+.name{
+    margin-bottom: 20px
+}
+.col-md-6{
+    margin-top: 50px
+}
+h3{
+ margin-top: 20px
+}
+.modal-content{
+    height: 200px;
+}
+@media (min-width: 1200px){
+    .container {
+        max-width: 1338px;}
+       
+    
+}
+@media (min-width: 1900px){
+    .container {
+        max-width: 1525px;}
+       
+    
+}
+@media (min-width: 2000px){
+    .container {
+        max-width: 1680px;}
+       
+    
+}

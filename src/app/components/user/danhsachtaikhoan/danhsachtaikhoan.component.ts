@@ -18,36 +18,23 @@ export class DanhsachtaikhoanComponent implements OnInit {
   userlist: any
   resdata: any[]
 
-  constructor(private apiService: ApiService, private root:ActivatedRoute) {
+  constructor(private apiService: ApiService, private root: ActivatedRoute) {
 
   }
 
   ngOnInit(): void {
-    
+
     var users
     this.apiService.getalluser()
       .subscribe(data => {
         this.userlist = Object.assign(data)
         //for (let index = 0; index < user.length; index++) {
-        
+
         this.innitDatatable(this.userlist.userlist);
-
       }
-
-        // }
-
-
       )
-
-
     console.log(this.userlist)
-    // this.resdata=this.userlist
-
-
   };
-
- 
-
 
   innitDatatable(datares) {
     var table = $('#datatable').DataTable({
@@ -60,16 +47,17 @@ export class DanhsachtaikhoanComponent implements OnInit {
             return '<img style="height: 100px;width:100px;border-radius:50%" src="../../../../assets/images/' + JsonResultRow.hinh + '">';
           }
         },
-        
-       
-        { data: 'tenNguoiDung' },
-        { data: 'soDienThoai' },
-        //{ data: 'tenHocSinh' },
-      
-
+        {
+          "render": function (data, type, JsonResultRow, row) {
+            return '<a style="color:black; margin-top:20px"  href="/home/chitiettaikhoan/' + JsonResultRow._id + '">' + JsonResultRow.tenNguoiDung + '</a>'
+          }
+        },
+        {
+          "render": function (data, type, JsonResultRow, row) {
+            return '<a style="color:black; margin-top:20px" href="/home/chitiettaikhoan/' + JsonResultRow._id + '">' + JsonResultRow.soDienThoai + '</a>'
+          }
+        },
       ]
-
-
     });
   }
 
