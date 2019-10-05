@@ -71,7 +71,7 @@ router.post('/create', fileUpload(), async function (req, res) {
         else {
             var file = req.files.hinh;
             req.body.hinh = file.name;
-            var url = path.join(path.join(__dirname, '../../'), 'public/images/');
+            var url = path.join(path.join(__dirname, '../../'), 'src/app/assets/images/');
             file.mv(url + req.files.hinh.name, async function () {
                 student = await studentController.createStudent(req.body);
 
@@ -117,7 +117,7 @@ router.put('/update', fileUpload(), async function (req, res) {
         else {
             var file = req.files.hinh;
             req.body.hinh = file.name;
-            var url = path.join(path.join(__dirname, '../../'), 'public/images/');
+            var url = path.join(path.join(__dirname, '../../'), 'src/app/assets/images/');
             file.mv(url + req.files.hinh.name, async function () {
                 student = await studentController.editProfile(req.body);
 
