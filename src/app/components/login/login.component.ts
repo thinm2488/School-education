@@ -34,6 +34,7 @@ export class LoginComponent implements OnInit {
       this.user=Object.assign(data)      
       var tenNguoiDung=this.user.user.tenNguoiDung;
        var hinh=this.user.user.hinh;
+       var id=this.user.user._id
       if (this.user.user.status==500) {
         window.alert(this.user.user.message)
        
@@ -42,6 +43,8 @@ export class LoginComponent implements OnInit {
       else{
         this.cookieService.set( 'tenNguoiDung',tenNguoiDung.toString()  );
         this.cookieService.set( 'hinh',hinh.toString()  );
+        this.cookieService.set( 'id',id.toString()  );
+       
         
         window.alert("Đăng Nhập Thành Công!!");
         window.location.href = '/home/danhsach'

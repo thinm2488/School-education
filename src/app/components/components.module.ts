@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import {FormsModule ,ReactiveFormsModule } from '@angular/forms';
+import { CKEditorModule } from 'ng2-ckeditor';
 
 // import { FooterComponent } from './footer/footer.component';
 // import { NavbarComponent } from './navbar/navbar.component';
@@ -12,13 +13,17 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 // import { DanhsachComponent } from './thongbao/danhsach/danhsach.component';
 import { DanhsachtaikhoanComponent } from './user/danhsachtaikhoan/danhsachtaikhoan.component';
 import { TaotaikhoanComponent } from './user/taotaikhoan/taotaikhoan.component';
-import{ChitiettaikhoanComponent} from './user/chitiettaikhoan/chitiettaikhoan.component'
+import{ChitiettaikhoanComponent} from './user/chitiettaikhoan/chitiettaikhoan.component';
+import { NotificationComponent } from './notification/notification.component';
+import { DanhsachnotiComponent } from './notification/danhsach/danhsachnoti/danhsachnoti.component'
+
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CKEditorModule
   ],
   declarations: [
     // FooterComponent,
@@ -30,7 +35,9 @@ import{ChitiettaikhoanComponent} from './user/chitiettaikhoan/chitiettaikhoan.co
     // DanhsachComponent,
     DanhsachtaikhoanComponent,
     TaotaikhoanComponent,
-    ChitiettaikhoanComponent
+    ChitiettaikhoanComponent,
+    NotificationComponent,
+    DanhsachnotiComponent
   ],
   exports: [
     // FooterComponent,

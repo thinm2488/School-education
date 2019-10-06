@@ -2,7 +2,7 @@ var express = require('express')
 var router = express.Router()
 var mongoose = require('mongoose')
 var User = mongoose.model('User')
-var constants = require('../../../configs/constants')
+// var constants = require('../../../configs/constants')
 var android= require('../pushnotification/android')
 //var common = require('../common')
 
@@ -12,13 +12,13 @@ const Notification = mongoose.model('Notification')
 
 
 
-function sendNotificationForBirthday (user) {
-    return new Promise((resolve, reject) => {
-      var message = constants.BIRTHDAY_NOTIFICATION
-      sendNotification(user, message)
-      return resolve()
-    })
-  }
+// function sendNotificationForBirthday (user) {
+//     return new Promise((resolve, reject) => {
+//       var message = constants.BIRTHDAY_NOTIFICATION
+//       sendNotification(user, message)
+//       return resolve()
+//     })
+//   }
   // async function sendNotifications ( message, type) {
   //   let users = await User.find({ role: 'ph' },
   //     { code: 1, androidToken: 1 })
@@ -35,7 +35,7 @@ async function sendNotifications ( message, type) {
   }
 module.exports = {
     
-    sendNotificationForBirthday: sendNotificationForBirthday,
+    // sendNotificationForBirthday: sendNotificationForBirthday,
     sendNotifications: sendNotifications,
   
   }

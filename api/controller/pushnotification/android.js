@@ -1,5 +1,5 @@
 const admin = require('../firebaseController')
-const constants = require('../../../configs/constants')
+// const constants = require('../../../configs/constants')
 
 // function sendNotification (token, str, type) {
 //   if (!token || !token.length) return

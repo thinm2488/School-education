@@ -11,15 +11,19 @@ import { DataTablesModule } from 'angular-datatables';
 import { FilterPipeModule } from 'ngx-filter-pipe';
 import { CookieService } from 'ngx-cookie-service';
 
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+
 //component module
 import{ComponentsModule} from './components/components.module'
 //services
 import { ApiService } from './service/api.service';
+import { ExcelService } from './service/excel.service';
+import {NotificationService} from './service/notification.service'
 //components
 import { LoginComponent } from './components/login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ModalModule } from 'ngx-bootstrap/modal';
-import { ExcelService } from './service/excel.service';
+
 
 
 @NgModule({
@@ -40,13 +44,15 @@ import { ExcelService } from './service/excel.service';
     FilterPipeModule,
     BrowserAnimationsModule,
     ModalModule.forRoot(),
+    CKEditorModule
     
     
   ],
   providers: [
     ApiService,
     CookieService,
-    ExcelService
+    ExcelService,
+    NotificationService
   ],
   bootstrap: [AppComponent]
 })

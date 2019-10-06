@@ -18,7 +18,7 @@ export class DanhsachtaikhoanComponent implements OnInit {
   userlist: any
 
 
-  constructor(private excelService:ExcelService,private apiService: ApiService, private root: ActivatedRoute) {
+  constructor(private excelService:ExcelService,private apiService: ApiService) {
 
   }
 

@@ -2,15 +2,13 @@ var express = require('express')
 var router = express.Router()
 var jwt = require('jsonwebtoken');
 var notificationController = require('../controller/notificatonController')
-var userController=require('../controller/userController')
-var userController=require('../controller/pushnotification/pushnotification')
-
+var firebaseController=require('../controller/firebaseController')
 router.post('/create', async (req, res) => {
     try {
       const token = req.headers['x-access-token'] || req.session.token
       //var phoneObj=jwt.decode(token)
-      
-      let data = await notificationController.createNotification(req.body)
+      let idFirebase =await firebaseController.insertfirebase(req.body)
+      let data = await notificationController.createNotification(req.body,idFirebase)
       
       return res.send({
           data,

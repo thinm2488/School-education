@@ -5,6 +5,8 @@ import {LoginComponent} from './components/login/login.component';
 import{DanhsachtaikhoanComponent} from './components/user/danhsachtaikhoan/danhsachtaikhoan.component';
 import{TaotaikhoanComponent} from './components/user/taotaikhoan/taotaikhoan.component'
 import{ChitiettaikhoanComponent} from './components/user/chitiettaikhoan/chitiettaikhoan.component'
+import { NotificationComponent } from './components/notification/notification.component'
+import{DanhsachnotiComponent} from './components/notification/danhsach/danhsachnoti/danhsachnoti.component'
 
 
 const routes: Routes = [
@@ -26,6 +28,14 @@ const routes: Routes = [
       {
         path: 'chitiettaikhoan/:id',
         component: ChitiettaikhoanComponent
+      },
+      {
+        path: 'thongbao/tao',
+        component: NotificationComponent
+      },
+      {
+        path: 'thongbao/danhsach',
+        component: DanhsachnotiComponent
       },
       
     ]

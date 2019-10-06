@@ -1,9 +1,10 @@
 
 
 const mongoose = require('mongoose')
+
 const Notification = mongoose.model('Notification')
 //const User = mongoose.model('User')
-const constants = require('../../configs/constants')
+// const constants = require('../../configs/constants')
 const async = require('async')
 var android = require('../controller/pushnotification/android')
 var pushnotiController=require('../controller/pushnotification/pushnotification')
@@ -11,9 +12,11 @@ var User = mongoose.model('User')
 
 
 
-const createNotification = async function (data) {
 
+const createNotification = async function (data, idfirebase) {
+ 
     noti = new Notification(data);
+    noti.idfirebase=idfirebase.idFirebase
     await noti.save();
     
     //sendNotification (token, data.noiDung,constants.notificationType.NEW_DOCUMENT)

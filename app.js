@@ -3,14 +3,18 @@ const path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session');
+var firebase = require('firebase');
 require('./api/model/User');
 require('./api/model/Student');
 require('./api/model/Schedule');
 require('./api/model/ApplicationForm')
 require('./api/model/Class')
+require('./api/model/Notification')
 var userRouter = require('./api/route/user')
 var scheduleRouter = require('./api/route/schedule')
 var studentRouter = require('./api/route/student')
+var notificationRouter= require('./api/route/notification')
+
 
 
 
@@ -34,6 +38,7 @@ app.use(session({
 app.use('/api/route/user', userRouter)
 app.use('/api/route/schedule', scheduleRouter)
 app.use('/api/route/student', studentRouter)
+app.use('/api/route/notification',notificationRouter)
 app.get('/*', function(req,res) {
     
 res.sendFile(path.join(__dirname+'/dist/school-education/index.html'));
@@ -125,7 +130,17 @@ function onListening() {
   debug('Listening on ' + bind);
 }
 
-
+// System.config({
+//   map: {
+//     'ng2-ckeditor': 'npm:ng2-ckeditor',
+//   },
+//   packages: {
+//     'ng2-ckeditor': {
+//       main: 'lib/index.js',
+//       defaultExtension: 'js',
+//     },
+//   },
+// });
 
 
 //Nhập mô-đun mongoose
@@ -141,15 +156,16 @@ var db = mongoose.connection;
 
 //Ràng buộc kết nối với sự kiện lỗi (để lấy ra thông báo khi có lỗi)
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-//Kết nối firebase
-var firebase = require('firebase');
-var config = {
+//Ket noi firebase
+const firebaseConfig = {
   apiKey: "AIzaSyBCon2O9GDH82NiGHI5E5gs64HEyV9sDf0",
   authDomain: "c-school-apps.firebaseapp.com",
   databaseURL: "https://c-school-apps.firebaseio.com",
   projectId: "c-school-apps",
-  storageBucket: "",
+  storageBucket: "c-school-apps.appspot.com",
   messagingSenderId: "353430333264",
   appId: "1:353430333264:web:ea7d5f99891fa0d0"
 };
-firebase.initializeApp(config);
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+//listenFirebase();

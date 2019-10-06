@@ -1,0 +1,65 @@
+<script src="//cdn.ckeditor.com/4.7.1/full/ckeditor.js"></script>
+
+
+<form [formGroup]="notiForm" novalidate >
+<div class="container">
+
+    <h1 style="color:#19c880;padding:30px 0px 50px">Tạo Thông Báo</h1>
+
+        <div class="title">
+            <!-- <div class="check">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label style="float: left">Nhóm Nhận thông báo:</label><br>
+                    </div>
+                    <div class="col-md-3">
+                        <input style="height: 25px" type="checkbox"> <label
+                            style="margin-left: -240px;margin-top: 9px">Giáo viên</label>́</div>
+                    <div class="col-md-3">
+                        <input style="height: 25px" type="checkbox"> <label
+                            style="margin-left: -240px;margin-top: 9px">Phụ huynh</label> </div>
+                </div>
+            </div> -->
+            <div class="row">
+                <div class="col-md-2">
+                    <label style="float: left;font-size:20px">Chủ đề:</label>
+
+                </div>
+                <div class="col-md-10">
+                    <input formControlName="chuDe" #chuDe placeholder="Nhập chủ đề...">
+                </div>
+
+            </div>
+
+        </div>
+    
+    <div class="editor">
+        <div class="row">
+            <div class="col-md-2">
+                    <label style="float: left;font-size:18px">Nội dung:</label>
+
+            </div>
+            <div class="col-md-10">
+                <textarea formControlName="noiDung" #noiDung placeholder="Nhập nội dung">
+
+                </textarea>
+            </div>
+        </div>
+
+        <!-- <ckeditor  [(ngModel)]="ckeditorContent">
+            <ckbutton [name]="'saveButton'" [command]="'saveCmd'" (click)="save($event)" [icon]="'save.png'"
+                [label]="'Save Document'" [toolbar]="'clipboard,1'">
+            </ckbutton>
+        </ckeditor> -->
+    </div>
+    <div class="row">
+        <div class="col-md-5"></div>
+        <div class="col-md-7">
+            <button style="float:left;margin-top:50px;margin-bottom:50px;font-size: 25px;border-radius: 10px ; background-color:#19c880" class="btn-u pull-left"
+                type="submit" 
+                [disabled]="notiForm.pristine || notiForm.invalid"(click)=create(chuDe.value,noiDung.value)>Tạo thông báo</button>
+        </div>
+    </div>
+
+</div>
+</form>
