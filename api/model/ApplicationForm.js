@@ -5,6 +5,7 @@ var ApplicationFormSchema = new Schema(
        
         idHocSinh:{type:String},
         tenHocSinh:{type:String},
+        lyDo:{type:String},
         ngayNghi:{type:Number},
         tenPhuHuynh:{type:String},
         trangThai:{type:Boolean, default:false},
