@@ -1,0 +1,84 @@
+<script src="//cdn.ckeditor.com/4.7.1/full/ckeditor.js"></script>
+
+
+
+<div class="container">
+
+    <h1 style="color:#19c880;padding:30px 0px 50px">Chi Tiết Thông Báo</h1>
+
+        <div class="title">
+            <!-- <div class="check">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label style="float: left">Nhóm Nhận thông báo:</label><br>
+                    </div>
+                    <div class="col-md-3">
+                        <input style="height: 25px" type="checkbox"> <label
+                            style="margin-left: -240px;margin-top: 9px">Giáo viên</label>́</div>
+                    <div class="col-md-3">
+                        <input style="height: 25px" type="checkbox"> <label
+                            style="margin-left: -240px;margin-top: 9px">Phụ huynh</label> </div>
+                </div>
+            </div> -->
+            <div class="row">
+                <div class="col-md-2">
+                    <label style="float: left;font-size:20px">Chủ đề:</label>
+
+                </div>
+                <div class="col-md-10">
+                    <input [(ngModel)]="noiDung" placeholder="Nhập chủ đề..." >
+                </div>
+
+            </div>
+
+        </div>
+    
+    <div class="editor">
+        <div class="row">
+            <div class="col-md-2">
+                    <label style="float: left;font-size:18px">Nội dung:</label>
+
+            </div>
+            <div class="col-md-10">
+                <textarea [(ngModel)]="chuDe" placeholder="Nhập nội dung" >
+
+                </textarea>
+            </div>
+        </div>
+
+        <!-- <ckeditor  [(ngModel)]="ckeditorContent">
+            <ckbutton [name]="'saveButton'" [command]="'saveCmd'" (click)="save($event)" [icon]="'save.png'"
+                [label]="'Save Document'" [toolbar]="'clipboard,1'">
+            </ckbutton>
+        </ckeditor> -->
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <button style="float: right;margin-top:50px;margin-bottom:50px;font-size: 25px;border-radius: 10px ; background-color:#19c880" class="btn-u pull-left"
+            type="submit" (click)="update()"
+           >Cập nhật</button>
+        </div>
+        <div class="col-md-6">
+            
+                <button (click)="openModal(template)"style="margin-top:50px;margin-bottom:50px;font-size: 20px;border-radius: 10px ; background-color:red;width:100px;float:left;color:black" class="btn btn-danger">Xóa</button>
+          
+        </div>
+    </div>
+
+    <ng-template #template>
+            <div class="modal-header">
+              <h4 class="modal-title pull-left">Xác thực yêu cầu</h4>
+              <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <h5>Bạn chắc chắn muốn xóa tài khoản này??</h5>
+            </div>
+            <div style="float: right;margin-right: 20px;margin-bottom: 10px" class="row">
+                <div class="col-md-8"></div>
+                <div  class="col-md-2"><button (click)="xoa()"style="font-size: 15px; width: 70px;height: 35px;border-radius: 10px;" class="btn btn-danger">Xóa</button></div>
+                <div  class="col-md-2" (click)="close()"><button style="font-size: 15px; width: 70px;height: 35px;border-radius: 10px;" class="btn btn-warning">Trở lại</button></div>
+            </div>
+          </ng-template>
+</div>
