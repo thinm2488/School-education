@@ -13,4 +13,13 @@ export class NotificationService {
   laydanhsachnoti(){
     return this.http.get('/api/route/notification/')
   }
+  suanoti(data) {
+    return this.http.put('/api/route/notification/edit', data)
+  }
+  laychitietnoti(id) {
+    return this.http.get('/api/route/notification/'+ id)
+  }
+  deletenoti(id) {
+    return this.http.delete('/api/route/notification/'+ id)
+  }
 }

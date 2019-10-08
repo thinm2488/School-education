@@ -3,12 +3,14 @@ var router = express.Router()
 var jwt = require('jsonwebtoken');
 var notificationController = require('../controller/notificatonController')
 var firebaseController=require('../controller/firebaseController')
+var userController = require('../controller/userController')
 router.post('/create', async (req, res) => {
     try {
       const token = req.headers['x-access-token'] || req.session.token
       //var phoneObj=jwt.decode(token)
       let idFirebase =await firebaseController.insertfirebase(req.body)
-      let data = await notificationController.createNotification(req.body,idFirebase)
+      let nguoiTao = await userController.layChiTietUser(req.body.nguoiTao)
+      let data = await notificationController.createNotification(req.body,idFirebase,nguoiTao)
       
       return res.send({
           data,
@@ -67,7 +69,7 @@ router.put('/edit', async (req, res) => {
     try {
       const token =  req.session.token
     //   var phoneObj=jwt.decode(token)
-      
+      await firebaseController.updatefirebase(req.body)
       let data = await notificationController.editNotification(req.body)
       return res.send({
           data,
@@ -83,6 +85,8 @@ router.put('/edit', async (req, res) => {
         const token = req.session.token || req.headers['x-access-token'];
         req.session.token = token;
         var noti = await notificationController.xoanoti(req.params.id);
+        await firebaseController.deletefirebase(noti.users,req.params.id)
+       
         res.send({
             status: 200,
             id: req.params.id

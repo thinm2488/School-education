@@ -13,14 +13,15 @@ var User = mongoose.model('User')
 
 
 
-const createNotification = async function (data, idfirebase) {
- 
+const createNotification = async function (data, idfirebase,nguoiTao) {
+
     noti = new Notification(data);
     noti.idfirebase=idfirebase.idFirebase
+    
     await noti.save();
     
     //sendNotification (token, data.noiDung,constants.notificationType.NEW_DOCUMENT)
-    pushnotiController.sendNotifications(noti,type='new')
+    pushnotiController.sendNotifications(noti,nguoiTao)
 //sendNotification(noti,type)
     return {
         noti
@@ -84,9 +85,11 @@ const layChiTietNoti = async function (id) {
 }
 const xoanoti = async function (id) {
     let noti = await Notification.findOne({ idfirebase: id });
+    let users= await User.findOne({_id:noti.nguoiTao})
     noti.remove();
     return {
-        mess:'Xóa thành công!'
+        mess:'Xóa thành công!',
+        users
     }
 }
 module.exports = {

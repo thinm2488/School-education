@@ -34,22 +34,22 @@ innitDatatable(datares) {
           {
             "render": function (data, type, JsonResultRow, row) {
               
-              return '<a style="color:black; margin-top:20px"  href="/home/chitietnoti/' + JsonResultRow._id + '">' + JsonResultRow.chuDe + '</a>'
+              return '<a style="color:black; margin-top:20px"  href="/home/thongbao/chitietnoti/' + JsonResultRow._id + '">' + JsonResultRow.chuDe + '</a>'
             }
           },
           {
             "render": function (data, type, JsonResultRow, row) {
-              return '<a style="color:black; margin-top:20px" href="/home/chitietnoti/' + JsonResultRow._id + '">' + JsonResultRow.noiDung + '</a>'
+              return '<a style="color:black; margin-top:20px" href="/home/thongbao/chitietnoti/' + JsonResultRow._id + '">' + JsonResultRow.noiDung + '</a>'
             }
           },
           
           { 
             "render": function (data, type, JsonResultRow, row) {
               var now = new Date(Number(JsonResultRow.gioTao));
-              var d= now.toLocaleString()
+              var d= now.toLocaleDateString()
               ;
              
-              return '<a style="color:black; margin-top:20px"  href="/home/chitietnoti/' + JsonResultRow._id + '">' + d + '</a>'
+              return '<a style="color:black; margin-top:20px"  href="/home/thongbao/chitietnoti/' + JsonResultRow._id + '">' + d + '</a>'
             }
           },
         ],

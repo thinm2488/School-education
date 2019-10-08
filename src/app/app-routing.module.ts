@@ -7,7 +7,11 @@ import{TaotaikhoanComponent} from './components/user/taotaikhoan/taotaikhoan.com
 import{ChitiettaikhoanComponent} from './components/user/chitiettaikhoan/chitiettaikhoan.component'
 import { NotificationComponent } from './components/notification/notification.component'
 import{DanhsachnotiComponent} from './components/notification/danhsach/danhsachnoti/danhsachnoti.component'
-
+import {ChitietnotiComponent} from './components/notification/chitietnoti/chitietnoti.component'
+import{DanhsachhocsinhComponent} from './components/student/danhsachhocsinh/danhsachhocsinh.component'
+import {ChitiethocsinhComponent} from './components/student/chitiethocsinh/chitiethocsinh.component'
+import {TaohocsinhComponent} from './components/student/taohocsinh/taohocsinh.component'
+import { from } from 'rxjs';
 
 const routes: Routes = [
   {
@@ -36,6 +40,22 @@ const routes: Routes = [
       {
         path: 'thongbao/danhsach',
         component: DanhsachnotiComponent
+      },
+      {
+        path: 'thongbao/chitietnoti/:id',
+        component: ChitietnotiComponent
+      },
+      {
+        path: 'hocsinh/danhsach',
+        component: DanhsachhocsinhComponent
+      },
+      {
+        path: 'hocsinh/taohocsinh',
+        component: TaohocsinhComponent
+      },
+      {
+        path: 'hocsinh/:id',
+        component: ChitiethocsinhComponent
       },
       
     ]

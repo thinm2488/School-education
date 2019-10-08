@@ -25,12 +25,12 @@ const Notification = mongoose.model('Notification')
   //   android.sendNotification(users.map(u => u.androidToken).filter(Boolean), message, type)
   //   //ios.sendNotification(users.map(u => u.iosToken).filter(Boolean), message, type)
   // }
-async function sendNotifications ( message, type) {
+async function sendNotifications ( message, nguoiTao) {
    
   let users = await User.find({role:'ph'}
     )
     
-    android.sendnoti(users.map(u => u.androidToken), message, type)
+    android.sendnoti(users.map(u => u.androidToken), message,nguoiTao)
          
   }
 module.exports = {

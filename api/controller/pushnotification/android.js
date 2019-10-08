@@ -1,4 +1,5 @@
 const admin = require('../firebaseController')
+
 // const constants = require('../../../configs/constants')
 
 // function sendNotification (token, str, type) {
@@ -37,7 +38,7 @@ var FCM = require('fcm-node');
 var serverKey = 'AIzaSyA3CE-n8z68M8wYvpJGVvOt8SxnI1z5M24'; //put your server key here
 var fcm = new FCM(serverKey);
 
-function sendnoti(token, str, type){
+function sendnoti(token, str, nguoiTao){
 
   for(var i=0;i<=token.length;i++){
     var message = { //this may vary according to the message type (single recipient, multicast, topic, et cetera)
@@ -45,7 +46,7 @@ function sendnoti(token, str, type){
       //collapse_key: 'your_collapse_key',
       to: token[i], //single device
       notification: {
-          title: str.nguoiTao, 
+          title: nguoiTao.user.tenNguoiDung, 
           body: str.noiDung ,
           tag:str.idfirebase,
 

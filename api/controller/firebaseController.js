@@ -19,8 +19,7 @@ function makeid(length) {
   return result;
 }
 const insertfirebase = async function (data) {
-  // var today = new Date();
-  // var time = today.getTime();;
+
   var _id = makeid(15);
   var dbRef = firebase.database().ref();
   var dbNoti = dbRef
@@ -41,6 +40,34 @@ const insertfirebase = async function (data) {
   }
  
 }
+const updatefirebase = async function (data) {
+
+
+  var dbRef = firebase.database().ref();
+  var dbNoti = dbRef
+  
+      .child("notifications/" + data.nguoiTao + "/" + data.idfirebase);
+  dbNoti.set({
+      _id:data.idfirebase,
+      ngaytao: data.gioTao,
+      noiDung: data.noiDung,
+      chuDe:data.chuDe,
+      IsBadge: false,
+      nguoiTao: data.nguoiTao,
+      hinh: data.hinh,
+  });
+  return{
+    idFirebase :data.idfirebase
+  }
+ 
+}
+const deletefirebase = async function (user,id) {
+
+  var dbRef = firebase.database().ref();
+  dbRef .child("notifications/" +   user.id + "/"+ id).remove();
+}
 module.exports = {
-  insertfirebase:insertfirebase
+  insertfirebase:insertfirebase,
+  updatefirebase:updatefirebase,
+  deletefirebase:deletefirebase
 }

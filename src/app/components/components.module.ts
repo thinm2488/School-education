@@ -15,7 +15,11 @@ import { DanhsachtaikhoanComponent } from './user/danhsachtaikhoan/danhsachtaikh
 import { TaotaikhoanComponent } from './user/taotaikhoan/taotaikhoan.component';
 import{ChitiettaikhoanComponent} from './user/chitiettaikhoan/chitiettaikhoan.component';
 import { NotificationComponent } from './notification/notification.component';
-import { DanhsachnotiComponent } from './notification/danhsach/danhsachnoti/danhsachnoti.component'
+import { DanhsachnotiComponent } from './notification/danhsach/danhsachnoti/danhsachnoti.component';
+import { ChitietnotiComponent } from './notification/chitietnoti/chitietnoti.component';
+import { DanhsachhocsinhComponent } from './student/danhsachhocsinh/danhsachhocsinh.component';
+import { ChitiethocsinhComponent } from './student/chitiethocsinh/chitiethocsinh.component';
+import { TaohocsinhComponent } from './student/taohocsinh/taohocsinh.component'
 
 @NgModule({
   imports: [
@@ -37,7 +41,11 @@ import { DanhsachnotiComponent } from './notification/danhsach/danhsachnoti/danh
     TaotaikhoanComponent,
     ChitiettaikhoanComponent,
     NotificationComponent,
-    DanhsachnotiComponent
+    DanhsachnotiComponent,
+    ChitietnotiComponent,
+    DanhsachhocsinhComponent,
+    ChitiethocsinhComponent,
+    TaohocsinhComponent
   ],
   exports: [
     // FooterComponent,
