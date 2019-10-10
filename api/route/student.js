@@ -3,6 +3,7 @@ var session = require('express-session')
 var router = express.Router();
 var studentController = require('../controller/studentController');
 var UserController= require('../controller/userController')
+var EmailController=require('../controller/emailController')
 // var authController = require('../controller/authController');
 var jwt = require('jsonwebtoken');
 var fileUpload = require('express-fileupload');
@@ -195,6 +196,7 @@ router.post('/dayoff', async function (req, res) {
         var user = await UserController.getUserByPhone(phoneObj.data);
         var teacher= await UserController.layChiTietUser(user.idTao)
         var dayoff= await studentController.createdayoff(user,req.body,teacher.user.email) ;
+        let email =await EmailController.sendMail(dayoff.applicationform)
         if(dayoff){
             res.send({
                 status:200,
@@ -210,5 +212,14 @@ router.post('/dayoff', async function (req, res) {
         res.status(500).send({ errorMessage: error.message })
     }
 });
-
+// router.post('/sendemail', async function (req, res) {
+   
+//     res.send({
+//         status:200,
+//         email,
+//         message:"thành công",
+       
+        
+//     })
+// });
 module.exports = router;

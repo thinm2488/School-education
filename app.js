@@ -4,6 +4,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session');
 var firebase = require('firebase');
+var nodemailer = require('nodemailer');
 require('./api/model/User');
 require('./api/model/Student');
 require('./api/model/Schedule');

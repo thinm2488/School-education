@@ -11,8 +11,6 @@ import {ChitietnotiComponent} from './components/notification/chitietnoti/chitie
 import{DanhsachhocsinhComponent} from './components/student/danhsachhocsinh/danhsachhocsinh.component'
 import {ChitiethocsinhComponent} from './components/student/chitiethocsinh/chitiethocsinh.component'
 import {TaohocsinhComponent} from './components/student/taohocsinh/taohocsinh.component'
-import { from } from 'rxjs';
-
 const routes: Routes = [
   {
     path: '',

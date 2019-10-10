@@ -161,40 +161,16 @@ const getdayoff = async function (id) {
 
 }
 const importexcel = async function (data) {
+    let classs = await Class.findOne({ soHieu: data.soHieu })
+    if (!classs) {
+        classs = new Class();
+        classs.khoi = data.khoi,
+        classs.soHieu = data.soHieu
+        await classs.save()
+    }
+    data.liststudent.map(async function (element) {
 
-    data.map(async function (element) {
-        // let user = await User.findOne({ soDienThoai: element.SoDienThoai });
-
-        // if(user){
-        //     return {
-
-        //         message: "fail",
-        //         status: 500
-        //     }
-        // }else{
-        // let student = await Student.findOne({ id: element.IDHocSinh })
-        let classs = await Class.findOne({ soHieu: data.soHieu })
-        if (!classs) {
-            classs = new Class();
-            classs.khoi = element.khoi,
-            classs.soHieu = element.soHieu
-            await classs.save()
-            student = new Student(data);
-            student.tenHocSinh = element.tenHocSinh;
-            student.soHieu = element.soHieu;
-            student.khoi = element.khoi;
-            student.ngaySinh = element.ngaySinh;
-            student.gioiTinh = element.gioiTinh;
-            student.diaChi = element.diaChi;
-            await student.save();
-            return {
-                student,
-                message: "Thêm tài khoản thành công",
-                status: 200
-            }
-        }
-
-        else {
+            
             student = new Student(data);
             student.tenHocSinh = element.tenHocSinh;
             student.soHieu = element.soHieu;
@@ -208,7 +184,7 @@ const importexcel = async function (data) {
                 message: "Thêm tài khoản thành công",
                 status: 200
             }
-        }
+        
 
     })
 
