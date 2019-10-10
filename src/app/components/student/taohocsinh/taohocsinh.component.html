@@ -1,1 +1,135 @@
-<p>taohocsinh works!</p>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<style>
+    .row {
+        margin-left: unset;
+        margin-right: unset
+    }
+
+    .form-control {
+        margin-left: 15px
+    }
+
+    .col-md-4 {
+        padding-left: 0;
+        padding-right: 0
+    }
+</style>
+<div style="   margin-top: 6%;" class="form">
+    <div class="container" style="background: rgba(255,255,255,.7); float: right; margin-right: 4%">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <form [formGroup]="studentForm" novalidate>
+                <div class="col-md-10" style="padding: 50px">
+                    <h1
+                        style="color: #19c880;font-size: 55px;text-align: center; margin: initial; margin-bottom: 10px;">
+                        Thêm tài khoản</h1>
+                    <hr>
+
+                    <div style="border-radius: 10px" class="input-group margin-bottom-20">
+                        <div class="row">
+                            <label>Họ và tên:&ensp;&ensp; </label>
+
+                            <div class="col-md-10">
+                                <span class="input-group-addon"><i style="border-radius: 10px;margin-left: 20px"
+                                        class="glyphicon glyphicon-user mycolor"></i></span>
+                                <input formControlName="tenHocSinh" size="60" maxlength="255" class="form-control"
+                                    placeholder="Nhập tên" type="text" #tenHocSinh>
+                            </div>
+                            <div class="col-md-2"></div>
+
+                        </div>
+
+                    </div>
+                    <div class="row" style="margin-top: 20px">
+
+                        <div class="col-md-5">
+                            <label style="position: absolute;margin-left: -15px;">Khối:</label>
+                            <select aria-placeholder="chọn khối"
+                                style="margin-left: 83px;width:180px;border-radius: 10px" class="form-control"
+                                formControlName="khoi" [(ngModel)]="khoilop">
+                                <option [ngValue]="khois" *ngFor="let khois of danhsachkhoi">{{khois}}</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6" style="    margin-left: 30px">
+                            <label style="position: absolute">Lớp:</label>
+                            <input size="60" [(ngModel)]="lop" maxlength="255" class="form-control"
+                                style="margin-left: 50px;width:200px" placeholder="Nhập số hiệu lớp" id="lop"
+                                class="form-control" [(ngModel)]="soHieu" formControlName="soHieu">
+                            <!-- <select aria-placeholder="chọn lớp"
+                                style="margin-left: 55px;width:180px;border-radius: 10px" >
+                                <option [ngValue]="item" *ngFor="let item of danhsachlop">{{item.soHieu}}</option>
+                            </select> -->
+                        </div>
+
+
+
+                    </div>
+
+
+
+                    <div style="border-radius: 10px" class="input-group margin-bottom-20">
+                        <label>Giới Tính: &ensp;</label>
+                        <input class="radio" type="radio" formControlName="gioiTinh" value="Nam" #gioiTinh>Nam
+                        <input class="radio" type="radio" formControlName="gioiTinh" value="Nữ" #gioiTinh>Nữ
+                    </div>
+
+                    <div style="border-radius: 10px" class="input-group margin-bottom-20">
+                        <div class="row">
+                            <label>Ngày Sinh: &ensp;</label>
+
+                            <div class="col-md-10">
+
+                                <!-- <input style="margin-left:30px" formControlName="ngaySinh" size="60" maxlength="255" class="form-control"
+                                placeholder="Click chọn ngày sinh.." type="text" #ngaySinh>
+                                                     -->
+                                <input class="form-control" placeholder="yyyy-mm-dd" name="dp" size="60"
+                                    [(ngModel)]="model" formControlName="ngaySinh" ngbDatepicker #d="ngbDatepicker"
+                                    #ngaySinh (click)="d.toggle()">
+                                <!-- <div class="input-group-append">
+                                                     <button class="btn btn-outline-secondary calendar" 
+                                                         type="button"></button>
+                                                 </div> -->
+                            </div>
+                            <div class="col-md-2"></div>
+
+                        </div>
+
+                    </div>
+                    <div style="border-radius: 10px" class="input-group margin-bottom-20">
+                        <label>Địa chỉ: &ensp;</label>
+                        <textarea type="text" formControlName="diaChi" #diaChi>
+
+                        </textarea>
+
+                    </div>
+                    <div class="row" style="margin-top: 20px">
+                        <div class="col-md-6 form-group">
+                            <button style="float: right;font-size: 25px;border-radius: 10px ; background-color:#19c880"
+                                class="btn-u pull-left" type="submit"
+                                (click)="tao(tenHocSinh.value,gioiTinh.value,ngaySinh.value,diaChi.value)"
+                                [disabled]="studentForm.pristine || studentForm.invalid">Thêm tài khoản</button>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <button style="font-size: 25px;border-radius: 10px ; background-color:#19c880"
+                                class="btn-u pull-left" type="submit" (click)=" importexcel()">Import Excel</button>
+                        </div>
+
+                    </div>
+
+                    <div class="row" style="margin-top: 10px">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-9">
+                            <input style="width: 320px;" type="file" class="form-control"
+                                (change)="uploadedFile($event)" placeholder="Upload file" accept=".xlsx">
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+</div>

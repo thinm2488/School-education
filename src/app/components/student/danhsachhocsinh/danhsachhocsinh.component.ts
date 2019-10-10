@@ -14,25 +14,45 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
 })
 export class DanhsachhocsinhComponent implements OnInit {
 
-  // liststudent:any
-  // danhsachkhoi = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
-  // danhsachlop: any;
-  // khoilop: String;
-  // soHieu: String;
-  // studentForm:FormGroup
+  liststudent:any
+  danhsachkhoi = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
+  danhsachlop: any;
+  khoilop: String;
+  soHieu: String;
+  studentForm:FormGroup;
+  isshow: boolean=false;
   constructor(private fb: FormBuilder,private excelService:ExcelService,private apiService: ApiService) { }
 
   ngOnInit() {
-    // var users
-    // this.apiService.getalluser()
-    //   .subscribe(data => {
-    //     this.userlist = Object.assign(data)
-    //     //for (let index = 0; index < user.length; index++) {
-
-    //     this.innitDatatable(this.userlist.userlist);
-    //   }
-    //   )
+  
+    
     // console.log(this.userlist)
+  }
+
+  getlop() {
+    let data = {
+      khoi: this.khoilop
+    }
+    window.alert()
+  
+    this.apiService.getlistclass(data).subscribe(res => {
+      let danhsachlop = Object.assign(res)
+      this.danhsachlop = danhsachlop.classes.Classes;
+ 
+    })
+  }
+  getstudent(){
+
+ 
+    this.apiService.getliststudent(this.soHieu)
+      .subscribe(data => {
+        this.liststudent = Object.assign(data)
+        //for (let index = 0; index < user.length; index++) {
+
+        this.innitDatatable(this.liststudent.list.liststudent);
+        this.isshow=true
+      }
+      )
   }
   // createform() {
   //   this.studentForm = this.fb.group({
@@ -45,64 +65,70 @@ export class DanhsachhocsinhComponent implements OnInit {
 
   //   });
   // }
-  // // exportAsXLSX(){
-  // //   const listexport = new Array();
-  // //   let count=1;
-  // //   this.userlist.userlist.forEach(element => {
-  // //    var data={
-  // //      "STT":count++,
-  // //       "Họ Và Tên":element.tenNguoiDung,
-  // //        "Số Điện Thoại":element.soDienThoai,
-  // //        "Email":element.email
+  exportAsXLSX(){
+    const listexport = new Array();
+    let count=1;
+    this.liststudent.list.liststudent.forEach(element => {
+     var data={
+       "STT":count++,
+        "Họ Và Tên":element.tenHocSinh,
+         "Lớp":element.soHieu,
+         "Ngày Sinh":element.ngaySinh,
+         "Địa chỉ":element.diaChi
          
-  // //      }
-  // //      listexport.push(data);
-  // //   });
-   
-  // //   this.excelService.exportAsExcelFile(listexport, 'Danh Sách Phụ Huynh');
-  // // }
+       }
+       listexport.push(data);
+    });
+    var lop=Object.assign(this.soHieu)
+    this.excelService.exportAsExcelFile(listexport, 'Danh Sách Học Sinh lớp '+ lop.soHieu);
+  }
 
-  // check(){
-  //   if(this.liststudent==null){
-  //     return true
-  //   }
-  //   else{
-  //     return false
-  //   }
-  // }
-  // innitDatatable(datares) {
-  //   $(document).ready(function() {
+ 
+  innitDatatable(datares) {
+    $(document).ready(function() {
     
-  //     var table = $('#datatable').DataTable({
-  //       responsive: true,
+      var table = $('#datatable').DataTable({
+        responsive: true,
+        destroy: true,
+        
+        "processing": true,
+        data: datares,
+        columns: [
+          {
+            "render": function (data, type, JsonResultRow, meta) {
+              return '<img style="height: 100px;width:100px;border-radius:50%" src="../../../../assets/images/' + JsonResultRow.hinh + '">';
+            }
+          },
+          {
+            "render": function (data, type, JsonResultRow, row) {
+              return '<a style="color:black; margin-top:20px"  href="/home/hocsinh/' + JsonResultRow._id + '">' + JsonResultRow.tenHocSinh + '</a>'
+            }
+          },
+          {
+            "render": function (data, type, JsonResultRow, row) {
+              return '<a style="color:black; margin-top:20px" href="/home/hocsinh/' + JsonResultRow._id + '">' + JsonResultRow.soHieu + '</a>'
+            }
+          },
+          {
+            "render": function (data, type, JsonResultRow, row) {
+              var now = new Date(Number(JsonResultRow.ngaySinh));
+              var d= now.toLocaleDateString()
+              return '<a style="color:black; margin-top:20px" href="/home/hocsinh/' + JsonResultRow._id + '">' + d + '</a>'
+            }
+          },
+          {
+            "render": function (data, type, JsonResultRow, row) {
+              return '<a style="color:black; margin-top:20px" href="/home/hocsinh/' + JsonResultRow._id + '">' + JsonResultRow.gioiTinh + '</a>'
+            }
+          },
+        ],
         
         
-  //       "processing": true,
-  //       data: datares,
-  //       columns: [
-  //         {
-  //           "render": function (data, type, JsonResultRow, meta) {
-  //             return '<img style="height: 100px;width:100px;border-radius:50%" src="../../../../assets/images/' + JsonResultRow.hinh + '">';
-  //           }
-  //         },
-  //         {
-  //           "render": function (data, type, JsonResultRow, row) {
-  //             return '<a style="color:black; margin-top:20px"  href="/home/chitiettaikhoan/' + JsonResultRow._id + '">' + JsonResultRow.tenNguoiDung + '</a>'
-  //           }
-  //         },
-  //         {
-  //           "render": function (data, type, JsonResultRow, row) {
-  //             return '<a style="color:black; margin-top:20px" href="/home/chitiettaikhoan/' + JsonResultRow._id + '">' + JsonResultRow.soDienThoai + '</a>'
-  //           }
-  //         },
-  //       ],
         
         
-        
-        
-  //     });
-  //   });
+      });
+    });
     
-  // }
+  }
 
 }

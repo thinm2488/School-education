@@ -1,0 +1,56 @@
+.row .myborder{
+    width: 70%;
+    float: right;
+}
+.from{float: right;}
+.input-group{
+    margin-top: 20px
+}
+@media (min-width: 1200px){
+    .container {
+        max-width: 860px;}
+}
+@media (min-width: 1350px){
+    .container {
+        max-width: 1017px;}
+}
+@media (min-width: 1500px){
+    .container {
+        max-width: 1153px;}
+}
+@media (min-width: 1700px){
+    .container {
+        max-width: 1297px;}
+       
+}
+@media (min-width: 1900px){
+    .container {
+        max-width: 1487px;}
+    
+      
+}
+@media (min-width: 2000px){
+    .container {
+        max-width: 1614px;};
+        
+        
+
+
+}
+@media (min-width: 768px){
+.col-md-10 {
+  
+    max-width: 100%;
+}
+}
+textarea{
+    width: 495px;
+    margin-left: 50px;
+    border-radius: 10px
+}
+.radio{
+    margin-left: 50px
+}
+.container{
+    margin-bottom: 50px
+}

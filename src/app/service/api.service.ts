@@ -38,8 +38,23 @@ export class ApiService {
 
 
   //student
+
+  getstudent(id){
+    return this.http.get("/api/route/student/"+id);
+  }
+  getlistclass(data){
+    return this.http.post("/api/route/student/class",data);
+  }
   getliststudent(data){
     return this.http.post("/api/route/student/getall",data);
+  }
+
+  createstudent(data){
+    return this.http.post("/api/route/student/create",data);
+  }
+  StudentImportexcel(data){
+    return this.http.post("/api/route/student/excel",data)
+  
   }
 
 

@@ -46,9 +46,9 @@ export class TaotaikhoanComponent implements OnInit {
     }
     window.alert()
   
-    this.as.getliststudent(data).subscribe(res => {
+    this.as.getlistclass(data).subscribe(res => {
       let danhsachlop = Object.assign(res)
-      this.danhsachlop = danhsachlop.list.liststudent;
+      this.danhsachlop =  danhsachlop.classes.Classes;
     })
   }
 

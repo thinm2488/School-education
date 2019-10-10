@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import {FormsModule ,ReactiveFormsModule } from '@angular/forms';
 import { CKEditorModule } from 'ng2-ckeditor';
+// import { DlDateTimeDateModule, DlDateTimePickerModule } from 'angular-bootstrap-datetimepicker';
 
 // import { FooterComponent } from './footer/footer.component';
 // import { NavbarComponent } from './navbar/navbar.component';
@@ -19,7 +20,9 @@ import { DanhsachnotiComponent } from './notification/danhsach/danhsachnoti/danh
 import { ChitietnotiComponent } from './notification/chitietnoti/chitietnoti.component';
 import { DanhsachhocsinhComponent } from './student/danhsachhocsinh/danhsachhocsinh.component';
 import { ChitiethocsinhComponent } from './student/chitiethocsinh/chitiethocsinh.component';
-import { TaohocsinhComponent } from './student/taohocsinh/taohocsinh.component'
+import { TaohocsinhComponent } from './student/taohocsinh/taohocsinh.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+// import { TaohocsinhComponent } from './student/taohocsinh/taohocsinh.component'
 
 @NgModule({
   imports: [
@@ -27,7 +30,9 @@ import { TaohocsinhComponent } from './student/taohocsinh/taohocsinh.component'
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
-    CKEditorModule
+    CKEditorModule,
+    NgbModule
+
   ],
   declarations: [
     // FooterComponent,
@@ -45,7 +50,8 @@ import { TaohocsinhComponent } from './student/taohocsinh/taohocsinh.component'
     ChitietnotiComponent,
     DanhsachhocsinhComponent,
     ChitiethocsinhComponent,
-    TaohocsinhComponent
+    TaohocsinhComponent,
+    // TaohocsinhComponent
   ],
   exports: [
     // FooterComponent,

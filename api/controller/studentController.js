@@ -9,6 +9,8 @@ const createStudent = async function (data) {
     // if (student) {
     //     throw new Error('Mã số đã được sử dụng ! ')
     // }
+    let date = new Date(data.ngaySinh); // some mock date
+    let milliseconds = date.getTime(); 
     let classs = await Class.findOne({ soHieu: data.soHieu })
     if (!classs) {
         classs = new Class(data);
@@ -22,6 +24,7 @@ const createStudent = async function (data) {
         }
     } else {
         student = new Student(data);
+        student.ngaySinh=milliseconds
         await student.save();
         return {
             student
@@ -170,12 +173,13 @@ const importexcel = async function (data) {
     }
     data.liststudent.map(async function (element) {
 
-            
+            let date = new Date(element.ngaySinh); // some mock date
+            let milliseconds = date.getTime(); 
             student = new Student(data);
             student.tenHocSinh = element.tenHocSinh;
             student.soHieu = element.soHieu;
             student.khoi = element.khoi;
-            student.ngaySinh = element.ngaySinh;
+            student.ngaySinh = milliseconds;
             student.gioiTinh = element.gioiTinh;
             student.diaChi = element.diaChi;
             await student.save();
