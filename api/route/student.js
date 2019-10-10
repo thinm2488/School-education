@@ -194,13 +194,13 @@ router.post('/dayoff', async function (req, res) {
         var phoneObj = jwt.decode(token);
         var user = await UserController.getUserByPhone(phoneObj.data);
         var teacher= await UserController.layChiTietUser(user.idTao)
-        var dayoff= await studentController.createdayoff(user,req.body,teacher) ;
+        var dayoff= await studentController.createdayoff(user,req.body,teacher.user.email) ;
         if(dayoff){
             res.send({
                 status:200,
                 dayoff,
                 message:"Đã cập nhật đơn xin phép thành công",
-                teacher,
+               
                 
             })
         }

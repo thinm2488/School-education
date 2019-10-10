@@ -128,12 +128,13 @@ const xoaStudent = async function (id) {
         mess: 'Xóa thành công!'
     }
 }
-const createdayoff = async function (user, data) {
+const createdayoff = async function (user, data,teacher) {
     let student = await Student.findOne({ _id: data.idHocSinh });
     applicationform = new Applicationform();
     if (student) {
         applicationform.tenHocSinh = student.tenHocSinh;
         applicationform.idHocSinh = student.id;
+        applicationform.emailGiaoVien=teacher;
         applicationform.tenPhuHuynh = user.tenNguoiDung;
         applicationform.ngayNghi = data.ngayNghi;
         applicationform.ngayGui = data.ngayGui;
