@@ -48,7 +48,17 @@ router.get('/:id', async function (req, res) {
 
 })
 
-
+router.post('/class', async function (req, res) {
+    try {
+        var classes = await studentController.getclass(req.body);
+        res.send({
+            classes
+        })
+    } catch (error) {
+        console.log(error)
+        res.status(500).send({ errorMessage: error.message })
+    }
+});
 router.post('/getall', async function (req, res) {
     try {
         var list = await studentController.laystudent(req.body);
@@ -67,6 +77,11 @@ router.post('/create', fileUpload(), async function (req, res) {
         var student
         if (!req.files) {
             student = await studentController.createStudent(req.body);
+            res.send({
+                student,
+                status:200
+    
+            })
         }
         else {
             var file = req.files.hinh;
@@ -76,14 +91,35 @@ router.post('/create', fileUpload(), async function (req, res) {
                 student = await studentController.createStudent(req.body);
 
             })
+            res.send({
+                student,
+                status:200
+    
+            })
 
         }
+        
+
+    } catch (error) {
+        console.log(error)
+        res.status(500).send({ errorMessage: error.message })
+    }
+});
+router.post('/excel', async function (req, res) {
+    try {
+        //firebasetoken=passport.createPassportConfig(req.body,req.body.soDienThoai,req.body.password,done=true);
+        
+        const token = req.session.token
+        var phoneObj = jwt.decode(token);
+        
+        var student = await studentController.importexcel(req.body);
+
         res.send({
+            status: 200,
+            token: token,
             student,
-            status:200
 
         })
-
     } catch (error) {
         console.log(error)
         res.status(500).send({ errorMessage: error.message })
@@ -157,13 +193,14 @@ router.post('/dayoff', async function (req, res) {
         const token = req.headers['x-access-token'];
         var phoneObj = jwt.decode(token);
         var user = await UserController.getUserByPhone(phoneObj.data);
-        var dayoff= await studentController.createdayoff(user,req.body) ;
+        var teacher= await UserController.layChiTietUser(user.idTao)
+        var dayoff= await studentController.createdayoff(user,req.body,teacher) ;
         if(dayoff){
             res.send({
                 status:200,
                 dayoff,
-                message:"Đã cập nhật đơn xin phép thành công"
-    
+                message:"Đã cập nhật đơn xin phép thành công",
+                teacher,
                 
             })
         }
@@ -173,4 +210,5 @@ router.post('/dayoff', async function (req, res) {
         res.status(500).send({ errorMessage: error.message })
     }
 });
+
 module.exports = router;
