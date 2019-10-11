@@ -10,7 +10,7 @@ const sendMail = async function (data) {
           pass: 'huynhnhu'
         }
       });
-      var dateTime = new Date(data.ngayNghi);
+      var dateTime = data.ngayNghi;
       var ngayNghi =moment( dateTime).format("DD/MM/YY");  
 
       var mailOptions = {
