@@ -68,17 +68,19 @@ const editProfile = async function (data) {
     if (data.tenHocSinh) {
         student.tenHocSinh = data.tenHocSinh;
     }
-    if (data.lop) {
-        student.lop = data.lop;
+    if (data.khoi) {
+        student.khoi = data.khoi;
     }
-    if (data.loai) {
-        student.loai = data.loai;
+    if (data.soHieu) {
+        student.soHieu = data.soHieu;
     }
     if (data.diaChi) {
         student.diaChi = data.diaChi;
     }
     if (data.ngaySinh) {
-        student.ngaySinh = data.ngaySinh;
+        let date = new Date(data.ngaySinh); // some mock date
+        let milliseconds = date.getTime(); 
+        student.ngaySinh = milliseconds;
     }
     if (data.queQuan) {
         student.queQuan = data.queQuan;

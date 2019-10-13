@@ -56,6 +56,11 @@ export class ApiService {
     return this.http.post("/api/route/student/excel",data)
   
   }
+  updataStudent(data){
+    return this.http.put("/api/route/student/update",data)
+  }
 
-
+  deleteStudent(id){
+    return this.http.delete("/api/route/student/"+id)
+  }
 }

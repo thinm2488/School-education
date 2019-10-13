@@ -23,7 +23,10 @@ import { ChitiethocsinhComponent } from './student/chitiethocsinh/chitiethocsinh
 import { TaohocsinhComponent } from './student/taohocsinh/taohocsinh.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 // import { TaohocsinhComponent } from './student/taohocsinh/taohocsinh.component'
-
+import {MatDatepickerModule,
+MatNativeDateModule,
+MatInputModule
+} from '@angular/material';
 @NgModule({
   imports: [
     CommonModule,
@@ -31,7 +34,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     FormsModule,
     ReactiveFormsModule,
     CKEditorModule,
-    NgbModule
+    NgbModule,
+    MatNativeDateModule,
+    MatInputModule,
+    MatDatepickerModule
 
   ],
   declarations: [

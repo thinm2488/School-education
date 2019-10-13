@@ -1,1 +1,158 @@
-<p>chitiethocsinh works!</p>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<style>
+    .row {
+        margin-left: unset;
+        margin-right: unset
+    }
+
+    .form-control {
+        margin-left: 15px
+    }
+
+    .col-md-4 {
+        padding-left: 0;
+        padding-right: 0
+    }
+</style>
+<div style="   margin-top: 6%;" class="form">
+    <div class="container" style="background: rgba(255,255,255,.7); float: right; margin-right: 4%">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <!-- <form [formGroup]="studentForm" novalidate> -->
+                <div class="col-md-10" style="padding: 50px">
+                  
+                    <div class="row">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4">
+                         
+                            <img   src='../../../../assets/images/{{Student.hinh}}'>
+                        </div>
+                    </div>
+                    <div class="row">
+                            <div class="col-md-3"></div>
+                            <div class="col-md-4">
+                               <input type="file" (change)="fileupdate($event)" placeholder="chưa có flie ..">
+                            </div>
+                        </div>
+                    <div style="border-radius: 10px" class="input-group margin-bottom-20">
+                        <div class="row">
+                            <label>Họ và tên:&ensp;&ensp; </label>
+
+                            <div class="col-md-10">
+                                <span class="input-group-addon"><i style="border-radius: 10px;margin-left: 20px"
+                                        class="glyphicon glyphicon-user mycolor"></i></span>
+                                <input [(ngModel)]="Student.tenHocSinh"  size="100" maxlength="255" class="form-control"
+                                    placeholder="Nhập tên" type="text">
+                            </div>
+                            <div class="col-md-2"></div>
+
+                        </div>
+
+                    </div>
+                    <div class="row" style="margin-top: 20px">
+
+                        <div class="col-md-5">
+                            <label style="position: absolute;margin-left: -15px;">Khối:</label>
+                            <select aria-placeholder="chọn khối" 
+                                style="margin-left: 78px;width:180px;border-radius: 10px" class="form-control"
+                                [(ngModel)]="Student.khoi">
+                                <option [ngValue]="khois" *ngFor="let khois of danhsachkhoi">{{khois}}</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6" style="    margin-left: -27px">
+                            <label style="position: absolute">Lớp:</label>
+                            <input size="100" maxlength="255" class="form-control"
+                                style="margin-left: 50px;width:200px" placeholder="Nhập số hiệu lớp" id="lop"
+                                class="form-control" [(ngModel)]="Student.soHieu" >
+                            <!-- <select aria-placeholder="chọn lớp"
+                                style="margin-left: 55px;width:180px;border-radius: 10px" >
+                                <option [ngValue]="item" *ngFor="let item of danhsachlop">{{item.soHieu}}</option>
+                            </select> -->
+                        </div>
+
+
+
+                    </div>
+
+
+
+                    <div style="border-radius: 10px" class="input-group margin-bottom-20">
+                        <label>Giới Tính: &ensp;</label>
+                        <input  [(ngModel)]="Student.gioiTinh"  class="radio" type="radio"value="Nam">Nam
+                        <input  [(ngModel)]="Student.gioiTinh" class="radio" type="radio" value="Nữ">Nữ
+                    </div>
+
+                    <div style="border-radius: 10px" class="input-group margin-bottom-20">
+                        <div class="row">
+                            <label>Ngày Sinh: &ensp;</label>
+
+                            <div class="col-md-10">
+
+                                <!-- <input style="margin-left:30px" formControlName="ngaySinh" size="60" maxlength="255" class="form-control"
+                                placeholder="Click chọn ngày sinh.." type="text" #ngaySinh>
+                                                     -->
+                                <input class="form-control" placeholder="{{Student.ngaySinh}}" name="dp" size="100"
+                                    [(ngModel)]="Student.ngaySinh"  ngbDatepicker #d="ngbDatepicker"
+                                   (click)="d.toggle()">
+                                <!-- <div class="input-group-append">
+                                                     <button class="btn btn-outline-secondary calendar" 
+                                                         type="button"></button>
+                                                 </div> -->
+                            </div>
+                            <div class="col-md-2"></div>
+
+                        </div>
+
+                    </div>
+                    <div style="border-radius: 10px" class="input-group margin-bottom-20">
+                        <div class="row">
+                           
+                            <div class="col-md-1"> <label style="margin-left: -12px">Địa chỉ: &ensp;</label></div>
+                            <div class="col-md-9">
+                                <textarea  [(ngModel)]="Student.diaChi" type="text" > {{Student.diaChi}}
+
+                                </textarea>
+        
+                            </div>
+                        </div>
+                        
+                     
+                    </div>
+                    <div class="row" style="margin-top: 20px">
+                        <div class="col-md-5 form-group">
+                            <button style="float: right;font-size: 25px;border-radius: 10px ; background-color:#19c880"
+                                class="btn-u pull-left" type="submit"
+                                (click)="sua()"
+                               >Cập nhật</button>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <button style="width:110px;font-size: 25px;border-radius: 10px ; background-color:red"
+                                class="btn-u pull-left" (click)="openModal(template)">Xóa</button>
+                        </div>
+
+                    </div>
+                   
+                </div>
+              
+            
+
+        </div>
+    </div>
+    <ng-template #template>
+            <div class="modal-header">
+              <h4 class="modal-title pull-left">Xác thực yêu cầu</h4>
+              <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <h5>Bạn chắc chắn muốn xóa tài khoản này??</h5>
+            </div>
+            <div style="float: right;margin-right: 20px;margin-bottom: 10px" class="row">
+                <div class="col-md-8"></div>
+                <div  class="col-md-2"><button (click)="Xoa()"style="font-size: 15px; width: 70px;height: 35px;border-radius: 10px;" class="btn btn-danger">Xóa</button></div>
+                <div  class="col-md-2" (click)="close()"><button style="font-size: 15px; width: 70px;height: 35px;border-radius: 10px;" class="btn btn-warning">Trở lại</button></div>
+            </div>
+          </ng-template>
+
+</div>

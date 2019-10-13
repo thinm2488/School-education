@@ -24,7 +24,11 @@ import { LoginComponent } from './components/login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
+import { 
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatInputModule
+} from '@angular/material';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,7 +48,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     BrowserAnimationsModule,
     ModalModule.forRoot(),
     CKEditorModule,
-    NgbModule
+    NgbModule,
+    MatNativeDateModule,
+    MatInputModule,
+    MatDatepickerModule
 
     
   ],
