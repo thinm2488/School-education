@@ -18,7 +18,7 @@ function makeid(length) {
   }
   return result;
 }
-const insertfirebase = async function (data) {
+const insertfirebase = async function (data,nguoiTao) {
 
   var _id = makeid(15);
   var dbRef = firebase.database().ref();
@@ -28,7 +28,7 @@ const insertfirebase = async function (data) {
   dbNoti.set({
       _id:_id,
       ngaytao: data.gioTao,
-      nguoiTao: data.nguoiTao,
+      nguoiTao:nguoiTao.user.tenNguoiDung,
       hinh: data.hinh,
       noiDung: data.noiDung,
       chuDe:data.chuDe,
@@ -40,7 +40,7 @@ const insertfirebase = async function (data) {
   }
  
 }
-const updatefirebase = async function (data) {
+const updatefirebase = async function (data,nguoiTao) {
 
 
   var dbRef = firebase.database().ref();
@@ -53,7 +53,7 @@ const updatefirebase = async function (data) {
       noiDung: data.noiDung,
       chuDe:data.chuDe,
       IsBadge: false,
-      nguoiTao: data.nguoiTao,
+      nguoiTao: nguoiTao.user.tenNguoiDung,
       hinh: data.hinh,
   });
   return{
