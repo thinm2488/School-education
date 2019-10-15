@@ -11,12 +11,44 @@ const path = require('path');
 // var passport = require('../controller/passport').passport
 // var multipart = require('connect-multiparty')
 // var multipartMiddleware = multipart()
+
+router.get('/getalldayoff', async function (req, res) {
+    try {
+        // const token = req.headers['x-access-token'];
+        // var phoneObj = jwt.decode(token);
+        // var user = await UserController.getUserByPhone(phoneObj.data);
+        var dayoffObj = await studentController.getalldayoff() ;
+        var dayofflist=dayoffObj.dayoff
+        if(dayofflist){
+            res.send({
+                status:200,
+                dayofflist
+                
+    
+                
+            })
+        }
+        
+    } catch (error) {
+        console.log(error)
+        res.status(500).send({ errorMessage: error.message })
+    }
+});
+router.get('/dayoff/:id', async function (req, res) {
+    var dayoff= await studentController.getdayoffbyid(req.params.id) ;
+    res.send({
+        status:200,
+      dayoff
+       
+        
+    })
+});
 router.get('/getdayoff/:id', async function (req, res) {
     try {
         // const token = req.headers['x-access-token'];
         // var phoneObj = jwt.decode(token);
         // var user = await UserController.getUserByPhone(phoneObj.data);
-        var dayoffObj = await studentController.getdayoff(req.params.id) ;
+        var dayoffObj = await studentController.getdayoffbyid(req.params.id) ;
         var dayoff=dayoffObj.dayoff
         if(dayoff){
             res.send({
@@ -212,14 +244,14 @@ router.post('/dayoff', async function (req, res) {
         res.status(500).send({ errorMessage: error.message })
     }
 });
-// router.post('/sendemail', async function (req, res) {
-   
-//     res.send({
-//         status:200,
-//         email,
-//         message:"thành công",
+
+router.put('/dayoff', async function (req, res) {
+    var dayoff= await studentController.alloweddayoff(req.body) ;
+    res.send({
+        status:200,
+      dayoff
        
         
-//     })
-// });
+    })
+});
 module.exports = router;

@@ -1,0 +1,142 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<style>
+    .row {
+        margin-left: unset;
+        margin-right: unset
+    }
+
+    .form-control {
+        margin-left: 15px
+    }
+
+    .col-md-4 {
+        padding-left: 0;
+        padding-right: 0
+    }
+</style>
+<div style="   margin-top: 6%;" class="form">
+    <div class="container" style="background: rgba(255,255,255,.7); float: right; margin-right: 4%">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <!-- <form [formGroup]="studentForm" novalidate> -->
+            <div class="col-md-8" style="padding: 50px">
+                <h1 style=" text-align: center;color:#19c880;padding:30px 0px 50px">Chi Tiết Ngày Nghỉ</h1>
+
+                <div class="row" style="margin-top: 20px">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-3">
+                        <label style="position: absolute;margin-left: -15px;">Tên Phụ Huynh:</label>
+
+                    </div>
+                    <div class="col-md-6" style="    margin-left: -27px" >
+                        {{tenPhuHuynh}}
+                    </div>
+
+
+
+                </div>
+
+                <div class="row" style="margin-top: 20px">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-3">
+                        <label style="position: absolute;margin-left: -15px;">Tên Học Sinh</label>
+
+                    </div>
+                    <div class="col-md-6" style="    margin-left: -27px">
+                       {{tenHocSinh}}
+                    </div>
+
+
+
+                </div>
+                <div class="row" style="margin-top: 20px">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-3">
+                        <label style="position: absolute;margin-left: -15px;">lớp</label>
+
+                    </div>
+                    <div  class="col-md-6" style="    margin-left: -27px">
+                        {{soHieu}}
+                    </div>
+
+
+
+                </div>
+                <div class="row" style="margin-top: 20px">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-3">
+                        <label style="position: absolute;margin-left: -15px;">Ngày Nghỉ</label>
+
+                    </div>
+                    <div class="col-md-6"style="    margin-left: -27px">
+                        {{ngayBatDau| date:'dd/MM/yyyy'}} - {{ngayKetThuc| date:'dd/MM/yyyy'}}
+                    </div>
+
+
+
+                </div>
+                <div class="row" style="margin-top: 20px">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-3">
+                        <label style="position: absolute;margin-left: -15px;">Số Ngày Nghỉ</label>
+
+                    </div>
+                    <div class="col-md-6" style="    margin-left: -27px">
+                        {{soNgayNghi}}
+                    </div>
+
+
+
+                </div>
+                <div class="row" style="margin-top: 20px">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-3">
+                        <label style="position: absolute;margin-left: -15px;">Lý Do</label>
+
+                    </div>
+                    <div class="col-md-6" style="    margin-left: -27px">
+                        {{lyDo}}
+                    </div>
+
+
+
+                </div>
+
+
+                <div class="row" style="margin-top: 20px">
+                    <div class="col-md-7 form-group">
+                        <button style="float: right;font-size: 25px;border-radius: 10px ; background-color:#19c880"
+                            class="btn-u pull-left" type="submit" (click)="duyet()">Duyệt</button>
+                    </div>
+                   
+
+                </div>
+
+            </div>
+            <div class="col-md-2"></div>
+
+
+        </div>
+    </div>
+    <ng-template #template>
+        <div class="modal-header">
+            <h4 class="modal-title pull-left">Xác thực yêu cầu</h4>
+            <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <h5>Bạn chắc chắn muốn xóa tài khoản này??</h5>
+        </div>
+        <div style="float: right;margin-right: 20px;margin-bottom: 10px" class="row">
+            <div class="col-md-8"></div>
+            <div class="col-md-2"><button (click)="Xoa()"
+                    style="font-size: 15px; width: 70px;height: 35px;border-radius: 10px;"
+                    class="btn btn-danger">Xóa</button></div>
+            <div class="col-md-2" (click)="close()"><button
+                    style="font-size: 15px; width: 70px;height: 35px;border-radius: 10px;" class="btn btn-warning">Trở
+                    lại</button></div>
+        </div>
+    </ng-template>
+
+</div>

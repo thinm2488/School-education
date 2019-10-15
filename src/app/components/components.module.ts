@@ -27,6 +27,8 @@ import {MatDatepickerModule,
 MatNativeDateModule,
 MatInputModule
 } from '@angular/material';
+import { DayoffComponent } from './student/dayoff/dayoff.component';
+import { DetaildayoffComponent } from './student/dayoff/detaildayoff/detaildayoff.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -57,6 +59,8 @@ MatInputModule
     DanhsachhocsinhComponent,
     ChitiethocsinhComponent,
     TaohocsinhComponent,
+    DayoffComponent,
+    DetaildayoffComponent,
     // TaohocsinhComponent
   ],
   exports: [

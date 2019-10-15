@@ -136,8 +136,17 @@ const xoaStudent = async function (id) {
 const createdayoff = async function (user, data,teacher) {
     let student = await Student.findOne({ _id: data.idHocSinh });
     applicationform = new Applicationform();
+    if(data.ngayBatDau==data.ngayKetThuc){
+        applicationform.soNgayNghi=1
+    }
+    else{
+        let periodSeconds = (data.ngayKetThuc - data.ngayBatDau);
+        soNgayNghi = Math.ceil((periodSeconds/(1000*60*60*24)))+2
+    }
+   
     if (student) {
         applicationform.tenHocSinh = student.tenHocSinh;
+        applicationform.soHieu = student.soHieu;
         applicationform.idHocSinh = student.id;
         applicationform.emailGiaoVien=teacher;
         applicationform.tenPhuHuynh = user.tenNguoiDung;
@@ -145,6 +154,7 @@ const createdayoff = async function (user, data,teacher) {
         applicationform.ngayKetThuc = data.ngayKetThuc;
         applicationform.ngayGui = data.ngayGui;
         applicationform.lyDo = data.lyDo
+        applicationform.soNgayNghi = soNgayNghi
         await applicationform.save();
         return {
             applicationform
@@ -157,6 +167,48 @@ const getdayoff = async function (id) {
     //let student= await Student.findOne({_id:data.idHocSinh});
     let dayoff = await Applicationform.find({ idHocSinh: id })
 
+    if (dayoff) {
+        return {
+            dayoff
+        }
+    } else {
+        throw new Error("Không có dữ liệu")
+    }
+
+}
+const getalldayoff = async function () {
+    //let student= await Student.findOne({_id:data.idHocSinh});
+    let dayoff = await Applicationform.find()
+
+    if (dayoff) {
+        return {
+            dayoff
+        }
+    } else {
+        throw new Error("Không có dữ liệu")
+    }
+
+}
+const alloweddayoff = async function (data) {
+    //let student= await Student.findOne({_id:data.idHocSinh});
+    let dayoff = await Applicationform.findOne({_id:data.id})
+   
+    if (dayoff) {
+        dayoff.trangThai=true
+        await dayoff.save()
+
+        return {
+            dayoff
+        }
+    } else {
+        throw new Error("Không có dữ liệu")
+    }
+
+}
+const getdayoffbyid = async function (id) {
+    //let student= await Student.findOne({_id:data.idHocSinh});
+    let dayoff = await Applicationform.findOne({_id:id})
+   
     if (dayoff) {
         return {
             dayoff
@@ -215,6 +267,9 @@ module.exports = {
     nhapDiem: nhapDiem,
     createdayoff: createdayoff,
     getdayoff: getdayoff,
+    alloweddayoff:alloweddayoff,
+    getalldayoff:getalldayoff,
     importexcel: importexcel,
-    getclass:getclass
+    getclass:getclass,
+    getdayoffbyid:getdayoffbyid
 }

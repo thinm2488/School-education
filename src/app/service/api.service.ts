@@ -48,7 +48,15 @@ export class ApiService {
   getliststudent(data){
     return this.http.post("/api/route/student/getall",data);
   }
-
+  getalldayoff(){
+    return this.http.get("/api/route/student/getalldayoff")
+  }
+  getdayoff(id){
+    return this.http.get("/api/route/student/getdayoff/"+id)
+  }
+  alloweddayoff(data){
+    return  this.http.put("/api/route/student/dayoff/",data)
+  }
   createstudent(data){
     return this.http.post("/api/route/student/create",data);
   }

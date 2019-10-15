@@ -10,8 +10,15 @@ const sendMail = async function (data) {
           pass: 'huynhnhu'
         }
       });
-      var dateTime = data.ngayBatDau;
-      var ngayNghi =moment( dateTime).format("DD/MM/YY");  
+      if(data.ngayBatDau==data.ngayKetThuc){
+        var dateTime = data.ngayBatDau;
+        var ngayNghi =moment( dateTime).format("DD/MM/YY");
+      }else{
+        var ngayBatDau = data.ngayBatDau;
+        var ngayKetThuc = data.ngayKetThuc;
+        var ngayNghi =(moment( ngayBatDau).format("DD/MM/YY"))+" - "+(moment( ngayKetThuc).format("DD/MM/YY"));
+      }
+       
 
       var mailOptions = {
         from: 'project.school.education@gmail.com',

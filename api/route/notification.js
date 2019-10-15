@@ -8,8 +8,9 @@ router.post('/create', async (req, res) => {
     try {
       const token = req.headers['x-access-token'] || req.session.token
       //var phoneObj=jwt.decode(token)
-      let idFirebase =await firebaseController.insertfirebase(req.body)
+      
       let nguoiTao = await userController.layChiTietUser(req.body.nguoiTao)
+      let idFirebase =await firebaseController.insertfirebase(req.body,nguoiTao)
       let data = await notificationController.createNotification(req.body,idFirebase,nguoiTao)
       
       return res.send({
@@ -69,7 +70,8 @@ router.put('/edit', async (req, res) => {
     try {
       const token =  req.session.token
     //   var phoneObj=jwt.decode(token)
-      await firebaseController.updatefirebase(req.body)
+    let nguoiTao = await userController.layChiTietUser(req.body.nguoiTao)
+      await firebaseController.updatefirebase(req.body,nguoiTao)
       let data = await notificationController.editNotification(req.body)
       return res.send({
           data,

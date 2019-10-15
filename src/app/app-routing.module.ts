@@ -11,11 +11,15 @@ import {ChitietnotiComponent} from './components/notification/chitietnoti/chitie
 import{DanhsachhocsinhComponent} from './components/student/danhsachhocsinh/danhsachhocsinh.component'
 import {ChitiethocsinhComponent} from './components/student/chitiethocsinh/chitiethocsinh.component'
 import {TaohocsinhComponent} from './components/student/taohocsinh/taohocsinh.component'
+import{ DayoffComponent} from './components/student/dayoff/dayoff.component'
+import { DetaildayoffComponent } from './components/student/dayoff/detaildayoff/detaildayoff.component';
+
 const routes: Routes = [
   {
     path: '',
     component: LoginComponent
   },
+ 
   {
     path: 'home',
     component: SidebarComponent,children:[
@@ -54,6 +58,14 @@ const routes: Routes = [
       {
         path: 'hocsinh/:id',
         component: ChitiethocsinhComponent
+      },
+      {
+        path: 'ngaynghi',
+        component: DayoffComponent
+      },
+      {
+        path: 'xinphep/:id',
+        component: DetaildayoffComponent
       },
       
     ]
