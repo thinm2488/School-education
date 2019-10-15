@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Student = mongoose.model('Student');
 const Applicationform = mongoose.model('ApplicationForm');
+const Android=require('./pushnotification/android')
 const Class = mongoose.model('Class');
 // const nodemailer = require('nodemailer')
 var jwt = require('jsonwebtoken');
@@ -155,6 +156,7 @@ const createdayoff = async function (user, data,teacher) {
         applicationform.ngayGui = data.ngayGui;
         applicationform.lyDo = data.lyDo
         applicationform.soNgayNghi = soNgayNghi
+        applicationform.idPhuHuynh = user.id
         await applicationform.save();
         return {
             applicationform
@@ -196,6 +198,7 @@ const alloweddayoff = async function (data) {
     if (dayoff) {
         dayoff.trangThai=true
         await dayoff.save()
+       
 
         return {
             dayoff

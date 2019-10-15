@@ -10,6 +10,7 @@ var ApplicationFormSchema = new Schema(
         ngayBatDau:{type:Number},
         ngayKetThuc:{type:Number},
         tenPhuHuynh:{type:String},
+        idPhuHuynh:{type:String},
         trangThai:{type:Boolean, default:false},
         ngayGui:{type:Number},
         emailGiaoVien:{type:String},

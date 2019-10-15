@@ -4,6 +4,7 @@ var router = express.Router();
 var studentController = require('../controller/studentController');
 var UserController= require('../controller/userController')
 var EmailController=require('../controller/emailController')
+var Android=require('../controller/pushnotification/android')
 // var authController = require('../controller/authController');
 var jwt = require('jsonwebtoken');
 var fileUpload = require('express-fileupload');
@@ -246,7 +247,11 @@ router.post('/dayoff', async function (req, res) {
 });
 
 router.put('/dayoff', async function (req, res) {
+   
+   
     var dayoff= await studentController.alloweddayoff(req.body) ;
+    let user= await UserController.layChiTietUser(dayoff.dayoff.idPhuHuynh)
+    Android.sendnotidayoff(user,dayoff);
     res.send({
         status:200,
       dayoff

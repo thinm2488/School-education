@@ -152,8 +152,8 @@ const checkLogin = async function (data) {
 const saveAndroidToken = async function (data) {
     let user = await User.findOne({ soDienThoai: data.soDienThoai || data });
     if (user) {
-        if (token) {
-            user.androidToken = data.token
+        if (data.androidTokentoken) {
+            user.androidToken = data.androidToken
             user.save();
         } else {
             throw new Error('Không tìm thấy android Token')
