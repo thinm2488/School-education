@@ -4,6 +4,7 @@ var router = express.Router();
 var studentController = require('../controller/studentController');
 var UserController= require('../controller/userController')
 var EmailController=require('../controller/emailController')
+var FirebaseController=require('../controller/firebaseController')
 var Android=require('../controller/pushnotification/android')
 // var authController = require('../controller/authController');
 var jwt = require('jsonwebtoken');
@@ -36,7 +37,8 @@ router.get('/getalldayoff', async function (req, res) {
     }
 });
 router.get('/dayoff/:id', async function (req, res) {
-    var dayoff= await studentController.getdayoffbyid(req.params.id) ;
+    var date= await studentController.getdayoffbyid(req.params.id) ;
+    var dayoff=date.dayoff
     res.send({
         status:200,
       dayoff
@@ -248,10 +250,13 @@ router.post('/dayoff', async function (req, res) {
 
 router.put('/dayoff', async function (req, res) {
    
-   
+    let token = req.session.token;
+    var phoneObj = jwt.decode(token);
+    let giaoVien= await UserController.getUserByPhone(phoneObj.data)
     var dayoff= await studentController.alloweddayoff(req.body) ;
     let user= await UserController.layChiTietUser(dayoff.dayoff.idPhuHuynh)
-    Android.sendnotidayoff(user,dayoff);
+    await FirebaseController.insertnoti(dayoff,giaoVien)
+    Android.sendnotidayoff(dayoff,user);
     res.send({
         status:200,
       dayoff

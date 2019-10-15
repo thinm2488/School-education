@@ -67,7 +67,7 @@ function sendnoti(token, str, nguoiTao){
   
 }
 var moment = require('moment')
-function sendnotidayoff(data, str){
+function sendnotidayoff( str,data){
  let ngaynghi
    if(str.dayoff.ngayBatDau==str.dayoff.ngayKetThuc){
     ngaynghi=moment( str.dayoff.ngayBatDau).format("DD/MM/YY")
@@ -83,7 +83,7 @@ function sendnotidayoff(data, str){
       notification: {
           title: "Yêu Cầu Xin nghỉ Phép", 
           body: "Yêu cầu xin nghỉ phép ngày "+ngaynghi+" đã được duyệt!" ,
-          tag:str.dayoff.id,
+          tag: str.dayoff.id,
 
       },
       

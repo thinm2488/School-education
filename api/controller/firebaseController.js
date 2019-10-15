@@ -7,7 +7,7 @@
 //   databaseURL: "https://c-school-apps.firebaseio.com"
 // });
 var firebase=require('firebase')
-
+var moment=require('moment')
 //listenFirebase();
 function makeid(length) {
   var result = '';
@@ -40,6 +40,31 @@ const insertfirebase = async function (data,nguoiTao) {
   }
  
 }
+const insertnoti = async function (data,giaoVien) {
+  let ngaynghi
+  if(data.dayoff.ngayBatDau==data.dayoff.ngayKetThuc){
+   ngaynghi=moment( data.dayoff.ngayBatDau).format("DD/MM/YY")
+  }
+  else{
+   ngaynghi=moment( data.dayoff.ngayBatDau).format("DD/MM/YY")+" đến "+moment(data.dayoff.ngayKetThuc).format("DD/MM/YY");
+
+  }
+
+  var dbRef = firebase.database().ref();
+  var dbNoti = dbRef
+  
+      .child("notifications/" + giaoVien.id + "/" + data.dayoff.id);
+  dbNoti.set({
+      _id: data.dayoff.id,
+      chuDe:"Yêu Cầu xin phép",
+      noiDung:"Yêu cầu xin nghỉ phép ngày "+ngaynghi+" đã được duyệt!",
+      ngaytao: data.dayoff.ngayGui,
+      nguoiTao:giaoVien.tenNguoiDung,
+      hinh: giaoVien.hinh,
+      IsBadge: false,
+  });
+  
+}
 const updatefirebase = async function (data,nguoiTao) {
 
 
@@ -66,8 +91,10 @@ const deletefirebase = async function (user,id) {
   var dbRef = firebase.database().ref();
   dbRef .child("notifications/" +   user.id + "/"+ id).remove();
 }
+
 module.exports = {
   insertfirebase:insertfirebase,
   updatefirebase:updatefirebase,
-  deletefirebase:deletefirebase
+  deletefirebase:deletefirebase,
+  insertnoti:insertnoti
 }

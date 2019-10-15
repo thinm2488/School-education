@@ -151,9 +151,9 @@ const createdayoff = async function (user, data,teacher) {
         applicationform.idHocSinh = student.id;
         applicationform.emailGiaoVien=teacher;
         applicationform.tenPhuHuynh = user.tenNguoiDung;
-        applicationform.ngayBatDau = data.ngayBatDau;
-        applicationform.ngayKetThuc = data.ngayKetThuc;
-        applicationform.ngayGui = data.ngayGui;
+        applicationform.ngayBatDau = data.ngayBatDau*1000;
+        applicationform.ngayKetThuc = data.ngayKetThuc*1000;
+        applicationform.ngayGui = data.ngayGui*1000;
         applicationform.lyDo = data.lyDo
         
         applicationform.idPhuHuynh = user.id

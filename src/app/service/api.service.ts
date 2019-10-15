@@ -52,7 +52,7 @@ export class ApiService {
     return this.http.get("/api/route/student/getalldayoff")
   }
   getdayoff(id){
-    return this.http.get("/api/route/student/getdayoff/"+id)
+    return this.http.get("/api/route/student/dayoff/"+id)
   }
   alloweddayoff(data){
     return  this.http.put("/api/route/student/dayoff/",data)
