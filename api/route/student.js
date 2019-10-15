@@ -49,7 +49,7 @@ router.get('/getdayoff/:id', async function (req, res) {
         // const token = req.headers['x-access-token'];
         // var phoneObj = jwt.decode(token);
         // var user = await UserController.getUserByPhone(phoneObj.data);
-        var dayoffObj = await studentController.getdayoffbyid(req.params.id) ;
+        var dayoffObj = await studentController.getdayoff(req.params.id) ;
         var dayoff=dayoffObj.dayoff
         if(dayoff){
             res.send({

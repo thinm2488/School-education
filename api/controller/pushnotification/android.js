@@ -83,7 +83,7 @@ function sendnotidayoff(data, str){
       notification: {
           title: "Yêu Cầu Xin nghỉ Phép", 
           body: "Yêu cầu xin nghỉ phép ngày "+ngaynghi+" đã được duyệt!" ,
-          
+          tag:str.dayoff.id,
 
       },
       
