@@ -142,7 +142,7 @@ const createdayoff = async function (user, data,teacher) {
     }
     else{
         let periodSeconds = (data.ngayKetThuc - data.ngayBatDau);
-        soNgayNghi = Math.ceil((periodSeconds/(1000*60*60*24)))+2
+        applicationform.soNgayNghi = Math.ceil((periodSeconds/(1000*60*60*24)))+2
     }
    
     if (student) {
@@ -155,7 +155,7 @@ const createdayoff = async function (user, data,teacher) {
         applicationform.ngayKetThuc = data.ngayKetThuc;
         applicationform.ngayGui = data.ngayGui;
         applicationform.lyDo = data.lyDo
-        applicationform.soNgayNghi = soNgayNghi
+        
         applicationform.idPhuHuynh = user.id
         await applicationform.save();
         return {
