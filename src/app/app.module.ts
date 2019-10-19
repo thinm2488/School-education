@@ -31,9 +31,9 @@ import {
   MatNativeDateModule,
   MatInputModule
 } from '@angular/material';
-import {AngularFireDatabaseModule} from 'angularfire2/database'
-import {AngularFireModule} from 'angularfire2'
-import {environment} from '../environments/environment'
+// import {AngularFireDatabaseModule} from 'angularfire2/database'
+// import {AngularFireModule} from 'angularfire2'
+// import {environment} from '../environments/environment'
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,8 +57,8 @@ import {environment} from '../environments/environment'
     MatNativeDateModule,
     MatInputModule,
     MatDatepickerModule,
-    AngularFireDatabaseModule,
-    AngularFireModule.initializeApp(environment.firebaseconfig)
+    // AngularFireDatabaseModule,
+//  AngularFireModule.initializeApp(environment.firebaseconfig)   
 
 
     

@@ -22,7 +22,7 @@ import { DanhsachhocsinhComponent } from './student/danhsachhocsinh/danhsachhocs
 import { ChitiethocsinhComponent } from './student/chitiethocsinh/chitiethocsinh.component';
 import { TaohocsinhComponent } from './student/taohocsinh/taohocsinh.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { AngularFireModule } from 'angularfire2';
+// import { AngularFireModule } from 'angularfire2';
 
 // import { TaohocsinhComponent } from './student/taohocsinh/taohocsinh.component'
 import {MatDatepickerModule,
