@@ -1,46 +1,46 @@
 const mongoose = require('mongoose');
-const User = mongoose.model('User');
 const Teacher = mongoose.model('Teacher');
 const Student = mongoose.model('Student');
 // const nodemailer = require('nodemailer')
 var jwt = require('jsonwebtoken');
 // const smtpTransport=require('nodemailer-smtp-transport')
 // var generator=require('generate-password')
-const layuser = async function () {
-    var listuser = await User.find({ role: 'ph' });
+const layTeacher = async function () {
+    var listTeacher = await Teacher.find();
     return {
-        listuser
+        listTeacher
     }
 
 }
-const layChiTietUser = async function (id) {
-    var user = await User.findOne({ _id: id });
+const layChiTietTeacher = async function (id) {
+    var teacher = await Teacher.findOne({ _id: id });
     return {
-        user
+        teacher
     }
 
 }
 // const islogin = async function (token) {
-//     var user = await User.findOne(token:to);
+//     var Teacher = await Teacher.findOne(token:to);
 //     return {
-//         user
+//         Teacher
 //     }
 
 // }
-const taoUser = async function (data) {
-    let user = await User.findOne({ soDienThoai: data.soDienThoai });
-    if (user) {
+const taoTeacher = async function (data) {
+    let teacher = await Teacher.findOne({ soDienThoai: data.soDienThoai });
+    if (teacher) {
         return {
             message: "Số Điện Thoại đã được sử dụng!",
             status: 500
         }
     }
 
-    user = new User(data);
-    user.quanHe = data.HocSinh
-    await user.save();
+    teacher = new Teacher(data);
+    teacher.idGV=  "GV"+data.soDienThoai
+ 
+    await teacher.save();
     return {
-        user,
+        teacher,
         message: "Thêm tài khoản thành công",
         status: 200
     }
@@ -50,17 +50,17 @@ const importexcel = async function (data, nguoiTao) {
 
     // try {
     //     for (let i=0; i <= data.length; i++) {
-    //         let user = await User.findOne({ soDienThoai: data[i].SoDienThoai });
+    //         let Teacher = await Teacher.findOne({ soDienThoai: data[i].SoDienThoai });
 
 
     //             let student = await Student.findOne({ id:  data[i].IDHocSinh })
-    //             user = new User(data);
-    //             user.quanHe = student;
-    //             user.idTao = nguoiTao.id;
-    //             user.tenNguoiDung = data[i].HovaTen;
-    //             user.soDienThoai = data[i].SoDienThoai;
-    //             user.email = data[i].Email;
-    //             await user.save();
+    //             Teacher = new Teacher(data);
+    //             Teacher.quanHe = student;
+    //             Teacher.idTao = nguoiTao.id;
+    //             Teacher.tenNguoiDung = data[i].HovaTen;
+    //             Teacher.soDienThoai = data[i].SoDienThoai;
+    //             Teacher.email = data[i].Email;
+    //             await Teacher.save();
     //             return {
 
     //                 message: "Thêm tài khoản thành công",
@@ -73,30 +73,32 @@ const importexcel = async function (data, nguoiTao) {
 
     // }
     data.map(async function (element) {
-        let user = await User.findOne({ soDienThoai: element.SoDienThoai });
+        let teacher = await Teacher.findOne({ soDienThoai: element.SoDienThoai });
 
-        if (user) {
+        if(teacher){
             return {
-
+    
                 message: "fail",
                 status: 500
             }
-        } else {
-            let student = await Student.findOne({ id: element.IDHocSinh })
-            user = new User(data);
-            user.quanHe = student;
-            user.idTao = nguoiTao.id;
-            user.tenNguoiDung = element.HovaTen;
-            user.soDienThoai = element.SoDienThoai;
-            user.email = element.Email;
-            await user.save();
+        }else{
+           
+            teacher = new Teacher(data);        
+            teacher.idTao = nguoiTao.id;
+            teacher.tenNguoiDung = element.HovaTen;
+            teacher.soDienThoai = "0"+element.SoDienThoai;
+            teacher.email = element.Email;
+            teacher.GVCN = element.GVCN;
+            teacher.idGV = "GV0"+element.SoDienThoai;
+            teacher.mon=element.BoMon
+            await teacher.save();
             return {
-
+    
                 message: "Thêm tài khoản thành công",
                 status: 200
             }
         }
-
+       
 
     })
 
@@ -116,27 +118,56 @@ const importexcel = async function (data, nguoiTao) {
 
 
 }
+const importexcelphancong = async function (data) {
 
-const getUserByPhone = async function (soDienThoai) {
-    let user = await User.findOne({ soDienThoai: soDienThoai });
-    return user;
+  for(let a=0;a<=data.length;a++){
+    let teacher = await Teacher.findOne({ idGV: data[a].idGV });
+    if(teacher){
+        var list=[];
+        var str =data[a].PhanCongChuyenMon+",";
+        var tam=""
+        for(let i=0;i<=str.length;i++){
+           
+            if(str[i]!=","){
+                tam=tam+str[i]
+            }
+            else{
+                list.push(tam);
+                tam=""
+            }
+           
+            
+        }
+        teacher.GVCN=data[a].chuNhiem,
+        teacher.lopDay=list
+        await teacher.save();
+    }
+  }
+     return{
+         message: "Thành Công",
+         status:200
+     }   
+        
+  
+
+}
+
+const getTeacherByPhone = async function (soDienThoai) {
+    let teacher = await Teacher.findOne({ soDienThoai: soDienThoai });
+    return teacher;
 
 }
 
 
 
 const checkLogin = async function (data) {
-    let user = await User.findOne({ soDienThoai: data.soDienThoai || data });
-    if (user) {
-        if (user.password === data.password) {
-            if(data.androidToken){
-                user.androidToken = data.androidToken
-                await user.save();
-            }
-           
+    let teacher = await Teacher.findOne({ soDienThoai: data.soDienThoai || data });
+    if (teacher) {
+        if (teacher.password === data.password) {
+          
             // saveAndroidToken(data)
             //saveAndroidToken(data.androidToken);
-            return user
+            return teacher
 
 
         } else {
@@ -147,87 +178,53 @@ const checkLogin = async function (data) {
             }
         }
     } else {
-        user = await Teacher.findOne({ soDienThoai: data.soDienThoai || data });
-        if(user){
-            if (user.password === data.password) {
-                // user.androidToken = data.androidToken
-                // await user.save();
-                // saveAndroidToken(data)
-                //saveAndroidToken(data.androidToken);
-                return user
-    
-    
-            } else {
-    
-                return {
-                    message: 'Sai mật khẩu hoặc password',
-                    status: 500
-                }
-            }
+        return {
+            message: 'Số điện thoại không tồn tại!',
+            status: 500
         }
-        else{
-            return{
-                message: 'Số điện thoại không tồn tại',
-                status: 500
-            }
-        }
-       
     }
 
 }
-const saveAndroidToken = async function (data) {
-    let user = await User.findOne({ soDienThoai: data.soDienThoai || data });
-    if (user) {
-        if (data.androidTokentoken) {
-            user.androidToken = data.androidToken
-            await user.save();
-        } else {
-            throw new Error('Không tìm thấy android Token')
-        }
-    }
-}
+
 const editProfile = async function (data) {
-    let user = await User.findOne({ soDienThoai: data.soDienThoai });
+    let teacher = await Teacher.findOne({ soDienThoai: data.soDienThoai });
 
-    user.soDienThoai = data.soDienThoai;
+    teacher.soDienThoai = data.soDienThoai;
     if (data.tenNguoiDung) {
-        user.tenNguoiDung = data.tenNguoiDung;
-    }
-    if (data.maSoHocSinh) {
-        user.maSoHocSinh = data.maSoHocSinh;
+        teacher.tenNguoiDung = data.tenNguoiDung;
     }
     if (data.hinh) {
-        user.hinh = data.hinh;
+        teacher.hinh = data.hinh;
     }
 
 
-    await user.save();
-    return { user }
+    await teacher.save();
+    return { Teacher }
 
 }
 const changePass = async function (data) {
-    let user = await User.findOne({ soDienThoai: data.soDienThoai });
+    let teacher = await Teacher.findOne({ soDienThoai: data.soDienThoai });
 
 
 
-    if (user.password === data.oldpassword) {
-        user.password = data.newpassword
+    if (teacher.password === data.oldpassword) {
+        teacher.password = data.newpassword
     }
     else {
         throw new Error('Nhập sai mật khẩu cũ!')
     }
-    await user.save();
-    return { user }
+    await teacher.save();
+    return { Teacher }
 
 }
 
 // function uploadImg (soDienThoai, file) {
 //     return new Promise((resolve, reject) => {
-//         let user = await User.findOne({ soDienThoai: soDienThoai }, function (err, user) {
+//         let Teacher = await Teacher.findOne({ soDienThoai: soDienThoai }, function (err, Teacher) {
 //         if (err) {
 //           console.log(err)
 //           return reject(responseStatus.Code500())
-//         } else if (!user) {
+//         } else if (!Teacher) {
 //           return reject(responseStatus.Code404())
 //         } else {
 //           let stream = fs.createReadStream(file.path)
@@ -260,15 +257,15 @@ const changePass = async function (data) {
 //     })
 //   }
 // const resetPassword = async function (data,host) {
-//     let user = await User.findOne({ Email: data.Email });
-//     if (!user) {
+//     let Teacher = await Teacher.findOne({ Email: data.Email });
+//     if (!Teacher) {
 //         throw new Error('Người dùng không tồn tại!')
 //     }
 //     var token = jwt.sign({ Email: data.Email }, "secret")
 //     var transPorter = nodemailer.createTransport(smtpTransport({
 //         service: "gmail",
 //         auth: {
-//             user: "cinemaproject19@gmail.com",
+//             Teacher: "cinemaproject19@gmail.com",
 //             pass: "cinemaproject2019"
 //         }
 //     }))
@@ -276,28 +273,28 @@ const changePass = async function (data) {
 //         from: "cinemaproject19@gmail.com",
 //         to: data.Email,
 //         subject: "Reset Password",
-//         text: "Nhấp vào đường link để thay đổi mật khẩu:\n" + "http://" + host + "/user/resetpassword/" + token
+//         text: "Nhấp vào đường link để thay đổi mật khẩu:\n" + "http://" + host + "/Teacher/resetpassword/" + token
 //     }
 //     console.log(mailOption)
 // return transPorter.sendMail(mailOption);
 // }
 const changePassword = async function (data) {
-    let user = await User.findOne({ Email: data });
+    let teacher = await Teacher.findOne({ Email: data });
 
     var newpass = generator.generate({
         length: 8,
         Number: true
     })
-    user.password = newpass;
+    teacher.password = newpass;
 
 
-    await user.save();
-    return { user, newpass }
+    await teacher.save();
+    return { Teacher, newpass }
 
 }
-const xoaUser = async function (id) {
-    let user = await User.findOne({ _id: id });
-    user.remove();
+const xoaTeacher = async function (id) {
+    let teacher = await Teacher.findOne({ _id: id });
+    teacher.remove();
     return {
         status: 200,
         message: 'Xóa thành công!'
@@ -307,16 +304,17 @@ const xoaUser = async function (id) {
 
 
 module.exports = {
-    layuser: layuser,
-    layChiTietUser: layChiTietUser,
+    layTeacher: layTeacher,
+    layChiTietTeacher: layChiTietTeacher,
     //islogin:islogin,
-    taoUser: taoUser,
-    getUserByPhone: getUserByPhone,
+    taoTeacher: taoTeacher,
+    getTeacherByPhone: getTeacherByPhone,
     checkLogin: checkLogin,
     editProfile: editProfile,
-    xoaUser: xoaUser,
+    xoaTeacher: xoaTeacher,
     changePass: changePass,
-    importexcel: importexcel
+    importexcel: importexcel,
+    importexcelphancong:importexcelphancong
     // resetPassword: resetPassword,
     // changePassword:changePassword
 }

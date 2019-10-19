@@ -5,7 +5,15 @@ var ClassSchema = new Schema({
   
    
     khoi:{type:String},
-   soHieu:{type:String}
+   soHieu:{type:String},
+   idGVCN:{type:String},
+   idGVMon:[
+       {
+           id:{type:String},
+           mon:{type:String},
+           tenGV:{type:String}
+        }
+    ]
    
 
 },)

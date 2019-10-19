@@ -91,10 +91,32 @@ const deletefirebase = async function (user,id) {
   var dbRef = firebase.database().ref();
   dbRef .child("notifications/" +   user.id + "/"+ id).remove();
 }
+const insertaccount = async function (data,giaoVien) {
+
+
+  var dbRef = firebase.database().ref();
+  var dbNoti = dbRef
+  
+      .child("chats/" + data.user.idTao + "/users/" + data.user.id);
+  dbNoti.set({
+      id:data.user.id,
+      emailGV:giaoVien.user.email,
+      tenNguoiDung: data.user.tenNguoiDung,
+      idTao:data.user.idTao,
+      hinh: data.user.hinh,
+      role: data.user.role,
+      soDienThoai:data.user.soDienThoai,
+    
+
+  });
+  
+ 
+}
 
 module.exports = {
   insertfirebase:insertfirebase,
   updatefirebase:updatefirebase,
   deletefirebase:deletefirebase,
-  insertnoti:insertnoti
+  insertnoti:insertnoti,
+  insertaccount:insertaccount
 }

@@ -18,7 +18,9 @@ import{ComponentsModule} from './components/components.module'
 //services
 import { ApiService } from './service/api.service';
 import { ExcelService } from './service/excel.service';
-import {NotificationService} from './service/notification.service'
+import {NotificationService} from './service/notification.service';
+import {TranscriptService}  from './service/transcript.service'
+// import{FirebaseService} from './service/firebase.service'
 //components
 import { LoginComponent } from './components/login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -29,6 +31,9 @@ import {
   MatNativeDateModule,
   MatInputModule
 } from '@angular/material';
+import {AngularFireDatabaseModule} from 'angularfire2/database'
+import {AngularFireModule} from 'angularfire2'
+import {environment} from '../environments/environment'
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,7 +56,10 @@ import {
     NgbModule,
     MatNativeDateModule,
     MatInputModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    AngularFireDatabaseModule,
+    AngularFireModule.initializeApp(environment.firebaseconfig)
+
 
     
   ],
@@ -59,7 +67,9 @@ import {
     ApiService,
     CookieService,
     ExcelService,
-    NotificationService
+    NotificationService,
+    TranscriptService
+    // FirebaseService
   ],
   bootstrap: [AppComponent]
 })

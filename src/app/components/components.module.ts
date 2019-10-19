@@ -22,6 +22,8 @@ import { DanhsachhocsinhComponent } from './student/danhsachhocsinh/danhsachhocs
 import { ChitiethocsinhComponent } from './student/chitiethocsinh/chitiethocsinh.component';
 import { TaohocsinhComponent } from './student/taohocsinh/taohocsinh.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AngularFireModule } from 'angularfire2';
+
 // import { TaohocsinhComponent } from './student/taohocsinh/taohocsinh.component'
 import {MatDatepickerModule,
 MatNativeDateModule,
@@ -29,6 +31,12 @@ MatInputModule
 } from '@angular/material';
 import { DayoffComponent } from './student/dayoff/dayoff.component';
 import { DetaildayoffComponent } from './student/dayoff/detaildayoff/detaildayoff.component';
+import { ChatComponent } from './chat/chat.component';
+import { ChatboxcontentComponent } from './chat/chatboxcontent/chatboxcontent.component';
+import { TranscriptComponent } from './transcript/transcript.component';
+import { TeacherComponent } from './teacher/teacher.component';
+import { EditteacherComponent } from './teacher/editteacher/editteacher.component';
+import { TrancripteditComponent } from './transcript/trancriptedit/trancriptedit.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -39,7 +47,8 @@ import { DetaildayoffComponent } from './student/dayoff/detaildayoff/detaildayof
     NgbModule,
     MatNativeDateModule,
     MatInputModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+  
 
   ],
   declarations: [
@@ -61,6 +70,13 @@ import { DetaildayoffComponent } from './student/dayoff/detaildayoff/detaildayof
     TaohocsinhComponent,
     DayoffComponent,
     DetaildayoffComponent,
+    ChatComponent,
+    ChatboxcontentComponent,
+    TranscriptComponent,
+    TeacherComponent,
+    EditteacherComponent,
+    TrancripteditComponent,
+    
     // TaohocsinhComponent
   ],
   exports: [

@@ -13,16 +13,31 @@ import {ChitiethocsinhComponent} from './components/student/chitiethocsinh/chiti
 import {TaohocsinhComponent} from './components/student/taohocsinh/taohocsinh.component'
 import{ DayoffComponent} from './components/student/dayoff/dayoff.component'
 import { DetaildayoffComponent } from './components/student/dayoff/detaildayoff/detaildayoff.component';
-
+import { ChatComponent } from './components/chat/chat.component';
+import {ChatboxcontentComponent} from './components/chat/chatboxcontent/chatboxcontent.component';
+import {TranscriptComponent} from './components/transcript/transcript.component'
+import {TrancripteditComponent} from './components/transcript/trancriptedit/trancriptedit.component'
+import{TeacherComponent} from './components/teacher/teacher.component'
+import{ EditteacherComponent} from './components/teacher/editteacher/editteacher.component'
+import { from } from 'rxjs';
 const routes: Routes = [
   {
     path: '',
     component: LoginComponent
   },
+  {
+    path: 'giaoVien/:id',
+    component: EditteacherComponent
+  },
  
   {
     path: 'home',
     component: SidebarComponent,children:[
+      {
+        path: 'giaoVien',
+        component: TeacherComponent
+      },
+     
       {
         path: 'danhsach',
         component: DanhsachtaikhoanComponent
@@ -67,6 +82,24 @@ const routes: Routes = [
         path: 'xinphep/:id',
         component: DetaildayoffComponent
       },
+      {
+        path: 'bangdiem',
+        component: TranscriptComponent
+      },
+      {
+        path: 'bangdiem/:id',
+        component: TrancripteditComponent
+      },
+      {
+        path: 'trochuyen',
+        component: ChatComponent,children:[
+          {
+            path: 'trochuyen/:id',
+            component: DetaildayoffComponent
+          },
+        ]
+      },
+      
       
     ]
   },

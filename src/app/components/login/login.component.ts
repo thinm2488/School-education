@@ -35,6 +35,9 @@ export class LoginComponent implements OnInit {
       var tenNguoiDung=this.user.user.tenNguoiDung;
        var hinh=this.user.user.hinh;
        var id=this.user.user._id
+       var role=this.user.user.role
+     
+
       if (this.user.user.status==500) {
         window.alert(this.user.user.message)
        
@@ -44,10 +47,12 @@ export class LoginComponent implements OnInit {
         this.cookieService.set( 'tenNguoiDung',tenNguoiDung.toString()  );
         this.cookieService.set( 'hinh',hinh.toString()  );
         this.cookieService.set( 'id',id.toString()  );
+        this.cookieService.set( 'role',role.toString()  );
+    
        
         
         window.alert("Đăng Nhập Thành Công!!");
-        window.location.href = '/home/danhsach'
+        window.location.href = '/home/giaoVien'
         return data
       
       }

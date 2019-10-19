@@ -6,6 +6,8 @@ import * as XLSX from 'xlsx';
 import * as FileSaver from 'file-saver'; 
 import User from 'src/app/model/User';
 import { utils } from 'protractor';
+import { CookieService } from 'ngx-cookie-service';
+
 @Component({
   selector: 'app-taotaikhoan',
   templateUrl: './taotaikhoan.component.html',
@@ -24,7 +26,7 @@ export class TaotaikhoanComponent implements OnInit {
   soHieu: String;
   hocsinh:any;
   res:any;
-  constructor(private http: HttpClient, private fb: FormBuilder,private as: ApiService) {
+  constructor(private cookies:CookieService,private http: HttpClient, private fb: FormBuilder,private as: ApiService) {
     this.createform();
 
   }
@@ -63,7 +65,9 @@ export class TaotaikhoanComponent implements OnInit {
   }
   // tenHocSinh:String;
   tao(tenNguoiDung,soDienThoai) {
+    var id=this.cookies.get('id')
     let data = {
+      idTao:id,
       tenNguoiDung: tenNguoiDung,
       soDienThoai: soDienThoai,
       HocSinh:this.hocsinh

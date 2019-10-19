@@ -71,4 +71,24 @@ export class ApiService {
   deleteStudent(id){
     return this.http.delete("/api/route/student/"+id)
   }
+  //teacher
+  getteacher(id){
+    return this.http.get("/api/route/teacher/"+id);
+  }
+  createTeacher(data){
+    return this.http.post("/api/route/teacher/signup",data);
+  }
+  getaccount(){
+    return this.http.get("/api/route/teacher/getall");
+  }
+  Importexcelteacher(data){
+    return this.http.post("/api/route/teacher/excel",data)
+  
+  }
+  Phanconggiangday(data){
+    return this.http.post("/api/route/teacher/excelphancong",data)
+  }
+  deleteTeacher(id){
+    return this.http.delete("/api/route/teacher/"+id)
+  }
 }
