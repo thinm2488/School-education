@@ -4,6 +4,7 @@ var router = express.Router();
 var studentController = require('../controller/studentController');
 var UserController= require('../controller/userController')
 var EmailController=require('../controller/emailController')
+var TeacherController=require('../controller/teacherController')
 var FirebaseController=require('../controller/firebaseController')
 var Android=require('../controller/pushnotification/android')
 // var authController = require('../controller/authController');
@@ -229,7 +230,7 @@ router.post('/dayoff', async function (req, res) {
         const token = req.headers['x-access-token'];
         var phoneObj = jwt.decode(token);
         var user = await UserController.getUserByPhone(phoneObj.data);
-        var teacher= await UserController.layChiTietUser(user.idTao)
+        var teacher= await TeacherController.layChiTietTeacher(user.idTao)
         var dayoff= await studentController.createdayoff(user,req.body,teacher.user.email) ;
         let email =await EmailController.sendMail(dayoff.applicationform)
         if(dayoff){
@@ -252,7 +253,7 @@ router.put('/dayoff', async function (req, res) {
    
     let token = req.session.token;
     var phoneObj = jwt.decode(token);
-    let giaoVien= await UserController.getUserByPhone(phoneObj.data)
+    let giaoVien= await TeacherController.getTeacherByPhone(phoneObj.data)
     var dayoff= await studentController.alloweddayoff(req.body) ;
     let user= await UserController.layChiTietUser(dayoff.dayoff.idPhuHuynh)
     await FirebaseController.insertnoti(dayoff,giaoVien)

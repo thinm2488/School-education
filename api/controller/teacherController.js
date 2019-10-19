@@ -13,9 +13,9 @@ const layTeacher = async function () {
 
 }
 const layChiTietTeacher = async function (id) {
-    var teacher = await Teacher.findOne({ _id: id });
+    var user = await Teacher.findOne({ _id: id });
     return {
-        teacher
+        user
     }
 
 }
@@ -153,8 +153,8 @@ const importexcelphancong = async function (data) {
 }
 
 const getTeacherByPhone = async function (soDienThoai) {
-    let teacher = await Teacher.findOne({ soDienThoai: soDienThoai });
-    return teacher;
+    let user = await Teacher.findOne({ soDienThoai: soDienThoai });
+    return user;
 
 }
 

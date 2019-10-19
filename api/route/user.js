@@ -2,6 +2,7 @@ var express = require('express');
 var session = require('express-session')
 var router = express.Router();
 var userController = require('../controller/userController');
+var TeacherController = require('../controller/teacherController');
 var firebaseController = require('../controller/firebaseController');
 // var authController = require('../controller/authController');
 var jwt = require('jsonwebtoken');
@@ -100,7 +101,7 @@ router.post('/signup', async function (req, res) {
         var token = jwt.sign({ data: req.body.soDienThoai }, 'secret', { expiresIn: '1y' });
         //req.session.token = token;
         var user = await userController.taoUser(req.body)
-        let giaoVien=await userController.layChiTietUser(user.user.idTao);
+        let giaoVien=await TeacherController.layChiTietTeacher(user.user.idTao);
         
         await firebaseController.insertaccount(user,giaoVien)
         //user = JSON.parse(JSON.stringify(user))
@@ -123,7 +124,7 @@ router.post('/excel', async function (req, res) {
         
         const token = req.session.token
         var phoneObj = jwt.decode(token);
-        var idtao = await userController.getUserByPhone(phoneObj.data)
+        var idtao = await TeacherController.getTeacherByPhone(phoneObj.data)
         var user = await userController.importexcel(req.body,idtao);
 
         res.send({

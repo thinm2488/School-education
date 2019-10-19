@@ -47,7 +47,7 @@ router.get('/profile', async function (req, res) {
     try {
         const token = req.headers['x-access-token'] || req.session.token
         var phoneObj = jwt.decode(token);
-        var user = await userController.getUserByPhone(phoneObj.data)
+        var user = await TeacherController.getTeacherByPhone(phoneObj.data)
         res.send({
             status: 200,
             user,
@@ -82,7 +82,7 @@ router.get('/signout', async function (req, res) {
 router.get('/:id', async function (req, res) {
     try {
         var user = await TeacherController.layChiTietTeacher(req.params.id);
-        var teacher=user.teacher
+        var teacher=user.user
         res.send({
             teacher,
 

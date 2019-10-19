@@ -4,12 +4,13 @@ var jwt = require('jsonwebtoken');
 var notificationController = require('../controller/notificatonController')
 var firebaseController=require('../controller/firebaseController')
 var userController = require('../controller/userController')
+var teacherController = require('../controller/teacherController')
 router.post('/create', async (req, res) => {
     try {
       const token = req.headers['x-access-token'] || req.session.token
       //var phoneObj=jwt.decode(token)
       
-      let nguoiTao = await userController.layChiTietUser(req.body.nguoiTao)
+      let nguoiTao = await teacherController.layChiTietTeacher(req.body.nguoiTao)
       let idFirebase =await firebaseController.insertfirebase(req.body,nguoiTao)
       let data = await notificationController.createNotification(req.body,idFirebase,nguoiTao)
       
@@ -70,7 +71,7 @@ router.put('/edit', async (req, res) => {
     try {
       const token =  req.session.token
     //   var phoneObj=jwt.decode(token)
-    let nguoiTao = await userController.layChiTietUser(req.body.nguoiTao)
+    let nguoiTao = await teacherController.layChiTietTeacher(req.body.nguoiTao)
       await firebaseController.updatefirebase(req.body,nguoiTao)
       let data = await notificationController.editNotification(req.body)
       return res.send({

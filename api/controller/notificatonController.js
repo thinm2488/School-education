@@ -8,7 +8,7 @@ const Notification = mongoose.model('Notification')
 const async = require('async')
 var android = require('../controller/pushnotification/android')
 var pushnotiController=require('../controller/pushnotification/pushnotification')
-var User = mongoose.model('User')
+var Teacher = mongoose.model('Teacher')
 
 
 
@@ -85,7 +85,7 @@ const layChiTietNoti = async function (id) {
 }
 const xoanoti = async function (id) {
     let noti = await Notification.findOne({ idfirebase: id });
-    let users= await User.findOne({_id:noti.nguoiTao})
+    let users= await Teacher.findOne({_id:noti.nguoiTao})
     noti.remove();
     return {
         mess:'Xóa thành công!',
