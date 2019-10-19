@@ -12,6 +12,7 @@ import User from 'src/app/model/User';
 export class ChatComponent implements OnInit {
  
 users:any;
+
   constructor() {
 
   
