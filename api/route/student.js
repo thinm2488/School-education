@@ -109,11 +109,13 @@ router.post('/getall', async function (req, res) {
 })
 router.post('/create', fileUpload(), async function (req, res) {
 
+    let teacher=await TeacherController.layChiTietTeacher(req.body.idTao)
     try {
        
         var student
         if (!req.files) {
-            student = await studentController.createStudent(req.body);
+            
+            student = await studentController.createStudent(req.body,teacher);
             res.send({
                 student,
                 status:200
@@ -125,7 +127,7 @@ router.post('/create', fileUpload(), async function (req, res) {
             req.body.hinh = file.name;
             var url = path.join(path.join(__dirname, '../../'), 'src/assets/images/');
             file.mv(url + req.files.hinh.name, async function () {
-                student = await studentController.createStudent(req.body);
+                student = await studentController.createStudent(req.bod,teacher);
 
             })
             res.send({
@@ -143,13 +145,14 @@ router.post('/create', fileUpload(), async function (req, res) {
     }
 });
 router.post('/excel', async function (req, res) {
+    let teacher=await TeacherController.layChiTietTeacher(req.body.idTao)
     try {
         //firebasetoken=passport.createPassportConfig(req.body,req.body.soDienThoai,req.body.password,done=true);
         
         const token = req.session.token
         var phoneObj = jwt.decode(token);
         
-        var student = await studentController.importexcel(req.body);
+        var student = await studentController.importexcel(req.body,teacher);
 
         res.send({
             status: 200,

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { HttpClient } from '@angular/common/http'
+import { CookieService } from 'ngx-cookie-service';
 import { ApiService } from '../../../service/api.service'
 import User from 'src/app/model/User';
 import * as XLSX from 'xlsx';  
@@ -23,7 +24,7 @@ export class TaohocsinhComponent implements OnInit {
   hocsinh:any;
   res:any;
   model;
-  constructor(private http: HttpClient, private fb: FormBuilder,private as: ApiService,private calendar: NgbCalendar) { 
+  constructor(private cookieService:CookieService,private http: HttpClient, private fb: FormBuilder,private as: ApiService,private calendar: NgbCalendar) { 
     this.createform();
   }
   createform() {
@@ -66,6 +67,8 @@ export class TaohocsinhComponent implements OnInit {
   tao(tenHocSinh,gioiTinh,ngaySinh,diaChi) {
   
     let data = {
+      idTao: this.cookieService.get('id'),
+    
       tenHocSinh: tenHocSinh,
       khoi: this.khoilop,
       soHieu:this.soHieu,
@@ -119,6 +122,7 @@ export class TaohocsinhComponent implements OnInit {
   importexcel(){
    
    var data={
+      idTao: this.cookieService.get('id'),
       soHieu:this.soHieu,
       khoi:this.khoilop,
       liststudent:this.StudentList

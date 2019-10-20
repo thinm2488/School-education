@@ -13,4 +13,10 @@ export class TranscriptService {
    importexcel(data){
      return this.http.post('/api/route/transcript/excel',data)
    }
+   gettrancript(data){
+    return this.http.post('/api/route/transcript/mon',data)
+  }
+  createtranscript(data){
+    return this.http.post('/api/route/transcript/create',data)
+  }
 }

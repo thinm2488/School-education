@@ -3,9 +3,10 @@ const Student = mongoose.model('Student');
 const Applicationform = mongoose.model('ApplicationForm');
 const Android=require('./pushnotification/android')
 const Class = mongoose.model('Class');
+const Transcript = mongoose.model('Transcript');
 // const nodemailer = require('nodemailer')
 var jwt = require('jsonwebtoken');
-const createStudent = async function (data) {
+const createStudent = async function (data,teacher) {
     // let student = await Student.findOne({ maSoHocSinh: data.maSoHocSinh });
     // if (student) {
     //     throw new Error('Mã số đã được sử dụng ! ')
@@ -15,18 +16,32 @@ const createStudent = async function (data) {
     let classs = await Class.findOne({ soHieu: data.soHieu })
     if (!classs) {
         classs = new Class(data);
+        
         classs.khoi = data.khoi,
         classs.soHieu = data.soHieu
         await classs.save()
         student = new Student(data);
         await student.save();
+        let transcript=new Transcript();
+        transcript.GVCN=data.idTao,
+        transcript.idHocSinh=student._id,
+        transcript.tenHocSinh=student.tenHocSinh,
+        transcript.tenGV=teacher.user.tenNguoiDung
+        await transcript.save()
         return {
             student
         }
     } else {
         student = new Student(data);
+        student.idTao=data.idTao
         student.ngaySinh=milliseconds
         await student.save();
+        let transcript=new Transcript();
+        transcript.GVCN=data.idTao,
+        transcript.idHocSinh=student._id,
+        transcript.tenHocSinh=student.tenHocSinh,
+        transcript.tenGV=teacher.user.tenNguoiDung
+        await transcript.save()
         return {
             student
         }
@@ -221,7 +236,7 @@ const getdayoffbyid = async function (id) {
     }
 
 }
-const importexcel = async function (data) {
+const importexcel = async function (data,teacher) {
     let classs = await Class.findOne({ soHieu: data.soHieu })
     if (!classs) {
         classs = new Class();
@@ -229,18 +244,31 @@ const importexcel = async function (data) {
         classs.soHieu = data.soHieu
         await classs.save()
     }
-    data.liststudent.map(async function (element) {
+    for(let i=0;i< data.liststudent.length;i++){
+        let date = new Date( data.liststudent[i].ngaySinh); // some mock date
+        let milliseconds = date.getTime(); 
+        student = new Student(data);
+        student.tenHocSinh =  data.liststudent[i].tenHocSinh;
+        student.soHieu =  data.liststudent[i].soHieu;
+        student.khoi =  data.liststudent[i].khoi;
+        student.ngaySinh = milliseconds;
+        student.gioiTinh =  data.liststudent[i].gioiTinh;
+        student.diaChi =  data.liststudent[i].diaChi;
+        if(student){
+            let transcript=new Transcript();
+            transcript.GVCN=data.idTao,
+            transcript.idHocSinh=student._id,
+            transcript.tenHocSinh=student.tenHocSinh,
+            transcript.tenGV=teacher.user.tenNguoiDung
+            await transcript.save();
+        }
+        
+        await student.save();
+        
+    }
+    
 
-            let date = new Date(element.ngaySinh); // some mock date
-            let milliseconds = date.getTime(); 
-            student = new Student(data);
-            student.tenHocSinh = element.tenHocSinh;
-            student.soHieu = element.soHieu;
-            student.khoi = element.khoi;
-            student.ngaySinh = milliseconds;
-            student.gioiTinh = element.gioiTinh;
-            student.diaChi = element.diaChi;
-            await student.save();
+            
             return {
 
                 message: "Thêm tài khoản thành công",
@@ -248,7 +276,6 @@ const importexcel = async function (data) {
             }
         
 
-    })
 
 }
 const getclass = async function (data) {

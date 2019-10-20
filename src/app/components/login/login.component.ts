@@ -37,24 +37,27 @@ export class LoginComponent implements OnInit {
        var id=this.user.user._id
        var role=this.user.user.role
      
-
       if (this.user.user.status==500) {
         window.alert(this.user.user.message)
        
       }
      
       else{
-        this.cookieService.set( 'tenNguoiDung',tenNguoiDung.toString()  );
-        this.cookieService.set( 'hinh',hinh.toString()  );
-        this.cookieService.set( 'id',id.toString()  );
-        this.cookieService.set( 'role',role.toString()  );
-    
-       
-        
-        window.alert("Đăng Nhập Thành Công!!");
-        window.location.href = '/home/giaoVien'
-        return data
-      
+        if(role=="gv"||role=="ht"){
+          var chuyenmon=this.user.user.mon
+
+          this.cookieService.set( 'tenNguoiDung',tenNguoiDung.toString()  );
+          this.cookieService.set( 'hinh',hinh.toString()  );
+          this.cookieService.set( 'id',id.toString()  );
+          this.cookieService.set( 'role',role.toString()  );
+          this.cookieService.set( 'chuyenmon',chuyenmon.toString()  );
+          window.alert("Đăng Nhập Thành Công!!");
+          window.location.href = '/home/giaoVien'
+          return data
+        }
+        else{
+          window.alert("Số điện thoại không có quyền truy cập mời bạn thử lại bằng app cho phụ huynh");
+        }
       }
       
     });

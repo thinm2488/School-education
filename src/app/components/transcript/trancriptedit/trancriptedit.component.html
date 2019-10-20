@@ -1,90 +1,206 @@
 <div class="container">
-    <div class="row">
-        <h2>Nhập điểm</h2>
 
+
+  <div class="row">
+    <div style="text-align: center"  class="col-md-12">
+      <h1>Nhập điểm</h1>
     </div>
-    <div class="row">
-            <div class="col-md-6">
+
+
+  </div>
+
+  <div class="row">
+      <div class="col-md-8">
+          <div class="row" >
+              <div class="col-md-6" style="margin-top: 40px">
                 <label>Họ Và tên:</label>
-            </div>
-            <div class="col-md-6"></div>
-            
-        </div>
-        <div class="row">
-                <div class="col-md-6">
-                    <label>Lớp:</label>
+              </div>
+              <div class="col-md-6"style="margin-top: 40px">
+                  <label>{{this.student.tenHocSinh}}</label>
                 </div>
-                <div class="col-md-6"></div>
-                
+             
+          
+            </div>
+            
+            <div class="row">
+              <div class="col-md-6">
+                <label>Lớp: </label>
+              </div>
+              <div class="col-md-6">
+                  <label>{{student.soHieu}}</label>
+                </div>
+             
+          
             </div>
             <div class="row">
-                    <div class="col-md-6">
-                        <label>Môn:</label>
-                    </div>
-                    <div class="col-md-6"></div>
-                    
-                </div>
-                <div class="row">
-                        <div class="col-md-12">
-                            <p>Bảng Điểm HK1</p>
-                            <table class="table">
-                                    <thead>
+              <div class="col-md-6"> <label>Môn:</label></div>
+              <div class="col-md-6"> <label>{{mon}}</label></div>
+              </div>
+      </div>
+      <div class="col-md-4">
+         <img src="../../../../assets/images/{{student.hinh}}">
+        </div>
+  
+  
+    </div>
+
+
+
+
+  
+   
+
+
+  <div class="row">
+    <div class="col-md-12">
+      <h4>Bảng Điểm HK1</h4>
+      <table border="1">
+        <!-- <thead>
                                       <tr>
                                         <th scope="col">15p'</th>
                                         <th scope="col">1 tiết</th>
                                         <th scope="col">giữa Kỳ</th>
                                         <th scope="col">Cuối Kỳ</th>
                                       </tr>
-                                    </thead>
-                                    <tbody>
-                                      <tr>
-                                        
-                                        <td><input placeholder="nhập điểm 15p"></td>
-                                        <td><input placeholder="nhập điểm 1 tiết"></td>
-                                        <td><input placeholder="nhập điểm giữa kỳ"></td>
-                                        <td><input placeholder="nhập điểm cuối kỳ"></td>
-                                      </tr>
-                                     
-                                    </tbody>
-                                  </table>
-                        </div>
-                       
-                        
-                    </div>
-                    <div class="row">
-                            <div class="col-md-12">
-                                <p>Bảng Điểm HK2</p>
-                                <table class="table">
-                                        <thead>
-                                          <tr>
-                                            <th scope="col">15p'</th>
-                                            <th scope="col">1 tiết</th>
-                                            <th scope="col">giữa Kỳ</th>
-                                            <th scope="col">Cuối Kỳ</th>
-                                          </tr>
-                                        </thead>
-                                        <tbody>
-                                          <tr>
-                                           
-                                        <td><input placeholder="nhập điểm 15p"></td>
-                                        <td><input placeholder="nhập điểm 1 tiết"></td>
-                                        <td><input placeholder="nhập điểm giữa kỳ"></td>
-                                        <td><input placeholder="nhập điểm cuối kỳ"></td>
-                                          </tr>
-                                         
-                                        </tbody>
-                                      </table>
-                            </div>
-                           
-                            
-                        </div>
-                        <div class="row">
-                            <div class="col-md-7">
-                                    <button style="float:right">Cập nhật</button>
-                            </div>
+                                    </thead> -->
+        <!-- <tbody> -->
+        <tr>
 
-                            <div class="col-md-6">
-                               
-                            </div>
-                        </div>
+          <th colspan="3">Điểm Miệng</th>
+          <th colspan="3">Điểm 15p</th>
+          <th colspan="3">Điểm 1 tiết</th>
+          <th colspan="1">GK I</th>
+          <th colspan="1">CK I</th>
+
+          <th colspan="3">Điểm Miệng</th>
+          <th colspan="3">Điểm 15p</th>
+          <th colspan="3">Điểm 1 tiết</th>
+          <th colspan="1">GK II</th>
+          <th colspan="1">CK II</th>
+          <th colspan="1">Cả năm</th>
+          <!-- <td><input placeholder="nhập điểm 1 tiết"></td> -->
+          <!-- <td><input placeholder="nhập điểm giữa kỳ"></td>
+                                        <td><input placeholder="nhập điểm cuối kỳ"></td> -->
+        </tr>
+        <tr *ngIf="ishiden">
+
+          <td><input [(ngModel)]="bangDiem.diemmieng1" placeholder="{{bangDiem.diemmieng1}}"></td>
+          <td><input [(ngModel)]="bangDiem.diemmieng2" name="diemmieng2" placeholder="{{bangDiem.diemmieng2}}"></td>
+          <td><input [(ngModel)]="bangDiem.diemmieng3" name="diemmieng3" placeholder="{{bangDiem.diemmieng3}}"></td>
+
+
+          <td><input [(ngModel)]="bangDiem.diem15p1" name="diem15p1" placeholder="{{bangDiem.diem15p1}}"></td>
+          <td><input [(ngModel)]="bangDiem.diem15p2" name="diem15p2" placeholder="{{bangDiem.diem15p2}}"></td>
+          <td><input [(ngModel)]="bangDiem.diem15p3" name="diem15p3" placeholder="{{bangDiem.diem15p3}}"></td>
+
+
+          <td><input [(ngModel)]="bangDiem.diem1tiet1" name="diem1tiet1" placeholder="{{bangDiem.diem1tiet1}}"></td>
+          <td><input [(ngModel)]="bangDiem.diem1tiet2" name="diem1tiet2" placeholder="{{bangDiem.diem1tiet2}}"></td>
+          <td><input [(ngModel)]="bangDiem.diem1tiet3" name="diem1tiet3" placeholder="{{bangDiem.diem1tiet3}}"></td>
+
+          <td><input [(ngModel)]="bangDiem.GKI" name="GKI" placeholder="{{bangDiem.GKI}}"></td>
+
+          <td><input [(ngModel)]="bangDiem.CKI" name="CKI" placeholder="{{bangDiem.CKII}}"></td>
+
+
+
+          <td><input [(ngModel)]="bangDiem.diemmieng4" name="diemmieng4" placeholder="{{bangDiem.diemmieng4}}"></td>
+          <td><input [(ngModel)]="bangDiem.diemmieng5" name="diemmieng5" placeholder="{{bangDiem.diemmieng5}}"></td>
+          <td><input [(ngModel)]="bangDiem.diemmieng6" name="diemmieng6" placeholder="{{bangDiem.diemmieng6}}"></td>
+
+
+          <td><input [(ngModel)]="bangDiem.diem15p4" name="diem15p4" placeholder="{{bangDiem.diem15p4}}"></td>
+          <td><input [(ngModel)]="bangDiem.diem15p5" name="diem15p5" placeholder="{{bangDiem.diem15p5}}"></td>
+          <td><input [(ngModel)]="bangDiem.diem15p6" name="diem15p16" placeholder="{{bangDiem.diem15p6}}"></td>
+
+
+          <td><input [(ngModel)]="bangDiem.diem1tiet4" name="diem1tiet4" placeholder="{{bangDiem.diem1tiet4}}"></td>
+          <td><input [(ngModel)]="bangDiem.diem1tiet5" name="diem1tiet5" placeholder="{{bangDiem.diem1tiet5}}"></td>
+          <td><input [(ngModel)]="bangDiem.diem1tiet6" name="diem1tiet6" placeholder="{{bangDiem.diem1tiet6}}"></td>
+
+          <td><input [(ngModel)]="bangDiem.GKII" name="GKII" placeholder="{{bangDiem.GKII}}"></td>
+
+          <td><input [(ngModel)]="bangDiem.CKII" name="CKII" placeholder="{{bangDiem.CKII}}"></td>
+
+          <td><input [(ngModel)]="bangDiem.canam" name="canam" placeholder="{{bangDiem.canam}}"></td>
+
+
+        </tr>
+
+
+
+        <tr *ngIf="isshow" style="background-color: rgb(235, 235, 228);">
+
+
+          <td><input disabled [(ngModel)]="bangDiem.diemmieng1" placeholder="{{bangDiem.diemmieng1}}"></td>
+          <td><input disabled [(ngModel)]="bangDiem.diemmieng2" name="diemmieng2" placeholder="{{bangDiem.diemmieng2}}">
+          </td>
+          <td><input disabled [(ngModel)]="bangDiem.diemmieng3" name="diemmieng3" placeholder="{{bangDiem.diemmieng3}}">
+          </td>
+
+
+          <td><input disabled [(ngModel)]="bangDiem.diem15p1" name="diem15p1" placeholder="{{bangDiem.diem15p1}}"></td>
+          <td><input disabled [(ngModel)]="bangDiem.diem15p2" name="diem15p2" placeholder="{{bangDiem.diem15p2}}"></td>
+          <td><input disabled [(ngModel)]="bangDiem.diem15p3" name="diem15p3" placeholder="{{bangDiem.diem15p3}}"></td>
+
+
+          <td><input disabled [(ngModel)]="bangDiem.diem1tiet1" name="diem1tiet1" placeholder="{{bangDiem.diem1tiet1}}">
+          </td>
+          <td><input disabled [(ngModel)]="bangDiem.diem1tiet2" name="diem1tiet2" placeholder="{{bangDiem.diem1tiet2}}">
+          </td>
+          <td><input disabled [(ngModel)]="bangDiem.diem1tiet3" name="diem1tiet3" placeholder="{{bangDiem.diem1tiet3}}">
+          </td>
+
+          <td><input disabled [(ngModel)]="bangDiem.GKI" name="GKI" placeholder="{{bangDiem.GKI}}"></td>
+
+          <td><input disabled [(ngModel)]="bangDiem.CKI" name="CKI" placeholder="{{bangDiem.CKII}}"></td>
+
+
+
+          <td><input disabled [(ngModel)]="bangDiem.diemmieng4" name="diemmieng4" placeholder="{{bangDiem.diemmieng4}}">
+          </td>
+          <td><input disabled [(ngModel)]="bangDiem.diemmieng5" name="diemmieng5" placeholder="{{bangDiem.diemmieng5}}">
+          </td>
+          <td><input disabled [(ngModel)]="bangDiem.diemmieng6" name="diemmieng6" placeholder="{{bangDiem.diemmieng6}}">
+          </td>
+
+
+          <td><input disabled [(ngModel)]="bangDiem.diem15p4" name="diem15p4" placeholder="{{bangDiem.diem15p4}}"></td>
+          <td><input disabled [(ngModel)]="bangDiem.diem15p5" name="diem15p5" placeholder="{{bangDiem.diem15p5}}"></td>
+          <td><input disabled [(ngModel)]="bangDiem.diem15p6" name="diem15p16" placeholder="{{bangDiem.diem15p6}}"></td>
+
+
+          <td><input disabled [(ngModel)]="bangDiem.diem1tiet4" name="diem1tiet4" placeholder="{{bangDiem.diem1tiet4}}">
+          </td>
+          <td><input disabled [(ngModel)]="bangDiem.diem1tiet5" name="diem1tiet5" placeholder="{{bangDiem.diem1tiet5}}">
+          </td>
+          <td><input disabled [(ngModel)]="bangDiem.diem1tiet6" name="diem1tiet6" placeholder="{{bangDiem.diem1tiet6}}">
+          </td>
+
+          <td><input disabled [(ngModel)]="bangDiem.GKII" name="GKII" placeholder="{{bangDiem.GKII}}"></td>
+
+          <td><input disabled [(ngModel)]="bangDiem.CKII" name="CKII" placeholder="{{bangDiem.CKII}}"></td>
+
+          <td><input disabled [(ngModel)]="bangDiem.canam" name="canam" placeholder="{{bangDiem.canam}}"></td>
+
+        </tr>
+
+        <!-- </tbody> -->
+      </table>
+    </div>
+
+
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <button type="submit" (click)="Sua()" style="float:right;width: 80px;">Sửa</button>
+    </div>
+
+    <div class="col-md-6">
+      <button type="submit" (click)="insertmark()" style="float: left;width: 80px;">Cập nhật</button>
+    </div>
+  </div>
+
+
 </div>

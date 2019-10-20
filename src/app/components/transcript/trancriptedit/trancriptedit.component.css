@@ -1,9 +1,81 @@
 .container{
     float: right;
     background: white;
-    margin-top: 20px;
+    margin-top:8%;
     margin-right: 50px
 }
 h2{
     text-align: center
+}
+@media (min-width: 1500px){
+    
+    #datatable{
+        max-width: 941px;
+    }
+    /* body > app-root > app-sidebar > app-trancriptedit > div > div:nth-child(5) > div > table > tr:nth-child(2) > td > input{
+        width: 46px;
+    } */
+    td input{
+        width: 46px!important;
+    }
+}
+
+@media (min-width: 1200px){
+.container {
+    max-width: 1168px;}
+    #datatable{
+        max-width: 1050px;
+    }
+}
+@media (min-width: 1700px){
+.container {
+    max-width: 1350px;}
+    #datatable{
+        max-width: 1184px;
+    }
+    td input{
+        width: 53px!important;
+    }
+
+}
+@media (min-width: 1900px){
+.container {
+    max-width: 1548px;}
+    #datable{
+        max-width: 1386px;
+    }
+    td input{
+        width: 63px!important;
+    }
+   
+
+}
+@media (min-width: 2100px){
+.container {
+    max-width: 1673px;}
+    #datatable{
+        max-width: 1465px;
+    }
+
+}
+
+@media (min-width: 2000px){
+
+#datatable{
+    max-width: 1389px;
+}
+}
+
+th{
+    text-align: center
+}
+.row{
+    padding: 10px 10px 10px 10px;
+}
+img{
+    width: 200px;
+    height: 250px;
+}
+label{
+    font-size: 18px
 }
