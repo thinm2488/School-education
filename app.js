@@ -11,6 +11,7 @@ require('./api/model/Student');
 require('./api/model/Schedule');
 require('./api/model/ApplicationForm')
 require('./api/model/Class')
+require('./api/model/Diligence')
 require('./api/model/Notification')
 require('./api/model/Transcript')
 var userRouter = require('./api/route/user')
@@ -19,7 +20,7 @@ var teacherRouter = require('./api/route/teacher')
 var scheduleRouter = require('./api/route/schedule')
 var studentRouter = require('./api/route/student')
 var notificationRouter= require('./api/route/notification')
-
+var diligenceRouter= require('./api/route/diligence')
 
 
 
@@ -46,6 +47,7 @@ app.use('/api/route/teacher', teacherRouter)
 app.use('/api/route/schedule', scheduleRouter)
 app.use('/api/route/student', studentRouter)
 app.use('/api/route/notification',notificationRouter)
+app.use('/api/route/diligence',diligenceRouter)
 app.get('/*', function(req,res) {
     
 res.sendFile(path.join(__dirname+'/dist/school-education/index.html'));

@@ -3,7 +3,9 @@ const Student = mongoose.model('Student');
 const Applicationform = mongoose.model('ApplicationForm');
 const Android=require('./pushnotification/android')
 const Class = mongoose.model('Class');
+const Diligence = mongoose.model('Diligence');
 const Transcript = mongoose.model('Transcript');
+var moment = require('moment')
 // const nodemailer = require('nodemailer')
 var jwt = require('jsonwebtoken');
 const createStudent = async function (data,teacher) {
@@ -26,8 +28,12 @@ const createStudent = async function (data,teacher) {
         transcript.GVCN=data.idTao,
         transcript.idHocSinh=student._id,
         transcript.tenHocSinh=student.tenHocSinh,
-        transcript.tenGV=teacher.user.tenNguoiDung
+        transcript.tenGV=teacher.user.tenNguoiDung,
+
         await transcript.save()
+        let diligence= new Diligence();
+        diligence.idHocSinh=student._id
+        await diligence.save();
         return {
             student
         }
@@ -42,6 +48,9 @@ const createStudent = async function (data,teacher) {
         transcript.tenHocSinh=student.tenHocSinh,
         transcript.tenGV=teacher.user.tenNguoiDung
         await transcript.save()
+        let diligence= new Diligence();
+        diligence.idHocSinh=student._id
+        await diligence.save();
         return {
             student
         }
@@ -213,7 +222,95 @@ const alloweddayoff = async function (data) {
     if (dayoff) {
         dayoff.trangThai=true
         await dayoff.save()
-       
+        let deligence = await Diligence.findOne({idHocSinh:dayoff.idHocSinh})
+        if(deligence){
+            var dateTime = dayoff.ngayBatDau;
+            var ngayNghi = moment( dateTime).format("MM");
+            
+           
+            if(ngayNghi==01){
+                if(deligence.thang1.soLuong){
+                    deligence.thang1.soLuong=deligence.thang1.soLuong+Number(dayoff.soNgayNghi)
+                } else{
+                    deligence.thang1.soLuong=Number(dayoff.soNgayNghi)
+                }
+              
+                deligence.thang1.danhSachNgayNghi.push(dayoff);
+                await deligence.save()
+            }
+            if(ngayNghi==02){
+                if(deligence.thang2.soLuong){
+                    deligence.thang2.soLuong=deligence.thang2.soLuong+Number(dayoff.soNgayNghi)
+                } else{
+                    deligence.thang2.soLuong=Number(dayoff.soNgayNghi)
+                }
+                deligence.thang2.danhSachNgayNghi.push(dayoff);
+                await deligence.save()
+            }
+            if(ngayNghi==03){
+                if(deligence.thang3.soLuong){
+                    deligence.thang3.soLuong=deligence.thang3.soLuong+Number(dayoff.soNgayNghi)
+                } else{
+                    deligence.thang3.soLuong=Number(dayoff.soNgayNghi)
+                }
+                deligence.thang3.danhSachNgayNghi.push(dayoff);
+                await deligence.save()
+            }
+            if(ngayNghi==04){
+                if(deligence.thang4.soLuong){
+                    deligence.thang4.soLuong=deligence.thang4.soLuong+Number(dayoff.soNgayNghi)
+                } else{
+                    deligence.thang4.soLuong=Number(dayoff.soNgayNghi)
+                }
+                deligence.thang4.danhSachNgayNghi.push(dayoff);
+                await deligence.save()
+            }
+            if(ngayNghi==05){
+                if(deligence.thang5.soLuong){
+                    deligence.thang5.soLuong=deligence.thang5.soLuong+Number(dayoff.soNgayNghi)
+                } else{
+                    deligence.thang5.soLuong=Number(dayoff.soNgayNghi)
+                }
+                deligence.thang5.danhSachNgayNghi.push(dayoff);
+                await deligence.save()
+            }
+            if(ngayNghi==09){
+                if(deligence.thang9.soLuong){
+                    deligence.thang9.soLuong=deligence.thang9.soLuong+Number(dayoff.soNgayNghi)
+                } else{
+                    deligence.thang9.soLuong=Number(dayoff.soNgayNghi)
+                }
+                deligence.thang9.danhSachNgayNghi.push(dayoff);
+                await deligence.save()
+            }
+            if(ngayNghi==10){
+                if(deligence.thang10.soLuong){
+                    deligence.thang10.soLuong=deligence.thang10.soLuong+Number(dayoff.soNgayNghi)
+                } else{
+                    deligence.thang10.soLuong=Number(dayoff.soNgayNghi)
+                }
+                deligence.thang10.danhSachNgayNghi.push(dayoff);
+                await deligence.save()
+            }
+            if(ngayNghi==11){
+                if(deligence.thang11.soLuong){
+                    deligence.thang11.soLuong=deligence.thang11.soLuong+Number(dayoff.soNgayNghi)
+                } else{
+                    deligence.thang11.soLuong=Number(dayoff.soNgayNghi)
+                }
+                deligence.thang11.danhSachNgayNghi.push(dayoff);
+                await deligence.save()
+            }
+            if(ngayNghi==12){
+                if(deligence.thang12.soLuong){
+                    deligence.thang12.soLuong=deligence.thang12.soLuong+Number(dayoff.soNgayNghi)
+                } else{
+                    deligence.thang12.soLuong=Number(dayoff.soNgayNghi)
+                }
+                deligence.thang12.danhSachNgayNghi.push(dayoff);
+                await deligence.save()
+            }
+        }
 
         return {
             dayoff
@@ -254,6 +351,7 @@ const importexcel = async function (data,teacher) {
         student.ngaySinh = milliseconds;
         student.gioiTinh =  data.liststudent[i].gioiTinh;
         student.diaChi =  data.liststudent[i].diaChi;
+        await student.save();
         if(student){
             let transcript=new Transcript();
             transcript.GVCN=data.idTao,
@@ -261,9 +359,12 @@ const importexcel = async function (data,teacher) {
             transcript.tenHocSinh=student.tenHocSinh,
             transcript.tenGV=teacher.user.tenNguoiDung
             await transcript.save();
+            let diligence= new Diligence();
+            diligence.idHocSinh=student._id
+            await diligence.save();
         }
-        
-        await student.save();
+      
+      
         
     }
     
