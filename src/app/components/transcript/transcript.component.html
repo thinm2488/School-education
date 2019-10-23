@@ -1,9 +1,106 @@
 
 
 
-<div class="container-fluid">
+<div class="container cl " >
+                <div>
+                    <h1 style="text-align: center;color:#199461">Danh Sách Học Sinh</h1>
+                </div>
+                <div style="margin-bottom:20px" class="row">
+                        <!-- <div class="col-md-4">
+                                <label style="position: absolute">Khối:</label>
+                                <select aria-placeholder="chọn khối"
+                                    style="margin-left: 95px;width:180px;border-radius: 10px" class="form-control"
+                                   [(ngModel)]="khoilop" (change)="getlop()">
+                                    <option [ngValue]="khois" *ngFor="let khois of danhsachkhoi">{{khois}}</option>
+                                </select>
+                        </div> -->
+                        <div class="col-md-3">
+                                <label style="position: absolute">Lớp:</label>
+                              
+                                <select (change)="getstudent()" aria-placeholder="chọn lớp"
+                                    style="margin-left: 55px;width:180px;border-radius: 10px" id="lop" class="form-control"
+                                    [(ngModel)]="soHieu" >
+                                    <option></option>
+                                    <option [ngValue]="item" *ngFor="let item of danhsachlop">{{item}}</option>
+                                </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label style="position: absolute">HK:</label>
+                          
+                            <select  aria-placeholder="chọn lớp"
+                            (change)="gettranscriptbytype()" style="margin-left: 55px;width:180px;border-radius: 10px" id="lop" class="form-control"
+                                [(ngModel)]="HK" >
+                                <option></option>
+                                <option [ngValue]="opthk" *ngFor="let opthk of OptionHK">{{opthk}}</option>
+                            </select>
+                    </div>
+                    
 
-        <div class="container cl">
+                        <div class="col-md-3">
+                                <input  style="width: 270px;" type="file" class="form-control" (change)="uploadedFile($event)" placeholder="Upload file"
+                                accept=".xlsx">
+                               
+                        </div>
+                        <div class="col-md-2">
+                                <button style="font-size: 20px;border-radius: 10px ; background-color:#19c880"
+                                class="btn-u pull-left"(click)="importexcel()">Import Excel</button>
+                        </div>
+        
+                    </div>
+               
+                <div style="float: right" class="table">
+                   
+                    <table border="1" *ngIf="isshowdiem"  style="float: right" id="datatable2" datatable class="row-border hover">
+                      
+                            <tr>
+                                <th >STT</th>
+                                <th >Họ và tên</th>
+                                <th >Lớp</th>
+                                <th>Điểm Miệng</th>
+                                <th>Điểm 15p</th>
+                                <th>Điểm 1 tiết</th>
+                                <th>Điểm Giữa Kỳ</th>
+                                <th>Điểm Cuối Kỳ</th>
+                                <th *ngIf="checkHK2">Cả năm</th>
+                                
+                               
+                               
+                            </tr>
+                     
+                     
+                            <tr  *ngFor="let student of danhsachbangdiem;let i=index ">
+                                    <td><a href="/home/bangdiem/{{student.idHocSinh}}">{{i}}</a></td>
+                                    <td><a href="/home/bangdiem/{{student.idHocSinh}}">{{student.tenHocSinh}}</a></td>
+                                    <td><a href="/home/bangdiem/{{student.idHocSinh}}">{{student.soHieu}}</a></td>
+                                    <td *ngIf="checkHK1"><label  *ngFor="let diem of student.HKI.diemMieng;let i=index "><a href="/home/bangdiem/{{student.idHocSinh}}">{{diem}}&emsp;</a></label></td>
+                                    <td *ngIf="checkHK1"><label  *ngFor="let diem of student.HKI.diem15p;let i=index "><a href="/home/bangdiem/{{student.idHocSinh}}">{{diem}}&emsp;</a></label></td>
+                                    <td *ngIf="checkHK1"><label  *ngFor="let diem of student.HKI.diem1tiet;let i=index "><a href="/home/bangdiem/{{student.idHocSinh}}">{{diem}}&emsp;</a></label></td>
+                                    <td *ngIf="checkHK1"><a href="/home/bangdiem/{{student.idHocSinh}}">{{student.HKI.diemGiuaKy}}</a></td>
+                                    <td *ngIf="checkHK1"><a href="/home/bangdiem/{{student.idHocSinh}}">{{student.HKI.diemCuoiKy}}</a></td>
+                                    <td  *ngIf="checkHK2"><label  *ngFor="let diem of student.HKII.diemMieng;let i=index "><a href="/home/bangdiem/{{student.idHocSinh}}">{{diem}}&emsp;</a></label></td>
+                                    <td *ngIf="checkHK2"><label  *ngFor="let diem of student.HKII.diem15p;let i=index "><a href="/home/bangdiem/{{student.idHocSinh}}">{{diem}}&emsp;</a></label></td>
+                                    <td *ngIf="checkHK2"><label  *ngFor="let diem of student.HKII.diem1tiet;let i=index "><a href="/home/bangdiem/{{student.idHocSinh}}">{{diem}}&emsp;</a></label></td>
+                                   
+                                    <td *ngIf="checkHK2"><a href="/home/bangdiem/{{student.idHocSinh}}">{{student.HKII.diemGiuaKy}}</a></td>
+                                    <td *ngIf="checkHK2"><a href="/home/bangdiem/{{student.idHocSinh}}">{{student.HKII.diemCuoiKy}}</a></td>
+                                    <td *ngIf="checkHK2"><a href="/home/bangdiem/{{student.idHocSinh}}">{{student.HKII.caNam}}</a></td>
+                                  
+                            </tr>
+                         
+                       
+                    </table>
+                    
+                    <div class="row" style="margin-top: 20px">
+                        
+                       
+                        <div class="col-md-6">
+                              
+                        </div>
+    
+                    </div>
+                </div>
+            </div>
+        <div class="container cl" style="margin-top:-20px">
             <div>
                 <h1 style="text-align: center;color:#199461">Danh Sách Học Sinh Lớp Chủ Nhiệm</h1>
             </div>
@@ -11,10 +108,10 @@
            
             <div style="float: right" class="table">
                
-                <table *ngIf="isshow"  style="float: right" id="datatable" datatable class="row-border hover">
+                <table *ngIf="isshow" id="datatableCN" datatable class="row-border hover">
                     <thead>
                         <tr>
-                            
+                            <th>STT</th>
                             <th>Họ và tên</th>
                             <th>Lớp</th>
                             <th>Ngày sinh</th>
@@ -47,80 +144,8 @@
                 </div>
             </div>
         </div>
-        <div class="container cl" style="margin-top:-20px">
-                <div>
-                    <h1 style="text-align: center;color:#199461">Danh Sách Học Sinh</h1>
-                </div>
-                <div style="margin-bottom:20px" class="row">
-                        <!-- <div class="col-md-4">
-                                <label style="position: absolute">Khối:</label>
-                                <select aria-placeholder="chọn khối"
-                                    style="margin-left: 95px;width:180px;border-radius: 10px" class="form-control"
-                                   [(ngModel)]="khoilop" (change)="getlop()">
-                                    <option [ngValue]="khois" *ngFor="let khois of danhsachkhoi">{{khois}}</option>
-                                </select>
-                        </div> -->
-                        <div class="col-md-3">
-                                <label style="position: absolute">Lớp:</label>
-                              
-                                <select (change)="getstudent()" aria-placeholder="chọn lớp"
-                                    style="margin-left: 55px;width:180px;border-radius: 10px" id="lop" class="form-control"
-                                    [(ngModel)]="soHieu" >
-                                    <option></option>
-                                    <option [ngValue]="item" *ngFor="let item of danhsachlop">{{item}}</option>
-                                </select>
-                        </div>
-                        <div class="col-md-4">
-                                <input style="width: 320px;" type="file" class="form-control" (change)="uploadedFile($event)" placeholder="Upload file"
-                                accept=".xlsx">
-                               
-                        </div>
-                        <div class="col-md-4">
-                                <button style="font-size: 25px;border-radius: 10px ; background-color:#19c880"
-                                class="btn-u pull-left"(click)="importexcel()">Import Excel</button>
-                        </div>
         
-                    </div>
-               
-                <div style="float: right" class="table">
-                   
-                    <table *ngIf="isshow"  style="float: right" id="datatable" datatable class="row-border hover">
-                        <thead>
-                            <tr>
-                                
-                                <th>Họ và tên</th>
-                                <th>Lớp</th>
-                                <th>Ngày sinh</th>
-                                <th>Giới Tính</th>
-                                
-                               
-                               
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- <tr  *ngFor="let student of danhsachhocsinh;let i=index ">
-                                    <td>{{student.tenHocSinh}}</td>
-                                    <td>{{student.soHieu}}</td>
-                                    <td>{{student.ngaySinh| date:' dd/MM/yy'}}</td>
-                                    <td>{{student.gioiTinh}}</td>
-                                    <td [(ngModel)]="student[i]">{{student._id}}</td>
-                                    <td><button (click)="sua()">Sua</button></td>
-                            </tr> -->
-                         
-                        </tbody>
-                    </table>
-                    
-                    <div class="row" style="margin-top: 20px">
-                        
-                       
-                        <div class="col-md-6">
-                              
-                        </div>
-    
-                    </div>
-                </div>
-            </div>
-    </div>
+
 <script>
 
 </script>

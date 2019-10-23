@@ -22,6 +22,38 @@ router.get('/:id', async function (req, res) {
         res.status(500).send({ errorMessage: error.message })
     }
 })
+router.post('/transcriptbysubject', async function (req, res) {
+    try {
+        // var student = await studentController.layChiTietStudent(req.body.id);
+        
+        var transcript= await strancriptController.getalltranscriptbysub(req.body)
+        res.send(
+            {
+                transcript,
+            }
+        )
+        
+    } catch (error) {
+        console.log(error)
+        res.status(500).send({ errorMessage: error.message })
+    }
+})
+router.post('/', async function (req, res) {
+    try {
+        // var student = await studentController.layChiTietStudent(req.body.id);
+        
+        var transcript= await strancriptController.getalltranscript(req.body.soHieu)
+        res.send(
+            {
+                transcript,
+            }
+        )
+        
+    } catch (error) {
+        console.log(error)
+        res.status(500).send({ errorMessage: error.message })
+    }
+})
 router.post('/mon', async function (req, res) {
     try {
         // var student = await studentController.layChiTietStudent(req.body.id);

@@ -29,10 +29,12 @@ const createStudent = async function (data,teacher) {
         transcript.idHocSinh=student._id,
         transcript.tenHocSinh=student.tenHocSinh,
         transcript.tenGV=teacher.user.tenNguoiDung,
+        transcript.soHieu=student.soHieu,
 
         await transcript.save()
         let diligence= new Diligence();
         diligence.idHocSinh=student._id
+      
         await diligence.save();
         return {
             student
@@ -46,10 +48,12 @@ const createStudent = async function (data,teacher) {
         transcript.GVCN=data.idTao,
         transcript.idHocSinh=student._id,
         transcript.tenHocSinh=student.tenHocSinh,
-        transcript.tenGV=teacher.user.tenNguoiDung
+        transcript.tenGV=teacher.user.tenNguoiDung,
+        transcript.soHieu=student.soHieu
         await transcript.save()
         let diligence= new Diligence();
-        diligence.idHocSinh=student._id
+        diligence.idHocSinh=student.id
+      
         await diligence.save();
         return {
             student
@@ -175,8 +179,8 @@ const createdayoff = async function (user, data,teacher) {
         applicationform.idHocSinh = student.id;
         applicationform.emailGiaoVien=teacher;
         applicationform.tenPhuHuynh = user.tenNguoiDung;
-        applicationform.ngayBatDau = data.ngayBatDau*1000;
-        applicationform.ngayKetThuc = data.ngayKetThuc*1000;
+        applicationform.ngayBatDau = data.ngayBatDau;
+        applicationform.ngayKetThuc = data.ngayKetThuc;
         applicationform.ngayGui = data.ngayGui*1000;
         applicationform.lyDo = data.lyDo
         
@@ -357,10 +361,12 @@ const importexcel = async function (data,teacher) {
             transcript.GVCN=data.idTao,
             transcript.idHocSinh=student._id,
             transcript.tenHocSinh=student.tenHocSinh,
-            transcript.tenGV=teacher.user.tenNguoiDung
+            transcript.tenGV=teacher.user.tenNguoiDung,
+            transcript.soHieu=student.soHieu
             await transcript.save();
             let diligence= new Diligence();
             diligence.idHocSinh=student._id
+      
             await diligence.save();
         }
       

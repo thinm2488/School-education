@@ -9,11 +9,21 @@
     padding: 30px;
     margin: 5%
 }
+
 @media (min-width: 1500px){
     
         #datatable{
             max-width: 941px;
         }
+        #datatable2{
+            width: 1050px;
+        }
+}
+@media (min-width: 1600px){
+  
+    #datatable2{
+        width: 1180px;
+    }
 }
 
 @media (min-width: 1200px){
@@ -37,6 +47,9 @@
         #datable{
             max-width: 1386px;
         }
+        #datable2{
+          width: 1375px;
+        }
 
 }
 @media (min-width: 2100px){
@@ -54,4 +67,11 @@
         max-width: 1389px;
     }
 
+}
+a{
+    color: black;
+
+}
+tr:hover{
+    background:  #dee2e6
 }

@@ -16,6 +16,9 @@ export class TranscriptService {
    gettrancript(data){
     return this.http.post('/api/route/transcript/mon',data)
   }
+  getalltrancript(data){
+    return this.http.post('/api/route/transcript/transcriptbysubject',data)
+  }
   createtranscript(data){
     return this.http.post('/api/route/transcript/create',data)
   }

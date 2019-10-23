@@ -102,7 +102,13 @@ export class TrancripteditComponent implements OnInit {
       
     }
     this.ts.createtranscript(data).subscribe(data=>{
-      let respon=Object.assign(data)
+      let res=Object.assign(data)
+      if(res.transcript.status==200){
+        window.alert("Cập nhật điểm thành công")
+        this.gethocsinh()
+        this.ishiden=false;
+        this.isshow=true
+      }
     })
    
     console.log(this.test)
