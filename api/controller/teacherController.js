@@ -6,7 +6,7 @@ var jwt = require('jsonwebtoken');
 // const smtpTransport=require('nodemailer-smtp-transport')
 // var generator=require('generate-password')
 const layTeacher = async function () {
-    var listTeacher = await Teacher.find();
+    var listTeacher = await Teacher.find().sort({tenNguoiDung:1});
     return {
         listTeacher
     }
@@ -73,7 +73,7 @@ const importexcel = async function (data, nguoiTao) {
 
     // }
     data.map(async function (element) {
-        let teacher = await Teacher.findOne({ soDienThoai: element.SoDienThoai });
+        let teacher = await Teacher.findOne({ soDienThoai: 0+element.SoDienThoai });
 
         if(teacher){
             return {
@@ -101,20 +101,6 @@ const importexcel = async function (data, nguoiTao) {
        
 
     })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }

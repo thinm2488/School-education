@@ -37,6 +37,7 @@ import { TranscriptComponent } from './transcript/transcript.component';
 import { TeacherComponent } from './teacher/teacher.component';
 import { EditteacherComponent } from './teacher/editteacher/editteacher.component';
 import { TrancripteditComponent } from './transcript/trancriptedit/trancriptedit.component';
+import { FulltranscriptComponent } from './transcript/fulltranscript/fulltranscript.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -76,6 +77,7 @@ import { TrancripteditComponent } from './transcript/trancriptedit/trancriptedit
     TeacherComponent,
     EditteacherComponent,
     TrancripteditComponent,
+    FulltranscriptComponent,
     
     // TaohocsinhComponent
   ],

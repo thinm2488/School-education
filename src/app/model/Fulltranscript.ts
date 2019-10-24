@@ -31,8 +31,9 @@ export default class FullTranscript {
             diem1tiet: [],
             diemGiuaKy: '',
             diemCuoiKy: '',
-            diemTB: ''
-       
+            diemTB: '',
+            TBCN:''
+
 
     }
 }

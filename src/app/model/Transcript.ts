@@ -22,5 +22,7 @@ export default class Transcript {
     GKII='';
     CKI='';
     CKII='';
+    TBHKI='';
+    TBHKII='';
     canam='';
 }

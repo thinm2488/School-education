@@ -137,28 +137,28 @@ gettranscriptbytype(){
           {
             "render": function (data, type, JsonResultRow, row) {
               count=count+1
-              return '<a style="color:black; margin-top:20px"  href="/home/bangdiem/' + JsonResultRow._id + '">' + count + '</a>'
+              return '<a style="color:black; margin-top:20px"  href="/home/bangdiemchitiet/' + JsonResultRow._id + '">' + count + '</a>'
             }
           },
           {
             "render": function (data, type, JsonResultRow, row) {
-              return '<a style="color:black; margin-top:20px" href="/home/bangdiem/' + JsonResultRow._id + '">' + JsonResultRow.tenHocSinh + '</a>'
+              return '<a style="color:black; margin-top:20px" href="/home/bangdiemchitiet/' + JsonResultRow._id + '">' + JsonResultRow.tenHocSinh + '</a>'
             }
           },  {
             "render": function (data, type, JsonResultRow, row) {
-              return '<a style="color:black; margin-top:20px" href="/home/bangdiem/' + JsonResultRow._id + '">' + JsonResultRow.soHieu + '</a>'
+              return '<a style="color:black; margin-top:20px" href="/home/bangdiemchitiet/' + JsonResultRow._id + '">' + JsonResultRow.soHieu + '</a>'
             }
           },
           {
             "render": function (data, type, JsonResultRow, row) {
               var now = new Date(Number(JsonResultRow.ngaySinh));
               var d = now.toLocaleDateString()
-              return '<a style="color:black; margin-top:20px" href="/home/bangDiem/' + JsonResultRow._id + '">' + d + '</a>'
+              return '<a style="color:black; margin-top:20px" href="/home/bangdiemchitiet/' + JsonResultRow._id + '">' + d + '</a>'
             }
           },
           {
             "render": function (data, type, JsonResultRow, row) {
-              return '<a style="color:black; margin-top:20px" href="/home/bangdiem/' + JsonResultRow._id + '">' + JsonResultRow.gioiTinh + '</a>'
+              return '<a style="color:black; margin-top:20px" href="/home/bangdiemchitiet/' + JsonResultRow._id + '">' + JsonResultRow.gioiTinh + '</a>'
             }
           },
         

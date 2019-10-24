@@ -39,6 +39,7 @@ export class LoginComponent implements OnInit {
      
        if(this.user.user.GVCN){
          var GVCN=this.user.user.GVCN
+         this.cookieService.set( 'GVCN',GVCN.toString()  );
        }
       if (this.user.user.status==500) {
         window.alert(this.user.user.message)
@@ -54,7 +55,7 @@ export class LoginComponent implements OnInit {
           this.cookieService.set( 'id',id.toString()  );
           this.cookieService.set( 'role',role.toString()  );
           this.cookieService.set( 'chuyenmon',chuyenmon.toString()  );
-          this.cookieService.set( 'GVCN',GVCN.toString()  );
+          
           window.alert("Đăng Nhập Thành Công!!");
           window.location.href = '/home/giaoVien'
           return data

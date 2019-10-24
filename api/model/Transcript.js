@@ -11,8 +11,10 @@ var TranscriptSchema = new Schema(
         tenHocSinh: { type: String },
         TBMCN: { type: String },
         xepLoai: { type: String },
+        xepHang: { type: String },
         hanhKiem: { type: String },
         nhanXet: { type: String },
+
         HKI: {
             diemAnh:
             {
@@ -21,7 +23,10 @@ var TranscriptSchema = new Schema(
                 diem1tiet: [],
                 diemGiuaKy: { type: String, default: "" },
                 diemCuoiKy: { type: String, default: "" },
+                diemTB: { type: String, default: "" },
+     
                
+
             },
 
             diemToan: {
@@ -30,7 +35,8 @@ var TranscriptSchema = new Schema(
                 diem1tiet: [],
                 diemGiuaKy: { type: String, default: "" },
                 diemCuoiKy: { type: String, default: "" },
-              
+                diemTB: { type: String, default: "" },
+                
             },
             diemVan: {
                 diemMieng: [],
@@ -38,7 +44,8 @@ var TranscriptSchema = new Schema(
                 diem1tiet: [],
                 diemGiuaKy: { type: String, default: "" },
                 diemCuoiKy: { type: String, default: "" },
-              
+                diemTB: { type: String, default: "" },
+               
             },
             diemSinh: {
                 diemMieng: [],
@@ -46,7 +53,8 @@ var TranscriptSchema = new Schema(
                 diem1tiet: [],
                 diemGiuaKy: { type: String, default: "" },
                 diemCuoiKy: { type: String, default: "" },
-              
+                diemTB: { type: String, default: "" },
+                
             },
             diemSu: {
                 diemMieng: [],
@@ -54,7 +62,8 @@ var TranscriptSchema = new Schema(
                 diem1tiet: [],
                 diemGiuaKy: { type: String, default: "" },
                 diemCuoiKy: { type: String, default: "" },
-              
+                diemTB: { type: String, default: "" },
+                
             },
             diemDia: {
                 diemMieng: [],
@@ -62,7 +71,8 @@ var TranscriptSchema = new Schema(
                 diem1tiet: [],
                 diemGiuaKy: { type: String, default: "" },
                 diemCuoiKy: { type: String, default: "" },
-              
+                diemTB: { type: String, default: "" },
+               
             },
             diemCongNghe: {
                 diemMieng: [],
@@ -70,7 +80,8 @@ var TranscriptSchema = new Schema(
                 diem1tiet: [],
                 diemGiuaKy: { type: String, default: "" },
                 diemCuoiKy: { type: String, default: "" },
-              
+                diemTB: { type: String, default: "" },
+                
             },
             diemLy: {
                 diemMieng: [],
@@ -78,6 +89,7 @@ var TranscriptSchema = new Schema(
                 diem1tiet: [],
                 diemGiuaKy: { type: String, default: "" },
                 diemCuoiKy: { type: String, default: "" },
+                diemTB: { type: String, default: "" },
               
             },
             diemHoa: {
@@ -86,6 +98,7 @@ var TranscriptSchema = new Schema(
                 diem1tiet: [],
                 diemGiuaKy: { type: String, default: "" },
                 diemCuoiKy: { type: String, default: "" },
+                diemTB: { type: String, default: "" },
               
             },
             diemGDCD: {
@@ -94,7 +107,8 @@ var TranscriptSchema = new Schema(
                 diem1tiet: [],
                 diemGiuaKy: { type: String, default: "" },
                 diemCuoiKy: { type: String, default: "" },
-              
+                diemTB: { type: String, default: "" },
+               
             },
             diemTin: {
                 diemMieng: [],
@@ -102,7 +116,8 @@ var TranscriptSchema = new Schema(
                 diem1tiet: [],
                 diemGiuaKy: { type: String, default: "" },
                 diemCuoiKy: { type: String, default: "" },
-              
+                diemTB: { type: String, default: "" },
+             
             },
             diemTheDuc: {
                 diemMieng: [],
@@ -110,7 +125,7 @@ var TranscriptSchema = new Schema(
                 diem1tiet: [],
                 diemGiuaKy: { type: String, default: "" },
                 diemCuoiKy: { type: String, default: "" },
-              
+                diemTB: { type: String, default: "" },
             },
             diemMyThuat: {
                 diemMieng: [],
@@ -118,7 +133,7 @@ var TranscriptSchema = new Schema(
                 diem1tiet: [],
                 diemGiuaKy: { type: String, default: "" },
                 diemCuoiKy: { type: String, default: "" },
-              
+                diemTB: { type: String, default: "" },
             },
 
 
@@ -132,7 +147,8 @@ var TranscriptSchema = new Schema(
                 diem1tiet: [],
                 diemGiuaKy: { type: String, default: "" },
                 diemCuoiKy: { type: String, default: "" },
-                diemTB: { type: String, default: "" }
+                diemTB: { type: String, default: "" },
+                TBCN: { type: String, default: "" }
             },
 
             diemToan: {
@@ -141,7 +157,8 @@ var TranscriptSchema = new Schema(
                 diem1tiet: [],
                 diemGiuaKy: { type: String, default: "" },
                 diemCuoiKy: { type: String, default: "" },
-                diemTB: { type: String, default: "" }
+                diemTB: { type: String, default: "" },
+                TBCN: { type: String, default: "" }
             },
             diemVan: {
                 diemMieng: [],
@@ -149,7 +166,8 @@ var TranscriptSchema = new Schema(
                 diem1tiet: [],
                 diemGiuaKy: { type: String, default: "" },
                 diemCuoiKy: { type: String, default: "" },
-                diemTB: { type: String, default: "" }
+                diemTB: { type: String, default: "" },
+                TBCN: { type: String, default: "" }
             },
             diemSinh: {
                 diemMieng: [],
@@ -157,7 +175,8 @@ var TranscriptSchema = new Schema(
                 diem1tiet: [],
                 diemGiuaKy: { type: String, default: "" },
                 diemCuoiKy: { type: String, default: "" },
-                diemTB: { type: String, default: "" }
+                diemTB: { type: String, default: "" },
+                TBCN: { type: String, default: "" }
             },
             diemSu: {
                 diemMieng: [],
@@ -165,7 +184,8 @@ var TranscriptSchema = new Schema(
                 diem1tiet: [],
                 diemGiuaKy: { type: String, default: "" },
                 diemCuoiKy: { type: String, default: "" },
-                diemTB: { type: String, default: "" }
+                diemTB: { type: String, default: "" },
+                TBCN: { type: String, default: "" }
             },
             diemDia: {
                 diemMieng: [],
@@ -173,7 +193,8 @@ var TranscriptSchema = new Schema(
                 diem1tiet: [],
                 diemGiuaKy: { type: String, default: "" },
                 diemCuoiKy: { type: String, default: "" },
-                diemTB: { type: String, default: "" }
+                diemTB: { type: String, default: "" },
+                TBCN: { type: String, default: "" }
             },
             diemCongNghe: {
                 diemMieng: [],
@@ -181,7 +202,8 @@ var TranscriptSchema = new Schema(
                 diem1tiet: [],
                 diemGiuaKy: { type: String, default: "" },
                 diemCuoiKy: { type: String, default: "" },
-                diemTB: { type: String, default: "" }
+                diemTB: { type: String, default: "" },
+                TBCN: { type: String, default: "" }
             },
             diemLy: {
                 diemMieng: [],
@@ -189,7 +211,8 @@ var TranscriptSchema = new Schema(
                 diem1tiet: [],
                 diemGiuaKy: { type: String, default: "" },
                 diemCuoiKy: { type: String, default: "" },
-                diemTB: { type: String, default: "" }
+                diemTB: { type: String, default: "" },
+                TBCN: { type: String, default: "" }
             },
             diemHoa: {
                 diemMieng: [],
@@ -197,7 +220,8 @@ var TranscriptSchema = new Schema(
                 diem1tiet: [],
                 diemGiuaKy: { type: String, default: "" },
                 diemCuoiKy: { type: String, default: "" },
-                diemTB: { type: String, default: "" }
+                diemTB: { type: String, default: "" },
+                TBCN: { type: String, default: "" }
             },
             diemGDCD: {
                 diemMieng: [],
@@ -205,7 +229,8 @@ var TranscriptSchema = new Schema(
                 diem1tiet: [],
                 diemGiuaKy: { type: String, default: "" },
                 diemCuoiKy: { type: String, default: "" },
-                diemTB: { type: String, default: "" }
+                diemTB: { type: String, default: "" },
+                TBCN: { type: String, default: "" }
             },
             diemTin: {
                 diemMieng: [],
@@ -213,7 +238,8 @@ var TranscriptSchema = new Schema(
                 diem1tiet: [],
                 diemGiuaKy: { type: String, default: "" },
                 diemCuoiKy: { type: String, default: "" },
-                diemTB: { type: String, default: "" }
+                diemTB: { type: String, default: "" },
+                TBCN: { type: String, default: "" }
             },
             diemTheDuc: {
                 diemMieng: [],
@@ -221,7 +247,8 @@ var TranscriptSchema = new Schema(
                 diem1tiet: [],
                 diemGiuaKy: { type: String, default: "" },
                 diemCuoiKy: { type: String, default: "" },
-                diemTB: { type: String, default: "" }
+                diemTB: { type: String, default: "" },
+                TBCN: { type: String, default: "" }
             },
             diemMyThuat: {
                 diemMieng: [],
@@ -229,7 +256,8 @@ var TranscriptSchema = new Schema(
                 diem1tiet: [],
                 diemGiuaKy: { type: String, default: "" },
                 diemCuoiKy: { type: String, default: "" },
-                diemTB: { type: String, default: "" }
+                diemTB: { type: String, default: "" },
+                TBCN: { type: String, default: "" }
             },
 
 

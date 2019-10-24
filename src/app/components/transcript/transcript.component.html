@@ -61,6 +61,8 @@
                                 <th>Điểm 1 tiết</th>
                                 <th>Điểm Giữa Kỳ</th>
                                 <th>Điểm Cuối Kỳ</th>
+                                <th *ngIf="checkHK1">Điểm TBHKI</th>
+                                <th  *ngIf="checkHK2">Điểm TBHKII</th>
                                 <th *ngIf="checkHK2">Cả năm</th>
                                 
                                
@@ -77,13 +79,15 @@
                                     <td *ngIf="checkHK1"><label  *ngFor="let diem of student.HKI.diem1tiet;let i=index "><a href="/home/bangdiem/{{student.idHocSinh}}">{{diem}}&emsp;</a></label></td>
                                     <td *ngIf="checkHK1"><a href="/home/bangdiem/{{student.idHocSinh}}">{{student.HKI.diemGiuaKy}}</a></td>
                                     <td *ngIf="checkHK1"><a href="/home/bangdiem/{{student.idHocSinh}}">{{student.HKI.diemCuoiKy}}</a></td>
+                                    <td *ngIf="checkHK1"><a href="/home/bangdiem/{{student.idHocSinh}}">{{student.HKI.diemTB}}</a></td>
                                     <td  *ngIf="checkHK2"><label  *ngFor="let diem of student.HKII.diemMieng;let i=index "><a href="/home/bangdiem/{{student.idHocSinh}}">{{diem}}&emsp;</a></label></td>
                                     <td *ngIf="checkHK2"><label  *ngFor="let diem of student.HKII.diem15p;let i=index "><a href="/home/bangdiem/{{student.idHocSinh}}">{{diem}}&emsp;</a></label></td>
                                     <td *ngIf="checkHK2"><label  *ngFor="let diem of student.HKII.diem1tiet;let i=index "><a href="/home/bangdiem/{{student.idHocSinh}}">{{diem}}&emsp;</a></label></td>
                                    
                                     <td *ngIf="checkHK2"><a href="/home/bangdiem/{{student.idHocSinh}}">{{student.HKII.diemGiuaKy}}</a></td>
                                     <td *ngIf="checkHK2"><a href="/home/bangdiem/{{student.idHocSinh}}">{{student.HKII.diemCuoiKy}}</a></td>
-                                    <td *ngIf="checkHK2"><a href="/home/bangdiem/{{student.idHocSinh}}">{{student.HKII.caNam}}</a></td>
+                                    <td *ngIf="checkHK2"><a href="/home/bangdiem/{{student.idHocSinh}}">{{student.HKII.diemTB}}</a></td>
+                                    <td *ngIf="checkHK2"><a href="/home/bangdiem/{{student.idHocSinh}}">{{student.HKII.TBCN}}</a></td>
                                   
                             </tr>
                          

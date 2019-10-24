@@ -81,8 +81,11 @@ export class TrancripteditComponent implements OnInit {
       this.bangDiem.CKI= res.transcript.transcript.HKI.diemCuoiKy
       this.bangDiem.GKII= res.transcript.transcript.HKII.diemGiuaKy
       this.bangDiem.CKII= res.transcript.transcript.HKII.diemCuoiKy
+  
+     this.bangDiem.TBHKI=res.transcript.transcript.HKI.diemTB
+     this.bangDiem.TBHKII=res.transcript.transcript.HKII.diemTB
 
-      this.bangDiem.canam= res.transcript.transcript.HKII.diemTB
+      this.bangDiem.canam= res.transcript.transcript.HKII.TBCN
      
     })
   } 

@@ -5,7 +5,7 @@ const Transcript = mongoose.model('Transcript');
 var jwt = require('jsonwebtoken');
 const gettranscript = async function (id) {
 
-    let transcript = await Transcript.findOne({ idHocSinh: id });
+    let transcript = await Transcript.findOne({ idHocSinh: id }).sort({ tenHocSinh: 1 });
     return {
         transcript,
         status: 200
@@ -16,7 +16,7 @@ const gettranscript = async function (id) {
 }
 const getalltranscript = async function (sohieu) {
 
-    let transcript = await Transcript.find({ soHieu: sohieu });
+    let transcript = await Transcript.find({ soHieu: sohieu }).sort({ tenHocSinh: 1 });
     return {
         transcript,
         status: 200
@@ -30,7 +30,7 @@ const getalltranscriptbysub = async function (data) {
 
     ]
 
-    let list = await Transcript.find({ soHieu: data.soHieu });
+    let list = await Transcript.find({ soHieu: data.soHieu }).sort({ tenHocSinh: 1 });
     if (data.mon == "Anh") {
 
         list.forEach(element => {
@@ -153,7 +153,7 @@ const getalltranscriptbysub = async function (data) {
             transcript.push(obj)
         });
     }
-    if (data.mon == "GDCN") {
+    if (data.mon == "GDCD") {
         list.forEach(element => {
             let obj = {
                 GVCN: element.GVCN,
@@ -458,26 +458,73 @@ const gettranscriptsub = async function (data) {
 }
 
 
+caculateTBM = function (diemM, diem15p, diem1tiet, diemGK, diemCK) {
+    let sumM = 0
+    let sum15p = 0
+    let sum1tiet = 0
+    diemM.forEach(element => {
+        sumM = sumM + Number(element)
+    });
+    diem15p.forEach(element => {
+        sum15p = sum15p + Number(element)
+    });
+    diem1tiet.forEach(element => {
+        sum1tiet = sum1tiet + Number(element)
+    });
+    if (diemCK == '' || diemGK == '') {
+        TBM = ''
+        return TBM
+    }
+    else {
+        var TBM = (((sumM / diemM.length) + (sum15p / diem15p.length) + (sum1tiet / diem1tiet.length * 2) + (diemGK * 2) + (diemCK * 3)) / 9)
+        if (!TBM) {
+            TBM = ''
+            return TBM
+        } else {
+            return TBM.toFixed(1)
+        }
+    }
 
+
+    // return TBM
+
+    // if(sumM==0){
+    //     var TBM =(( (sum15p / diem15p.length) + (sum1tiet / diem1tiet.length * 2) + (diemGK * 2) + (diemCK * 3)) / 9)
+    //     return TBM
+    // }
+    // else if(sum15p==0){
+    //     var TBM =(( (sumM / diemM.length)  + (sum1tiet / diem1tiet.length * 2) + (diemGK * 2) + (diemCK * 3)) / 9)
+    //     return TBM
+    // }
+    // else if(sum1tiet==0){
+    //     var TBM =(((sumM / diemM.length) + (sum15p / diem15p.length) + (diemGK * 2) + (diemCK * 3)) / 9)
+    //     return TBM
+    // }
+    // else{
+    //     var TBM =(((sumM / diemM.length) + (sum15p / diem15p.length) + + (sum1tiet / diem1tiet.length * 2) + (diemGK * 2) + (diemCK * 3)) / 9)
+    //     return TBM
+    // }
+
+
+
+
+
+}
 
 const inserttranscript = async function (data) {
     let transcript = await Transcript.findOne({ idHocSinh: data.idHocSinh })
     if (transcript) {
-        let sum = 0
 
 
         let list = []
         if (data.bangDiem.diemmieng1 && data.bangDiem.diemmieng1 != '') {
             list.push(data.bangDiem.diemmieng1)
-            sum + data.bangDiem.diemmieng1
         }
         if (data.bangDiem.diemmieng2 && data.bangDiem.diemmieng2 != '') {
             list.push(data.bangDiem.diemmieng2)
-            sum + data.bangDiem.diemmieng2
         }
         if (data.bangDiem.diemmieng3 && data.bangDiem.diemmieng3 != '') {
             list.push(data.bangDiem.diemmieng3)
-            sum + data.bangDiem.diemmieng3
         }
         let list1 = []
         if (data.bangDiem.diem15p1 && data.bangDiem.diem15p1 != '') {
@@ -515,18 +562,18 @@ const inserttranscript = async function (data) {
         if (data.bangDiem.diem15p4 && data.bangDiem.diem15p4 != '') {
             list4.push(data.bangDiem.diem15p4)
         }
-        if (data.bangDiem.diem15p4 && data.bangDiem.diem15p4 != '') {
-            list4.push(data.bangDiem.diem15p4)
+        if (data.bangDiem.diem15p5 && data.bangDiem.diem15p5 != '') {
+            list4.push(data.bangDiem.diem15p5)
         }
-        if (data.bangDiem.diem15p4 && data.bangDiem.dien15p4 != '') {
-            list4.push(data.bangDiem.diem15p4)
+        if (data.bangDiem.diem15p6 && data.bangDiem.dien15p6 != '') {
+            list4.push(data.bangDiem.diem15p6)
         }
         let list5 = []
         if (data.bangDiem.diem1tiet4 && data.bangDiem.diem1tiet4 != '') {
             list5.push(data.bangDiem.diem1tiet4)
         }
         if (data.bangDiem.diem1tiet5 && data.bangDiem.diem1tiet5 != '') {
-            list5.push(data.bangDiem.diem1tiet2)
+            list5.push(data.bangDiem.diem1tiet5)
         }
         if (data.bangDiem.diem1tiet6 && data.bangDiem.diem1tiet6 != '') {
             list5.push(data.bangDiem.diem1tiet6)
@@ -548,6 +595,23 @@ const inserttranscript = async function (data) {
             transcript.idHocSinh = data.idHocSinh
             // transcript.diemAnh.HKI.diemTB = 
             transcript.soHieu = data.soHieu
+            let TBMHKI = 0
+            let TBMHKII = 0
+
+            TBMHKI = caculateTBM(transcript.HKI.diemAnh.diemMieng, transcript.HKI.diemAnh.diem15p, transcript.HKI.diemAnh.diem1tiet, transcript.HKI.diemAnh.diemGiuaKy, transcript.HKI.diemAnh.diemCuoiKy)
+            TBMHKII = caculateTBM(transcript.HKII.diemAnh.diemMieng, transcript.HKII.diemAnh.diem15p, transcript.HKII.diemAnh.diem1tiet, transcript.HKII.diemAnh.diemGiuaKy, transcript.HKII.diemAnh.diemCuoiKy)
+
+
+            transcript.HKI.diemAnh.diemTB = TBMHKI
+            transcript.HKII.diemAnh.diemTB = TBMHKII
+            if (TBMHKI == "" || TBMHKII == "") {
+                transcript.HKII.diemAnh.TBCN = ''
+            } else {
+
+                transcript.HKII.diemAnh.TBCN = ((Number(TBMHKI) + (Number(TBMHKII * 2))) / 3).toFixed(1)
+            }
+
+
             await transcript.save()
         } if (data.mon == "Toán") {
             transcript.HKI.diemToan.diemMieng = list
@@ -564,6 +628,22 @@ const inserttranscript = async function (data) {
             transcript.idHocSinh = data.idHocSinh
             // transcript.diemAnh.HKI.diemTB = 
             transcript.soHieu = data.soHieu
+            let TBMHKI = 0
+            let TBMHKII = 0
+
+            TBMHKI = caculateTBM(transcript.HKI.diemToan.diemMieng, transcript.HKI.diemToan.diem15p, transcript.HKI.diemToan.diem1tiet, transcript.HKI.diemToan.diemGiuaKy, transcript.HKI.diemToan.diemCuoiKy)
+            TBMHKII = caculateTBM(transcript.HKII.diemToan.diemMieng, transcript.HKII.diemToan.diem15p, transcript.HKII.diemToan.diem1tiet, transcript.HKII.diemToan.diemGiuaKy, transcript.HKII.diemToan.diemCuoiKy)
+
+
+            transcript.HKI.diemToan.diemTB = TBMHKI
+            transcript.HKII.diemToan.diemTB = TBMHKII
+            if (TBMHKI == "" || TBMHKII == "") {
+                transcript.HKII.diemToan.TBCN = ''
+            } else {
+                transcript.HKII.diemToan.TBCN = ((Number(TBMHKI) + (Number(TBMHKII) * 2)) / 3).toFixed(1)
+            }
+
+
             await transcript.save()
         } if (data.mon == "Văn") {
             transcript.HKI.diemVan.diemMieng = list
@@ -575,10 +655,28 @@ const inserttranscript = async function (data) {
             transcript.HKII.diemVan.diem15p = list4
             transcript.HKII.diemVan.diem1tiet = list5
             transcript.HKI.diemVan.diemCuoiKy = data.bangDiem.CKI
+            transcript.HKII.diemVan.diemCuoiKy = data.bangDiem.CKII
             transcript.HKII.diemVan.diemTB = data.bangDiem.canam
             transcript.idHocSinh = data.idHocSinh
             // transcript.diemAnh.HKI.diemTB = 
             transcript.soHieu = data.soHieu
+
+            let TBMHKI = 0
+            let TBMHKII = 0
+
+            TBMHKI = caculateTBM(transcript.HKI.diemVan.diemMieng, transcript.HKI.diemVan.diem15p, transcript.HKI.diemVan.diem1tiet, transcript.HKI.diemVan.diemGiuaKy, transcript.HKI.diemVan.diemCuoiKy)
+            TBMHKII = caculateTBM(transcript.HKII.diemVan.diemMieng, transcript.HKII.diemVan.diem15p, transcript.HKII.diemVan.diem1tiet, transcript.HKII.diemVan.diemGiuaKy, transcript.HKII.diemVan.diemCuoiKy)
+
+
+            transcript.HKI.diemVan.diemTB = TBMHKI
+            transcript.HKII.diemVan.diemTB = TBMHKII
+            if (TBMHKI == "" || TBMHKII == "") {
+                transcript.HKII.diemVan.TBCN = ''
+            }
+            else {
+                transcript.HKII.diemVan.TBCN = ((Number(TBMHKI) + (Number(TBMHKII) * 2)) / 3).toFixed(1)
+            }
+
             await transcript.save()
         }
         if (data.mon == "Sinh") {
@@ -596,6 +694,21 @@ const inserttranscript = async function (data) {
             transcript.idHocSinh = data.idHocSinh
             // transcript.diemAnh.HKI.diemTB = 
             transcript.soHieu = data.soHieu
+            let TBMHKI = 0
+            let TBMHKII = 0
+
+            TBMHKI = caculateTBM(transcript.HKI.diemSinh.diemMieng, transcript.HKI.diemSinh.diem15p, transcript.HKI.diemSinh.diem1tiet, transcript.HKI.diemSinh.diemGiuaKy, transcript.HKI.diemSinh.diemCuoiKy)
+            TBMHKII = caculateTBM(transcript.HKII.diemSinh.diemMieng, transcript.HKII.diemSinh.diem15p, transcript.HKII.diemSinh.diem1tiet, transcript.HKII.diemSinh.diemGiuaKy, transcript.HKII.diemSinh.diemCuoiKy)
+
+
+            transcript.HKI.diemSinh.diemTB = TBMHKI
+            transcript.HKII.diemSinh.diemTB = TBMHKII
+            if (TBMHKI == "" || TBMHKII == "") {
+                transcript.HKII.diemSinh.TBCN = ''
+            } else {
+                transcript.HKII.diemSinh.TBCN = ((Number(TBMHKI) + (Number(TBMHKII) * 2)) / 3).toFixed(1)
+            }
+
             await transcript.save()
         }
         if (data.mon == "Sử") {
@@ -613,6 +726,21 @@ const inserttranscript = async function (data) {
             transcript.idHocSinh = data.idHocSinh
             // transcript.diemAnh.HKI.diemTB = 
             transcript.soHieu = data.soHieu
+            let TBMHKI = 0
+            let TBMHKII = 0
+
+            TBMHKI = caculateTBM(transcript.HKI.diemSu.diemMieng, transcript.HKI.diemSu.diem15p, transcript.HKI.diemSu.diem1tiet, transcript.HKI.diemSu.diemGiuaKy, transcript.HKI.diemSu.diemCuoiKy)
+            TBMHKII = caculateTBM(transcript.HKII.diemSu.diemMieng, transcript.HKII.diemSu.diem15p, transcript.HKII.diemSu.diem1tiet, transcript.HKII.diemSu.diemGiuaKy, transcript.HKII.diemSu.diemCuoiKy)
+
+
+            transcript.HKI.diemSu.diemTB = TBMHKI
+            transcript.HKII.diemSu.diemTB = TBMHKII
+            if (TBMHKI == "" || TBMHKII == "") {
+                transcript.HKII.diemSu.TBCN = ''
+            } else {
+                transcript.HKII.diemSu.TBCN = ((Number(TBMHKI) + (Number(TBMHKII) * 2)) / 3).toFixed(1)
+            }
+
             await transcript.save()
         }
         if (data.mon == "Địa") {
@@ -630,6 +758,21 @@ const inserttranscript = async function (data) {
             transcript.idHocSinh = data.idHocSinh
             // transcript.diemAnh.HKI.diemTB = 
             transcript.soHieu = data.soHieu
+            let TBMHKI = 0
+            let TBMHKII = 0
+
+            TBMHKI = caculateTBM(transcript.HKI.diemDia.diemMieng, transcript.HKI.diemDia.diem15p, transcript.HKI.diemDia.diem1tiet, transcript.HKI.diemDia.diemGiuaKy, transcript.HKI.diemDia.diemCuoiKy)
+            TBMHKII = caculateTBM(transcript.HKII.diemDia.diemMieng, transcript.HKII.diemDia.diem15p, transcript.HKII.diemDia.diem1tiet, transcript.HKII.diemDia.diemGiuaKy, transcript.HKII.diemDia.diemCuoiKy)
+
+
+            transcript.HKI.diemDia.diemTB = TBMHKI
+            transcript.HKII.diemDia.diemTB = TBMHKII
+            if (TBMHKI == "" || TBMHKII == "") {
+                transcript.HKII.diemDia.TBCN = ''
+            } else {
+                transcript.HKII.diemDia.TBCN = ((Number(TBMHKI) + (Number(TBMHKII) * 2)) / 3).toFixed(1)
+            }
+
             await transcript.save()
         }
         if (data.mon == "Lý") {
@@ -647,6 +790,21 @@ const inserttranscript = async function (data) {
             transcript.idHocSinh = data.idHocSinh
             // transcript.diemAnh.HKI.diemTB = 
             transcript.soHieu = data.soHieu
+            let TBMHKI = 0
+            let TBMHKII = 0
+
+            TBMHKI = caculateTBM(transcript.HKI.diemLy.diemMieng, transcript.HKI.diemLy.diem15p, transcript.HKI.diemLy.diem1tiet, transcript.HKI.diemLy.diemGiuaKy, transcript.HKI.diemLy.diemCuoiKy)
+            TBMHKII = caculateTBM(transcript.HKII.diemLy.diemMieng, transcript.HKII.diemLy.diem15p, transcript.HKII.diemLy.diem1tiet, transcript.HKII.diemLy.diemGiuaKy, transcript.HKII.diemLy.diemCuoiKy)
+
+
+            transcript.HKI.diemLy.diemTB = TBMHKI
+            transcript.HKII.diemLy.diemTB = TBMHKII
+            if (TBMHKI == "" || TBMHKII == "") {
+                transcript.HKII.diemLy.TBCN = ''
+            } else {
+                transcript.HKII.diemLy.TBCN = ((Number(TBMHKI) + (Number(TBMHKII) * 2)) / 3).toFixed(1)
+            }
+
             await transcript.save()
         }
         if (data.mon == "Hóa") {
@@ -664,6 +822,21 @@ const inserttranscript = async function (data) {
             transcript.idHocSinh = data.idHocSinh
             // transcript.diemAnh.HKI.diemTB = 
             transcript.soHieu = data.soHieu
+            let TBMHKI = 0
+            let TBMHKII = 0
+
+            TBMHKI = caculateTBM(transcript.HKI.diemHoa.diemMieng, transcript.HKI.diemHoa.diem15p, transcript.HKI.diemHoa.diem1tiet, transcript.HKI.diemHoa.diemGiuaKy, transcript.HKI.diemHoa.diemCuoiKy)
+            TBMHKII = caculateTBM(transcript.HKII.diemHoa.diemMieng, transcript.HKII.diemHoa.diem15p, transcript.HKII.diemHoa.diem1tiet, transcript.HKII.diemHoa.diemGiuaKy, transcript.HKII.diemHoa.diemCuoiKy)
+
+
+            transcript.HKI.diemHoa.diemTB = TBMHKI
+            transcript.HKII.diemHoa.diemTB = TBMHKII
+            if (TBMHKI == "" || TBMHKII == "") {
+                transcript.HKII.diemHoa.TBCN = ''
+            } else {
+                transcript.HKII.diemHoa.TBCN = ((Number(TBMHKI) + (Number(TBMHKII) * 2)) / 3).toFixed(1)
+            }
+
             await transcript.save()
         }
         if (data.mon == "Công Nghệ") {
@@ -681,6 +854,21 @@ const inserttranscript = async function (data) {
             transcript.idHocSinh = data.idHocSinh
             // transcript.diemAnh.HKI.diemTB = 
             transcript.soHieu = data.soHieu
+            let TBMHKI = 0
+            let TBMHKII = 0
+
+            TBMHKI = caculateTBM(transcript.HKI.diemCongNghe.diemMieng, transcript.HKI.diemCongNghe.diem15p, transcript.HKI.diemCongNghe.diem1tiet, transcript.HKI.diemCongNghe.diemGiuaKy, transcript.HKI.diemCongNghe.diemCuoiKy)
+            TBMHKII = caculateTBM(transcript.HKII.diemCongNghe.diemMieng, transcript.HKII.diemCongNghe.diem15p, transcript.HKII.diemCongNghe.diem1tiet, transcript.HKII.diemCongNghe.diemGiuaKy, transcript.HKII.diemCongNghe.diemCuoiKy)
+
+
+            transcript.HKI.diemCongNghe.diemTB = TBMHKI
+            transcript.HKII.diemCongNghe.diemTB = TBMHKII
+            if (TBMHKI == "" || TBMHKII == "") {
+                transcript.HKII.diemCongNghe.TBCN = ''
+            } else {
+                transcript.HKII.diemCongNghe.TBCN = ((Number(TBMHKI) + (Number(TBMHKII) * 2)) / 3).toFixed(1)
+            }
+
             await transcript.save()
         }
         if (data.mon == "Tin") {
@@ -698,6 +886,21 @@ const inserttranscript = async function (data) {
             transcript.idHocSinh = data.idHocSinh
             // transcript.diemAnh.HKI.diemTB = 
             transcript.soHieu = data.soHieu
+            let TBMHKI = 0
+            let TBMHKII = 0
+
+            TBMHKI = caculateTBM(transcript.HKI.diemTin.diemMieng, transcript.HKI.diemTin.diem15p, transcript.HKI.diemTin.diem1tiet, transcript.HKI.diemTin.diemGiuaKy, transcript.HKI.diemTin.diemCuoiKy)
+            TBMHKII = caculateTBM(transcript.HKII.diemTin.diemMieng, transcript.HKII.diemTin.diem15p, transcript.HKII.diemTin.diem1tiet, transcript.HKII.diemTin.diemGiuaKy, transcript.HKII.diemTin.diemCuoiKy)
+
+
+            transcript.HKI.diemTin.diemTB = TBMHKI
+            transcript.HKII.diemTin.diemTB = TBMHKII
+            if (TBMHKI == "" || TBMHKII == "") {
+                transcript.HKII.diemTin.TBCN = ''
+            } else {
+                transcript.HKII.diemTin.TBCN = ((Number(TBMHKI) + (Number(TBMHKII) * 2)) / 3).toFixed(1)
+            }
+
             await transcript.save()
         }
         if (data.mon == "Mỹ Thuật") {
@@ -715,6 +918,21 @@ const inserttranscript = async function (data) {
             transcript.idHocSinh = data.idHocSinh
             // transcript.diemAnh.HKI.diemTB = 
             transcript.soHieu = data.soHieu
+            let TBMHKI = 0
+            let TBMHKII = 0
+
+            TBMHKI = caculateTBM(transcript.HKI.diemMyThuat.diemMieng, transcript.HKI.diemMyThuat.diem15p, transcript.HKI.diemMyThuat.diem1tiet, transcript.HKI.diemMyThuat.diemGiuaKy, transcript.HKI.diemMyThuat.diemCuoiKy)
+            TBMHKII = caculateTBM(transcript.HKII.diemMyThuat.diemMieng, transcript.HKII.diemMyThuat.diem15p, transcript.HKII.diemMyThuat.diem1tiet, transcript.HKII.diemMyThuat.diemGiuaKy, transcript.HKII.diemMyThuat.diemCuoiKy)
+
+
+            transcript.HKI.diemMyThuat.diemTB = TBMHKI
+            transcript.HKII.diemMyThuat.diemTB = TBMHKII
+            if (TBMHKI == "" || TBMHKII == "") {
+                transcript.HKII.diemMyThuat.TBCN = ''
+            } else {
+                transcript.HKII.diemMyThuat.TBCN = ((Number(TBMHKI) + (Number(TBMHKII) * 2)) / 3).toFixed(1)
+            }
+
             await transcript.save()
         }
         if (data.mon == "GDCD") {
@@ -732,6 +950,21 @@ const inserttranscript = async function (data) {
             transcript.idHocSinh = data.idHocSinh
             // transcript.diemAnh.HKI.diemTB = 
             transcript.soHieu = data.soHieu
+            let TBMHKI = 0
+            let TBMHKII = 0
+
+            TBMHKI = caculateTBM(transcript.HKI.diemGDCD.diemMieng, transcript.HKI.diemGDCD.diem15p, transcript.HKI.diemGDCD.diem1tiet, transcript.HKI.diemGDCD.diemGiuaKy, transcript.HKI.diemGDCD.diemCuoiKy)
+            TBMHKII = caculateTBM(transcript.HKII.diemGDCD.diemMieng, transcript.HKII.diemGDCD.diem15p, transcript.HKII.diemGDCD.diem1tiet, transcript.HKII.diemGDCD.diemGiuaKy, transcript.HKII.diemGDCD.diemCuoiKy)
+
+
+            transcript.HKI.diemGDCD.diemTB = TBMHKI
+            transcript.HKII.diemGDCD.diemTB = TBMHKII
+            if (TBMHKI == "" || TBMHKII == "") {
+                transcript.HKII.diemGDCD.TBCN = ''
+            } else {
+                transcript.HKII.diemGDCD.TBCN = ((Number(TBMHKI) + (Number(TBMHKII) * 2)) / 3).toFixed(1)
+            }
+
             await transcript.save()
         }
 
@@ -750,14 +983,141 @@ const inserttranscript = async function (data) {
             transcript.idHocSinh = data.idHocSinh
             // transcript.diemAnh.HKI.diemTB = 
             transcript.soHieu = data.soHieu
+            let TBMHKI = 0
+            let TBMHKII = 0
+
+            TBMHKI = caculateTBM(transcript.HKI.diemTheDuc.diemMieng, transcript.HKI.diemTheDuc.diem15p, transcript.HKI.diemTheDuc.diem1tiet, transcript.HKI.diemTheDuc.diemGiuaKy, transcript.HKI.diemTheDuc.diemCuoiKy)
+            TBMHKII = caculateTBM(transcript.HKII.diemTheDuc.diemMieng, transcript.HKII.diemTheDuc.diem15p, transcript.HKII.diemTheDuc.diem1tiet, transcript.HKII.diemTheDuc.diemGiuaKy, transcript.HKII.diemTheDuc.diemCuoiKy)
+
+
+            transcript.HKI.diemTheDuc.diemTB = TBMHKI
+            transcript.HKII.diemTheDuc.diemTB = TBMHKII
+            if (TBMHKI == "" || TBMHKII == "") {
+                transcript.HKII.diemTheDuc.TBCN = ''
+            } else {
+                transcript.HKII.diemTheDuc.TBCN = ((Number(TBMHKI) + (Number(TBMHKII) * 2)) / 3).toFixed(1)
+            }
+
             await transcript.save()
         }
+        if (transcript.HKII.diemAnh.TBCN &&
+            transcript.HKII.diemToan.TBCN &&
+            transcript.HKII.diemVan.TBCN &&
+            transcript.HKII.diemLy.TBCN&&
+            transcript.HKII.diemHoa.TBCN&&
+            transcript.HKII.diemSinh.TBCN&&
+            transcript.HKII.diemSu.TBCN &&
+            transcript.HKII.diemDia.TBCN &&
+            transcript.HKII.diemCongNghe.TBCN&&
+            transcript.HKII.diemTheDuc.TBCN&&
+            transcript.HKII.diemMyThuat.TBCN&&
+            transcript.HKII.diemTin.TBCN&&
+            transcript.HKII.diemGDCD.TBCN 
+        ) {
+            transcript.TBMCN = ((Number(transcript.HKII.diemAnh.TBCN) + Number(transcript.HKII.diemDia.TBCN) + Number(transcript.HKII.diemSu.TBCN)
+                + Number(transcript.HKII.diemSinh.TBCN) + Number(transcript.HKII.diemHoa.TBCN) + Number(transcript.HKII.diemLy.TBCN)
+                + Number(transcript.HKII.diemVan.TBCN) + Number(transcript.HKII.diemToan.TBCN) + Number(transcript.HKII.diemGDCD.TBCN)
+                + Number(transcript.HKII.diemTin.TBCN) + Number(transcript.HKII.diemMyThuat.TBCN) + Number(transcript.HKII.diemTheDuc.TBCN)
+                + Number(transcript.HKII.diemCongNghe.TBCN)) / 13).toFixed(1)
+            //Xếp loại
+            if (transcript.TBMCN >= 8) {
+                if (transcript.HKII.diemAnh.TBCN >= 6.5 &&
+                    transcript.HKII.diemLy.TBCN >= 6.5 &&
+                    transcript.HKII.diemHoa.TBCN >= 6.5 &&
+                    transcript.HKII.diemSinh.TBCN >= 6.5 &&
+                    transcript.HKII.diemSu.TBCN >= 6.5 &&
+                    transcript.HKII.diemDia.TBCN >= 6.5 &&
+                    transcript.HKII.diemCongNghe.TBCN >= 6.5 &&
+                    transcript.HKII.diemTheDuc.TBCN >= 6.5 &&
+                    transcript.HKII.diemMyThuat.TBCN >= 6.5 &&
+                    transcript.HKII.diemTin.TBCN >= 6.5 &&
+                    transcript.HKII.diemGDCD.TBCN >= 6.5) {
+                    if (transcript.HKII.diemToan.TBCN >= 8 ||
+                        transcript.HKII.diemVan.TBCN >= 8) {
+                        transcript.xepLoai = "Giỏi"
+                    }
+                }
+            }
+            else if (transcript.TBMCN >= 6.5 && transcript.TBMCN < 8) {
+                if (transcript.HKII.diemAnh.TBCN >= 5 &&
+                    transcript.HKII.diemLy.TBCN >= 5 &&
+                    transcript.HKII.diemHoa.TBCN >= 5 &&
+                    transcript.HKII.diemSinh.TBCN > 5 &&
+                    transcript.HKII.diemSu.TBCN >= 5 &&
+                    transcript.HKII.diemDia.TBCN >= 5 &&
+                    transcript.HKII.diemCongNghe.TBCN >= 5 &&
+                    transcript.HKII.diemTheDuc.TBCN >= 5 &&
+                    transcript.HKII.diemMyThuat.TBCN >= 5 &&
+                    transcript.HKII.diemTin.TBCN >= 5 &&
+                    transcript.HKII.diemGDCD.TBCN >= 5) {
+                    if (transcript.HKII.diemToan.TBCN >= 6.5 ||
+                        transcript.HKII.diemVan.TBCN >= 6.5) {
+                        transcript.xepLoai = "Khá"
+                    }
+                    else{
+                        transcript.xepLoai = "Trung Bình"
+                    }
+                }
+            }
+            else if (transcript.TBMCN >= 5 && transcript.TBMCN < 6.5) {
+                if (transcript.HKII.diemAnh.TBCN >= 3.5 &&
+                    transcript.HKII.diemLy.TBCN >= 3.5 &&
+                    transcript.HKII.diemHoa.TBCN >= 3.5 &&
+                    transcript.HKII.diemSinh.TBCN > 5 &&
+                    transcript.HKII.diemSu.TBCN >= 3.5 &&
+                    transcript.HKII.diemDia.TBCN >= 3.5 &&
+                    transcript.HKII.diemCongNghe.TBCN >= 3.5 &&
+                    transcript.HKII.diemTheDuc.TBCN >= 3.5 &&
+                    transcript.HKII.diemMyThuat.TBCN >= 3.5 &&
+                    transcript.HKII.diemTin.TBCN >= 3.5 &&
+                    transcript.HKII.diemGDCD.TBCN >= 3.5) {
+                    if (transcript.HKII.diemToan.TBCN >= 5 ||
+                        transcript.HKII.diemVan.TBCN >= 5) {
+                        transcript.xepLoai = "Trung Bình"
+                    } else{
+                        transcript.xepLoai = "Yếu"
+
+                    }
+                }
+            }
+            else if (transcript.TBMCN >= 2 && transcript.TBMCN < 5) {
+                if (transcript.HKII.diemAnh.TBCN >= 2 &&
+                    transcript.HKII.diemLy.TBCN >= 2 &&
+                    transcript.HKII.diemHoa.TBCN >= 2 &&
+                    transcript.HKII.diemSinh.TBCN > 5 &&
+                    transcript.HKII.diemSu.TBCN >= 2 &&
+                    transcript.HKII.diemDia.TBCN >= 2 &&
+                    transcript.HKII.diemCongNghe.TBCN >= 2 &&
+                    transcript.HKII.diemTheDuc.TBCN >= 2 &&
+                    transcript.HKII.diemMyThuat.TBCN >= 2 &&
+                    transcript.HKII.diemTin.TBCN >= 2 &&
+                    transcript.HKII.diemGDCD.TBCN >= 2) {
+                    transcript.xepLoai = "Yếu"
+                }
+            }
+            else {
+                transcript.xepLoai = "Kém"
+            }
+
+            //Xếp hạng
+            let listtranscript = Transcript.find().sort({TBCN:1})
+            for (let i=0;i<=listtranscript.length;i++){
+                listtranscript[i].xepHang=[i+1]
+                await listtranscript[i].save()
+            }
+            await transcript.save()
+            
+        }
+
+    
+
 
 
         return {
             transcript,
             status: 200
         }
+    
     }
     else {
         return {
@@ -779,175 +1139,175 @@ const importexcel = async function (data) {
             if (data.mon == "Anh") {
                 if (data.diem[a].diem15pHKI) {
                     let tam = ''
-                    let diem=data.diem[a].diem15pHKI+","
+                    let diem = data.diem[a].diem15pHKI + ","
                     for (let i = 0; i <= diem.length; i++) {
                         if (diem[i] != ",") {
                             tam = tam + diem[i]
                         }
                         if (diem[i] == ",") {
                             transcript.HKI.diemAnh.diem15p.push(tam)
-                            tam='';
+                            tam = '';
                         }
                     }
                 }
                 if (data.diem[a].diem15pHKII) {
                     let tam = ''
-                    let diem=data.diem[a].diem15pHKII+","
-                    for (let i = 0; i <=diem.length; i++) {
+                    let diem = data.diem[a].diem15pHKII + ","
+                    for (let i = 0; i <= diem.length; i++) {
                         if (diem[i] != ",") {
-                            tam = tam +diem[i]
+                            tam = tam + diem[i]
                         }
                         if (diem[i] == ",") {
                             transcript.HKII.diemAnh.diem15p.push(tam);
-                            tam='';
+                            tam = '';
                         }
                     }
                 }
                 if (data.diem[a].diemMiengHKI) {
                     let tam = ''
-                    let diem=data.diem[a].diemMiengHKI+","
+                    let diem = data.diem[a].diemMiengHKI + ","
                     for (let i = 0; i <= diem.length; i++) {
                         if (diem[i] != ",") {
                             tam = tam + diem[i]
                         }
                         if (diem[i] == ",") {
                             transcript.HKI.diemAnh.diemMieng.push(tam);
-                            tam='';
+                            tam = '';
                         }
                     }
                 }
                 if (data.diem[a].diemMiengHKII) {
                     let tam = ''
-                    let diem=data.diem[a].diemMiengHKII+","
+                    let diem = data.diem[a].diemMiengHKII + ","
                     for (let i = 0; i <= diem.length; i++) {
                         if (diem[i] != ",") {
                             tam = tam + diem[i]
                         }
                         if (diem[i] == ",") {
                             transcript.HKII.diemAnh.diemMieng.push(tam);
-                            tam='';
+                            tam = '';
                         }
                     }
                 }
                 if (data.diem[a].diem1tietHKI) {
                     let tam = ''
-                    let diem=data.diem[a].diem1tietHKI+","
+                    let diem = data.diem[a].diem1tietHKI + ","
                     for (let i = 0; i <= diem.length; i++) {
                         if (diem[i] != ",") {
                             tam = tam + diem[i]
                         }
                         if (diem[i] == ",") {
                             transcript.HKI.diemAnh.diem1tiet.push(tam);
-                            tam='';
+                            tam = '';
                         }
                     }
                 }
                 if (data.diem[a].diem1tietHKII) {
                     let tam = ''
-                    let diem=data.diem[a].diem1tietHKII+","
+                    let diem = data.diem[a].diem1tietHKII + ","
                     for (let i = 0; i <= diem.length; i++) {
                         if (diem[i] != ",") {
-                            tam = tam +diem[i]
+                            tam = tam + diem[i]
                         }
                         if (diem[i] == ",") {
                             transcript.HKII.diemAnh.diem1tiet.push(tam);
-                            tam='';
+                            tam = '';
                         }
                     }
                 }
                 transcript.HKI.diemAnh.diemGiuaKy = data.diem[a].diemgiuaKyHKI
                 transcript.HKII.diemAnh.diemGiuaKy = data.diem[a].diemgiuaKyHKII
-    
+
                 transcript.HKI.diemAnh.diemCuoiKy = data.diem[a].diemcuoiKyHKI
                 transcript.HKII.diemAnh.diemCuoiKy = data.diem[a].diemcuoiKyHKII
-    
+
                 transcript.HKII.diemAnh.diemTB = data.diem[a].tbm
             }
             if (data.mon == "Toán") {
                 if (data.diem[a].diem15pHKI) {
                     let tam = ''
-                    let diem=data.diem[a].diem15pHKI+","
+                    let diem = data.diem[a].diem15pHKI + ","
                     for (let i = 0; i <= diem.length; i++) {
                         if (diem[i] != ",") {
                             tam = tam + diem[i]
                         }
                         if (diem[i] == ",") {
                             transcript.HKI.diemToan.diem15p.push(tam)
-                            tam='';
+                            tam = '';
                         }
                     }
                 }
                 if (data.diem[a].diem15pHKII) {
                     let tam = ''
-                    let diem=data.diem[a].diem15pHKII+","
-                    for (let i = 0; i <=diem.length; i++) {
+                    let diem = data.diem[a].diem15pHKII + ","
+                    for (let i = 0; i <= diem.length; i++) {
                         if (diem[i] != ",") {
-                            tam = tam +diem[i]
+                            tam = tam + diem[i]
                         }
                         if (diem[i] == ",") {
                             transcript.HKII.diemToan.diem15p.push(tam);
-                            tam='';
+                            tam = '';
                         }
                     }
                 }
                 if (data.diem[a].diemMiengHKI) {
                     let tam = ''
-                    let diem=data.diem[a].diemMiengHKI+","
+                    let diem = data.diem[a].diemMiengHKI + ","
                     for (let i = 0; i <= diem.length; i++) {
                         if (diem[i] != ",") {
                             tam = tam + diem[i]
                         }
                         if (diem[i] == ",") {
                             transcript.HKI.diemToan.diemMieng.push(tam);
-                            tam='';
+                            tam = '';
                         }
                     }
                 }
                 if (data.diem[a].diemMiengHKII) {
                     let tam = ''
-                    let diem=data.diem[a].diemMiengHKII+","
+                    let diem = data.diem[a].diemMiengHKII + ","
                     for (let i = 0; i <= diem.length; i++) {
                         if (diem[i] != ",") {
                             tam = tam + diem[i]
                         }
                         if (diem[i] == ",") {
                             transcript.HKII.diemToan.diemMieng.push(tam);
-                            tam='';
+                            tam = '';
                         }
                     }
                 }
                 if (data.diem[a].diem1tietHKI) {
                     let tam = ''
-                    let diem=data.diem[a].diem1tietHKI+","
+                    let diem = data.diem[a].diem1tietHKI + ","
                     for (let i = 0; i <= diem.length; i++) {
                         if (diem[i] != ",") {
                             tam = tam + diem[i]
                         }
                         if (diem[i] == ",") {
                             transcript.HKI.diemToan.diem1tiet.push(tam);
-                            tam='';
+                            tam = '';
                         }
                     }
                 }
                 if (data.diem[a].diem1tietHKII) {
                     let tam = ''
-                    let diem=data.diem[a].diem1tietHKII+","
+                    let diem = data.diem[a].diem1tietHKII + ","
                     for (let i = 0; i <= diem.length; i++) {
                         if (diem[i] != ",") {
-                            tam = tam +diem[i]
+                            tam = tam + diem[i]
                         }
                         if (diem[i] == ",") {
                             transcript.HKII.diemToan.diem1tiet.push(tam);
-                            tam='';
+                            tam = '';
                         }
                     }
                 }
                 transcript.HKI.diemToan.diemGiuaKy = data.diem[a].diemgiuaKyHKI
                 transcript.HKII.diemToan.diemGiuaKy = data.diem[a].diemgiuaKyHKII
-    
+
                 transcript.HKI.diemToan.diemCuoiKy = data.diem[a].diemcuoiKyHKI
                 transcript.HKII.diemToan.diemCuoiKy = data.diem[a].diemcuoiKyHKII
-    
+
                 transcript.HKII.diemToan.diemTB = data.diem[a].tbm
             }
 
@@ -955,97 +1315,97 @@ const importexcel = async function (data) {
             if (data.mon == "Văn") {
                 if (data.diem[a].diem15pHKI) {
                     let tam = ''
-                    let diem=data.diem[a].diem15pHKI+","
+                    let diem = data.diem[a].diem15pHKI + ","
                     for (let i = 0; i <= diem.length; i++) {
                         if (diem[i] != ",") {
                             tam = tam + diem[i]
                         }
                         if (diem[i] == ",") {
                             transcript.HKI.diemVan.diem15p.push(tam)
-                            tam='';
+                            tam = '';
                         }
                     }
                 }
                 if (data.diem[a].diem15pHKII) {
                     let tam = ''
-                    let diem=data.diem[a].diem15pHKII+","
-                    for (let i = 0; i <=diem.length; i++) {
+                    let diem = data.diem[a].diem15pHKII + ","
+                    for (let i = 0; i <= diem.length; i++) {
                         if (diem[i] != ",") {
-                            tam = tam +diem[i]
+                            tam = tam + diem[i]
                         }
                         if (diem[i] == ",") {
                             transcript.HKII.diemVan.diem15p.push(tam);
-                            tam='';
+                            tam = '';
                         }
                     }
                 }
                 if (data.diem[a].diemMiengHKI) {
                     let tam = ''
-                    let diem=data.diem[a].diemMiengHKI+","
+                    let diem = data.diem[a].diemMiengHKI + ","
                     for (let i = 0; i <= diem.length; i++) {
                         if (diem[i] != ",") {
                             tam = tam + diem[i]
                         }
                         if (diem[i] == ",") {
                             transcript.HKI.diemVan.diemMieng.push(tam);
-                            tam='';
+                            tam = '';
                         }
                     }
                 }
                 if (data.diem[a].diemMiengHKII) {
                     let tam = ''
-                    let diem=data.diem[a].diemMiengHKII+","
+                    let diem = data.diem[a].diemMiengHKII + ","
                     for (let i = 0; i <= diem.length; i++) {
                         if (diem[i] != ",") {
                             tam = tam + diem[i]
                         }
                         if (diem[i] == ",") {
                             transcript.HKII.diemVan.diemMieng.push(tam);
-                            tam='';
+                            tam = '';
                         }
                     }
                 }
                 if (data.diem[a].diem1tietHKI) {
                     let tam = ''
-                    let diem=data.diem[a].diem1tietHKI+","
+                    let diem = data.diem[a].diem1tietHKI + ","
                     for (let i = 0; i <= diem.length; i++) {
                         if (diem[i] != ",") {
                             tam = tam + diem[i]
                         }
                         if (diem[i] == ",") {
                             transcript.HKI.diemVan.diem1tiet.push(tam);
-                            tam='';
+                            tam = '';
                         }
                     }
                 }
                 if (data.diem[a].diem1tietHKII) {
                     let tam = ''
-                    let diem=data.diem[a].diem1tietHKII+","
+                    let diem = data.diem[a].diem1tietHKII + ","
                     for (let i = 0; i <= diem.length; i++) {
                         if (diem[i] != ",") {
-                            tam = tam +diem[i]
+                            tam = tam + diem[i]
                         }
                         if (diem[i] == ",") {
                             transcript.HKII.diemVan.diem1tiet.push(tam);
-                            tam='';
+                            tam = '';
                         }
                     }
                 }
                 transcript.HKI.diemVan.diemGiuaKy = data.diem[a].diemgiuaKyHKI
                 transcript.HKII.diemVan.diemGiuaKy = data.diem[a].diemgiuaKyHKII
-    
+
                 transcript.HKI.diemVan.diemCuoiKy = data.diem[a].diemcuoiKyHKI
                 transcript.HKII.diemVan.diemCuoiKy = data.diem[a].diemcuoiKyHKII
-    
+
                 transcript.HKII.diemVan.diemTB = data.diem[a].tbm
             }
-           
-    
+
+
         }
         await transcript.save()
-       
+
     }
-   
+
     return {
         message: "Thành Công",
         status: 200
@@ -1053,9 +1413,9 @@ const importexcel = async function (data) {
 
 }
 
-    
 
-    
+
+
 
 
 

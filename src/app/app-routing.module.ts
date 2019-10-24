@@ -19,6 +19,7 @@ import {TranscriptComponent} from './components/transcript/transcript.component'
 import {TrancripteditComponent} from './components/transcript/trancriptedit/trancriptedit.component'
 import{TeacherComponent} from './components/teacher/teacher.component'
 import{ EditteacherComponent} from './components/teacher/editteacher/editteacher.component'
+import{ FulltranscriptComponent} from './components/transcript/fulltranscript/fulltranscript.component'
 import { from } from 'rxjs';
 const routes: Routes = [
   {
@@ -89,6 +90,10 @@ const routes: Routes = [
       {
         path: 'bangdiem/:id',
         component: TrancripteditComponent
+      },
+      {
+        path: 'bangdiemchitiet/:id',
+        component: FulltranscriptComponent
       },
       {
         path: 'trochuyen',

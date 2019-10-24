@@ -64,14 +64,14 @@ const createStudent = async function (data,teacher) {
 }
 const laystudent = async function (data) {
     if (data.soHieu) {
-        var liststudent = await Student.find({ soHieu: data.soHieu });
+        var liststudent = await Student.find({ soHieu: data.soHieu }).sort({tenHocSinh:1});
         return {
             liststudent
         }
 
     }
     if (data.khoi) {
-        var liststudent = await Student.find({ khoi: data.khoi });
+        var liststudent = await Student.find({ khoi: data.khoi }).sort({tenHocSinh:1});
         return {
             liststudent
         }
@@ -195,7 +195,7 @@ const createdayoff = async function (user, data,teacher) {
 }
 const getdayoff = async function (id) {
     //let student= await Student.findOne({_id:data.idHocSinh});
-    let dayoff = await Applicationform.find({ idHocSinh: id })
+    let dayoff = await Applicationform.find({ idHocSinh: id }).sort({ngayGui:-1})
 
     if (dayoff) {
         return {
@@ -208,7 +208,7 @@ const getdayoff = async function (id) {
 }
 const getalldayoff = async function () {
     //let student= await Student.findOne({_id:data.idHocSinh});
-    let dayoff = await Applicationform.find()
+    let dayoff = await Applicationform.find().sort({ngayGui:-1})
 
     if (dayoff) {
         return {
@@ -387,7 +387,7 @@ const importexcel = async function (data,teacher) {
 }
 const getclass = async function (data) {
     //let student= await Student.findOne({_id:data.idHocSinh});
-    let Classes = await Class.find({ khoi: data.khoi })
+    let Classes = await Class.find({ khoi: data.khoi }).sort({soHieu:1})
 
   
         return {
