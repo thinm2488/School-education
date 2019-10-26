@@ -4,8 +4,8 @@ var DiligenceSchema = new Schema(
     {
      
         idHocSinh:{type:String},
-        danhSachNgayNghi:[]
-        
+        danhSachNgayNghi:[],
+        soLuong:{type:Number}
     }
 );
 module.exports = mongoose.model('Diligence', DiligenceSchema)
